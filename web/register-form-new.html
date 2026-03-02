@@ -1,0 +1,372 @@
+<!-- Multi-Step Registration Form with Progress Indicator -->
+<div id="registerTab" class="tab-content">
+    <h2>Register New Client</h2>
+    
+    <!-- Progress Steps -->
+    <div class="progress-steps">
+        <div class="step active" data-step="1">
+            <div class="step-number">1</div>
+            <div class="step-label">Scan ID</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step" data-step="2">
+            <div class="step-number">2</div>
+            <div class="step-label">Personal Info</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step" data-step="3">
+            <div class="step-number">3</div>
+            <div class="step-label">Employment</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step" data-step="4">
+            <div class="step-number">4</div>
+            <div class="step-label">Bank & Witness</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step" data-step="5">
+            <div class="step-number">5</div>
+            <div class="step-label">ID Capture</div>
+        </div>
+    </div>
+
+    <form id="registerForm" class="multi-step-form">
+        
+        <!-- Step 1: Barcode Scanner -->
+        <div class="form-step active" data-step="1">
+            <div class="barcode-scanner-section">
+                <div class="step-icon">📱</div>
+                <h3>Quick Registration - Scan National ID</h3>
+                <p class="step-description">Scan the barcode on the back of the Malawi National ID to auto-fill information</p>
+                <button type="button" class="btn btn-scanner-large" onclick="startBarcodeScanner()">
+                    📸 Scan ID Barcode
+                </button>
+                <div class="or-divider">
+                    <span>OR</span>
+                </div>
+                <button type="button" class="btn btn-secondary" onclick="nextStep()">Skip & Enter Manually</button>
+            </div>
+        </div>
+
+        <!-- Step 2: Personal Information -->
+        <div class="form-step" data-step="2">
+            <div class="step-icon">👤</div>
+            <h3>Personal Information</h3>
+            <p class="step-description">Please provide your personal details</p>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>First Name <span class="required">*</span></label>
+                    <input type="text" id="clientFirstName" required placeholder="Enter first name">
+                </div>
+                <div class="form-group">
+                    <label>Last Name <span class="required">*</span></label>
+                    <input type="text" id="clientLastName" required placeholder="Enter last name">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Title</label>
+                    <select id="clientTitle">
+                        <option value="">Select Title</option>
+                        <option value="Mr">Mr</option>
+                        <option value="Mrs">Mrs</option>
+                        <option value="Miss">Miss</option>
+                        <option value="Dr">Dr</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Gender <span class="required">*</span></label>
+                    <select id="gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Date of Birth <span class="required">*</span></label>
+                    <input type="date" id="dob" required>
+                </div>
+                <div class="form-group">
+                    <label>Marital Status <span class="required">*</span></label>
+                    <select id="maritalStatus" required>
+                        <option value="">Select Status</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Divorced">Divorced</option>
+                        <option value="Widowed">Widowed</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>ID Type <span class="required">*</span></label>
+                    <select id="idType" required>
+                        <option value="">Select ID Type</option>
+                        <option value="National ID">National ID</option>
+                        <option value="Passport">Passport</option>
+                        <option value="Driver's License">Driver's License</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>ID Number <span class="required">*</span></label>
+                    <input type="text" id="nationalId" required placeholder="Enter ID number">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Phone Number <span class="required">*</span></label>
+                    <input type="tel" id="phone" required placeholder="+265">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="Optional">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>District <span class="required">*</span></label>
+                    <input type="text" id="district" required placeholder="Enter district">
+                </div>
+                <div class="form-group">
+                    <label>T/A (Traditional Authority)</label>
+                    <input type="text" id="traditionalAuthority" placeholder="Optional">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Home Village <span class="required">*</span></label>
+                    <input type="text" id="homeVillage" required placeholder="Enter village">
+                </div>
+                <div class="form-group">
+                    <label>Physical Address</label>
+                    <input type="text" id="address" placeholder="Optional">
+                </div>
+            </div>
+            
+            <div id="spouseSection" style="display: none;">
+                <h4 class="subsection-title">Spouse Information</h4>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Spouse Name</label>
+                        <input type="text" id="spouseName" placeholder="Enter spouse name">
+                    </div>
+                    <div class="form-group">
+                        <label>Spouse Contact</label>
+                        <input type="tel" id="spouseContact" placeholder="+265">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Employment Details -->
+        <div class="form-step" data-step="3">
+            <div class="step-icon">💼</div>
+            <h3>Employment Details</h3>
+            <p class="step-description">Tell us about your employment</p>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Name of Employer/Ministry <span class="required">*</span></label>
+                    <input type="text" id="employerName" required placeholder="Enter employer name">
+                </div>
+                <div class="form-group">
+                    <label>Department</label>
+                    <input type="text" id="department" placeholder="Optional">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Employment Number</label>
+                    <input type="text" id="employmentNumber" placeholder="Optional">
+                </div>
+                <div class="form-group">
+                    <label>Net Monthly Salary (MK) <span class="required">*</span></label>
+                    <input type="number" id="monthlySalary" required placeholder="Enter amount in MK">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Full Employment Status <span class="required">*</span></label>
+                    <select id="fullEmployment" required>
+                        <option value="">Select Status</option>
+                        <option value="Yes">Yes - Permanent</option>
+                        <option value="No">No - Contract/Temporary</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Length of Service</label>
+                    <input type="text" id="lengthOfService" placeholder="e.g., 5 years">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Work Address</label>
+                <input type="text" id="workAddress" placeholder="Enter work address">
+            </div>
+        </div>
+
+        <!-- Step 4: Bank & Witness Details -->
+        <div class="form-step" data-step="4">
+            <div class="step-icon">🏦</div>
+            <h3>Bank & Witness Details</h3>
+            <p class="step-description">Provide your bank and witness information</p>
+            
+            <h4 class="subsection-title">Bank Details</h4>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Bank Name <span class="required">*</span></label>
+                    <input type="text" id="bankName" required placeholder="Enter bank name">
+                </div>
+                <div class="form-group">
+                    <label>Account Number <span class="required">*</span></label>
+                    <input type="text" id="accountNumber" required placeholder="Enter account number">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Account Type <span class="required">*</span></label>
+                    <select id="accountType" required>
+                        <option value="">Select Type</option>
+                        <option value="Savings">Savings</option>
+                        <option value="Current">Current</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Branch</label>
+                    <input type="text" id="bankBranch" placeholder="Enter branch">
+                </div>
+            </div>
+            
+            <h4 class="subsection-title">Witness/Guarantor Details</h4>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Witness Name <span class="required">*</span></label>
+                    <input type="text" id="witnessName" required placeholder="Enter witness name">
+                </div>
+                <div class="form-group">
+                    <label>Witness Contact <span class="required">*</span></label>
+                    <input type="tel" id="witnessContact" required placeholder="+265">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Relationship to Client <span class="required">*</span></label>
+                    <input type="text" id="witnessRelationship" required placeholder="e.g., Brother, Friend">
+                </div>
+                <div class="form-group">
+                    <label>Witness Occupation</label>
+                    <input type="text" id="witnessOccupation" placeholder="Enter occupation">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Witness Monthly Income (MK)</label>
+                <input type="number" id="witnessIncome" placeholder="Enter amount in MK">
+            </div>
+        </div>
+
+        <!-- Step 5: ID Document Capture -->
+        <div class="form-step" data-step="5">
+            <div class="step-icon">📸</div>
+            <h3>ID Document Capture</h3>
+            <p class="step-description">Capture or upload both sides of your ID</p>
+            
+            <div class="id-capture-section">
+                <div class="id-capture-group">
+                    <label>ID Front Side <span class="required">*</span></label>
+                    <div class="id-upload-area" id="idFrontArea">
+                        <input type="file" id="idFront" accept="image/*" capture="environment" style="display: none;">
+                        <div class="upload-placeholder" id="idFrontPlaceholder">
+                            <div class="upload-icon">📷</div>
+                            <p>Capture ID Front</p>
+                            <div class="capture-buttons">
+                                <button type="button" class="btn btn-camera" onclick="openCamera('front')">📸 Camera</button>
+                                <button type="button" class="btn btn-upload" onclick="document.getElementById('idFront').click()">📁 Upload</button>
+                            </div>
+                        </div>
+                        <video id="cameraFront" class="camera-stream" style="display: none;" autoplay playsinline></video>
+                        <canvas id="canvasFront" style="display: none;"></canvas>
+                        <div id="cameraControlsFront" class="camera-controls" style="display: none;">
+                            <button type="button" class="btn btn-success" onclick="capturePhoto('front')">📸 Capture</button>
+                            <button type="button" class="btn btn-danger" onclick="closeCamera('front')">✕ Cancel</button>
+                        </div>
+                        <img id="idFrontPreview" class="id-preview" style="display: none;">
+                        <button type="button" class="btn-remove-image" id="removeIdFront" style="display: none;" onclick="removeIdImage('front')">✕</button>
+                    </div>
+                </div>
+                
+                <div class="id-capture-group">
+                    <label>ID Back Side <span class="required">*</span></label>
+                    <div class="id-upload-area" id="idBackArea">
+                        <input type="file" id="idBack" accept="image/*" capture="environment" style="display: none;">
+                        <div class="upload-placeholder" id="idBackPlaceholder">
+                            <div class="upload-icon">📷</div>
+                            <p>Capture ID Back</p>
+                            <div class="capture-buttons">
+                                <button type="button" class="btn btn-camera" onclick="openCamera('back')">📸 Camera</button>
+                                <button type="button" class="btn btn-upload" onclick="document.getElementById('idBack').click()">📁 Upload</button>
+                            </div>
+                        </div>
+                        <video id="cameraBack" class="camera-stream" style="display: none;" autoplay playsinline></video>
+                        <canvas id="canvasBack" style="display: none;"></canvas>
+                        <div id="cameraControlsBack" class="camera-controls" style="display: none;">
+                            <button type="button" class="btn btn-success" onclick="capturePhoto('back')">📸 Capture</button>
+                            <button type="button" class="btn btn-danger" onclick="closeCamera('back')">✕ Cancel</button>
+                        </div>
+                        <img id="idBackPreview" class="id-preview" style="display: none;">
+                        <button type="button" class="btn-remove-image" id="removeIdBack" style="display: none;" onclick="removeIdImage('back')">✕</button>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="form-note">📝 Both ID front and back images are required</p>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="form-navigation">
+            <button type="button" class="btn btn-secondary" id="prevBtn" onclick="prevStep()" style="display: none;">
+                ← Previous
+            </button>
+            <button type="button" class="btn btn-primary" id="nextBtn" onclick="nextStep()">
+                Next →
+            </button>
+            <button type="submit" class="btn btn-success" id="submitBtn" style="display: none;">
+                ✓ Register Client
+            </button>
+        </div>
+        
+        <div id="registerMessage" class="message"></div>
+    </form>
+    
+    <!-- Barcode Scanner Modal -->
+    <div id="barcodeScannerModal" class="scanner-modal" style="display: none;">
+        <div class="scanner-modal-content">
+            <div class="scanner-header">
+                <h3>📱 Scan National ID Barcode</h3>
+                <button class="modal-close" onclick="stopBarcodeScanner()">✕</button>
+            </div>
+            <div class="scanner-body">
+                <video id="barcodeVideo" class="barcode-video" autoplay playsinline></video>
+                <canvas id="barcodeCanvas" style="display: none;"></canvas>
+                <div class="scanner-overlay">
+                    <div class="scanner-frame"></div>
+                    <p class="scanner-instruction">Position the barcode within the frame</p>
+                </div>
+                <div id="scannerStatus" class="scanner-status"></div>
+            </div>
+        </div>
+    </div>
+</div>
