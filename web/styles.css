@@ -555,6 +555,49 @@ body:has(#branchDashboard.active) {
     align-items: center;
 }
 
+.approved-loan-card {
+    border-left: 4px solid #28a745;
+}
+
+.approved-loan-card:hover {
+    border-left-color: #218838;
+}
+
+.loan-stats {
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+}
+
+.loan-stat-item {
+    background: #f8f9fa;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 120px;
+}
+
+.loan-stat-item.default-stat {
+    background: #fff3cd;
+}
+
+.loan-stat-label {
+    font-size: 12px;
+    color: #6c757d;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.loan-stat-value {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.loan-stat-item.default-stat .loan-stat-value {
+    color: #dc3545;
+}
+
 .loan-info h3 {
     color: #333;
     margin-bottom: 10px;
@@ -1669,6 +1712,123 @@ body:has(#branchDashboard.active) {
 .client-name-link:hover {
     color: #5568d3;
     text-decoration: none;
+}
+
+/* Client Breakdown Modal */
+.branch-breakdown-summary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.breakdown-total h3 {
+    font-size: 32px;
+    margin: 0 0 10px 0;
+    color: white;
+}
+
+.breakdown-total p {
+    font-size: 16px;
+    margin: 0;
+    opacity: 0.9;
+}
+
+.branch-breakdown-list {
+    display: grid;
+    gap: 20px;
+}
+
+.branch-breakdown-card {
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    padding: 20px;
+    transition: all 0.3s;
+}
+
+.branch-breakdown-card:hover {
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.15);
+    transform: translateY(-2px);
+}
+
+.branch-breakdown-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.branch-breakdown-header h3 {
+    margin: 0;
+    color: #1a3a52;
+    font-size: 20px;
+}
+
+.branch-breakdown-count {
+    background: #667eea;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.branch-breakdown-percentage {
+    margin-bottom: 15px;
+}
+
+.percentage-bar {
+    width: 100%;
+    height: 10px;
+    background: #e9ecef;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.percentage-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    border-radius: 5px;
+    transition: width 0.5s ease;
+}
+
+.percentage-text {
+    font-size: 14px;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.branch-client-list {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e9ecef;
+}
+
+.branch-client-list p {
+    margin: 0 0 10px 0;
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.branch-client-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.branch-client-list li {
+    padding: 8px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.branch-client-list li.more-clients {
+    color: #6c757d;
+    font-style: italic;
 }
 
 @media (max-width: 768px) {

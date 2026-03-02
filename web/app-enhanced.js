@@ -1,34 +1,65 @@
 // Demo Mode - No Backend Required
 let currentUser = null;
 
-// Mock data
+// Mock data - Expanded with realistic sample data
 const mockClients = [
-    { id: 1, fullName: "John Doe", nationalId: "1234567890123", phoneNumber: "+250788123456", email: "john@example.com", address: "Kigali, Rwanda" },
-    { id: 2, fullName: "Jane Smith", nationalId: "9876543210987", phoneNumber: "+250788234567", email: "jane@example.com", address: "Musanze, Rwanda" },
-    { id: 3, fullName: "Bob Johnson", nationalId: "5555555555555", phoneNumber: "+250788345678", email: "bob@example.com", address: "Huye, Rwanda" },
-    { id: 4, fullName: "Alice Williams", nationalId: "1111222233334", phoneNumber: "+250788456789", email: "alice@example.com", address: "Rubavu, Rwanda" },
-    { id: 5, fullName: "Charlie Brown", nationalId: "9999888877776", phoneNumber: "+250788567890", email: "charlie@example.com", address: "Nyagatare, Rwanda" }
+    // Main Branch Clients
+    { id: 1, firstName: "Chisomo", lastName: "Banda", fullName: "Chisomo Banda", nationalId: "MWI001234567", phoneNumber: "+265888123456", email: "chisomo.banda@email.com", district: "Lilongwe", homeVillage: "Area 25", employerName: "Ministry of Health", monthlySalary: 450000, witnessName: "Grace Phiri", witnessContact: "+265999234567" },
+    { id: 2, firstName: "Thoko", lastName: "Mwale", fullName: "Thoko Mwale", nationalId: "MWI002345678", phoneNumber: "+265888234567", email: "thoko.mwale@email.com", district: "Lilongwe", homeVillage: "Area 18", employerName: "Malawi Revenue Authority", monthlySalary: 650000, witnessName: "John Kamwendo", witnessContact: "+265999345678" },
+    { id: 3, firstName: "Mphatso", lastName: "Chirwa", fullName: "Mphatso Chirwa", nationalId: "MWI003456789", phoneNumber: "+265888345678", email: "mphatso.chirwa@email.com", district: "Lilongwe", homeVillage: "Area 47", employerName: "Reserve Bank of Malawi", monthlySalary: 850000, witnessName: "Mercy Banda", witnessContact: "+265999456789" },
+    { id: 4, firstName: "Kondwani", lastName: "Phiri", fullName: "Kondwani Phiri", nationalId: "MWI004567890", phoneNumber: "+265888456789", email: "kondwani.phiri@email.com", district: "Lilongwe", homeVillage: "Area 36", employerName: "Airtel Malawi", monthlySalary: 550000, witnessName: "Esther Nyirenda", witnessContact: "+265999567890" },
+    { id: 5, firstName: "Tamanda", lastName: "Nyirenda", fullName: "Tamanda Nyirenda", nationalId: "MWI005678901", phoneNumber: "+265888567890", email: "tamanda.nyirenda@email.com", district: "Lilongwe", homeVillage: "Area 49", employerName: "TNM Plc", monthlySalary: 480000, witnessName: "Patrick Mbewe", witnessContact: "+265999678901" },
+    
+    // East Branch Clients
+    { id: 6, firstName: "Chimwemwe", lastName: "Kachingwe", fullName: "Chimwemwe Kachingwe", nationalId: "MWI006789012", phoneNumber: "+265888678901", email: "chimwemwe.k@email.com", district: "Blantyre", homeVillage: "Ndirande", employerName: "Blantyre City Council", monthlySalary: 420000, witnessName: "Linda Banda", witnessContact: "+265999789012" },
+    { id: 7, firstName: "Pemphero", lastName: "Gondwe", fullName: "Pemphero Gondwe", nationalId: "MWI007890123", phoneNumber: "+265888789012", email: "pemphero.g@email.com", district: "Blantyre", homeVillage: "Chilomoni", employerName: "Malawi Posts Corporation", monthlySalary: 380000, witnessName: "Moses Phiri", witnessContact: "+265999890123" },
+    { id: 8, firstName: "Alinafe", lastName: "Mkandawire", fullName: "Alinafe Mkandawire", nationalId: "MWI008901234", phoneNumber: "+265888890123", email: "alinafe.m@email.com", district: "Blantyre", homeVillage: "Zingwangwa", employerName: "ESCOM", monthlySalary: 520000, witnessName: "Ruth Kamwendo", witnessContact: "+265999901234" },
+    
+    // North Branch Clients
+    { id: 9, firstName: "Dalitso", lastName: "Tembo", fullName: "Dalitso Tembo", nationalId: "MWI009012345", phoneNumber: "+265888901234", email: "dalitso.t@email.com", district: "Mzuzu", homeVillage: "Chibavi", employerName: "Mzuzu University", monthlySalary: 720000, witnessName: "Sarah Nyirongo", witnessContact: "+265999012345" },
+    { id: 10, firstName: "Wongani", lastName: "Lungu", fullName: "Wongani Lungu", nationalId: "MWI010123456", phoneNumber: "+265888012345", email: "wongani.l@email.com", district: "Mzuzu", homeVillage: "Katoto", employerName: "Northern Region Water Board", monthlySalary: 460000, witnessName: "James Mhango", witnessContact: "+265999123456" },
+    
+    // Central Branch Clients
+    { id: 11, firstName: "Tawonga", lastName: "Zimba", fullName: "Tawonga Zimba", nationalId: "MWI011234567", phoneNumber: "+265888112345", email: "tawonga.z@email.com", district: "Dedza", homeVillage: "Dedza Boma", employerName: "Ministry of Education", monthlySalary: 410000, witnessName: "Agnes Phiri", witnessContact: "+265999212345" },
+    { id: 12, firstName: "Limbani", lastName: "Sakala", fullName: "Limbani Sakala", nationalId: "MWI012345678", phoneNumber: "+265888212345", email: "limbani.s@email.com", district: "Dedza", homeVillage: "Mtakataka", employerName: "Agricultural Development Division", monthlySalary: 390000, witnessName: "Peter Banda", witnessContact: "+265999312345" }
 ];
 
 const mockLoans = [
-    { id: 1, loanNumber: "LN001", clientName: "John Doe", requestedAmount: 5000000, repaymentPeriodMonths: 12, loanPurpose: "Business expansion", status: "PENDING", branchName: "Main Branch" },
-    { id: 2, loanNumber: "LN002", clientName: "Jane Smith", requestedAmount: 3000000, repaymentPeriodMonths: 6, loanPurpose: "Education", status: "APPROVED", branchName: "Main Branch" },
-    { id: 3, loanNumber: "LN003", clientName: "Bob Johnson", requestedAmount: 2000000, repaymentPeriodMonths: 24, loanPurpose: "Home improvement", status: "PENDING", branchName: "East Branch" },
-    { id: 4, loanNumber: "LN004", clientName: "Alice Williams", requestedAmount: 7500000, repaymentPeriodMonths: 18, loanPurpose: "Agriculture", status: "APPROVED", branchName: "Main Branch" },
-    { id: 5, loanNumber: "LN005", clientName: "Charlie Brown", requestedAmount: 1500000, repaymentPeriodMonths: 12, loanPurpose: "Small business", status: "PENDING", branchName: "East Branch" }
+    // Main Branch Loans
+    { id: 1, loanNumber: "LN001", clientName: "Chisomo Banda", clientId: 1, requestedAmount: 2500000, repaymentPeriodMonths: 12, loanPurpose: "Business expansion - grocery shop", status: "APPROVED", branchName: "Main Branch", disbursedAmount: 2500000, collectedAmount: 1800000, defaultAmount: 0, disbursedDate: "2024-01-15" },
+    { id: 2, loanNumber: "LN002", clientName: "Thoko Mwale", clientId: 2, requestedAmount: 3500000, repaymentPeriodMonths: 18, loanPurpose: "Home renovation", status: "APPROVED", branchName: "Main Branch", disbursedAmount: 3500000, collectedAmount: 3500000, defaultAmount: 0, disbursedDate: "2023-12-01" },
+    { id: 3, loanNumber: "LN003", clientName: "Mphatso Chirwa", clientId: 3, requestedAmount: 5000000, repaymentPeriodMonths: 24, loanPurpose: "Vehicle purchase", status: "APPROVED", branchName: "Main Branch", disbursedAmount: 5000000, collectedAmount: 3200000, defaultAmount: 800000, disbursedDate: "2023-10-10" },
+    { id: 4, loanNumber: "LN004", clientName: "Kondwani Phiri", clientId: 4, requestedAmount: 1800000, repaymentPeriodMonths: 12, loanPurpose: "Education - university fees", status: "PENDING", branchName: "Main Branch", disbursedAmount: 0, collectedAmount: 0, defaultAmount: 0 },
+    { id: 5, loanNumber: "LN005", clientName: "Tamanda Nyirenda", clientId: 5, requestedAmount: 2200000, repaymentPeriodMonths: 15, loanPurpose: "Small business startup", status: "APPROVED", branchName: "Main Branch", disbursedAmount: 2200000, collectedAmount: 1500000, defaultAmount: 0, disbursedDate: "2024-02-01" },
+    
+    // East Branch Loans
+    { id: 6, loanNumber: "LN006", clientName: "Chimwemwe Kachingwe", clientId: 6, requestedAmount: 1500000, repaymentPeriodMonths: 12, loanPurpose: "Agricultural inputs", status: "APPROVED", branchName: "East Branch", disbursedAmount: 1500000, collectedAmount: 800000, defaultAmount: 400000, disbursedDate: "2024-01-20" },
+    { id: 7, loanNumber: "LN007", clientName: "Pemphero Gondwe", clientId: 7, requestedAmount: 2800000, repaymentPeriodMonths: 18, loanPurpose: "Tailoring business equipment", status: "PENDING", branchName: "East Branch", disbursedAmount: 0, collectedAmount: 0, defaultAmount: 0 },
+    { id: 8, loanNumber: "LN008", clientName: "Alinafe Mkandawire", clientId: 8, requestedAmount: 3200000, repaymentPeriodMonths: 24, loanPurpose: "House construction", status: "APPROVED", branchName: "East Branch", disbursedAmount: 3200000, collectedAmount: 2100000, defaultAmount: 0, disbursedDate: "2023-11-15" },
+    
+    // North Branch Loans
+    { id: 9, loanNumber: "LN009", clientName: "Dalitso Tembo", clientId: 9, requestedAmount: 4500000, repaymentPeriodMonths: 24, loanPurpose: "Rental property investment", status: "APPROVED", branchName: "North Branch", disbursedAmount: 4500000, collectedAmount: 2800000, defaultAmount: 0, disbursedDate: "2023-09-01" },
+    { id: 10, loanNumber: "LN010", clientName: "Wongani Lungu", clientId: 10, requestedAmount: 1900000, repaymentPeriodMonths: 12, loanPurpose: "Livestock farming", status: "PENDING", branchName: "North Branch", disbursedAmount: 0, collectedAmount: 0, defaultAmount: 0 },
+    
+    // Central Branch Loans
+    { id: 11, loanNumber: "LN011", clientName: "Tawonga Zimba", clientId: 11, requestedAmount: 2600000, repaymentPeriodMonths: 18, loanPurpose: "Motorcycle purchase for transport business", status: "APPROVED", branchName: "Central Branch", disbursedAmount: 2600000, collectedAmount: 1400000, defaultAmount: 600000, disbursedDate: "2024-01-05" },
+    { id: 12, loanNumber: "LN012", clientName: "Limbani Sakala", clientId: 12, requestedAmount: 3100000, repaymentPeriodMonths: 24, loanPurpose: "Farm equipment and seeds", status: "PENDING", branchName: "Central Branch", disbursedAmount: 0, collectedAmount: 0, defaultAmount: 0 }
 ];
 
 const recentActivities = [
-    { type: 'payment', client: 'Client #C1048', amount: 50, time: '1 hours ago' },
-    { type: 'payment', client: 'Client #C1001', amount: 100, time: '2 hours ago' },
-    { type: 'payment', client: 'Client #C1002', amount: 150, time: '3 hours ago' },
-    { type: 'payment', client: 'Client #C1003', amount: 200, time: '4 hours ago' },
-    { type: 'payment', client: 'Client #C1004', amount: 250, time: '5 hours ago' }
+    { type: 'payment', client: 'Chisomo Banda - LN001', amount: 250000, time: '2 hours ago' },
+    { type: 'payment', client: 'Alinafe Mkandawire - LN008', amount: 180000, time: '4 hours ago' },
+    { type: 'payment', client: 'Tamanda Nyirenda - LN005', amount: 200000, time: '6 hours ago' },
+    { type: 'payment', client: 'Dalitso Tembo - LN009', amount: 350000, time: '1 day ago' },
+    { type: 'payment', client: 'Mphatso Chirwa - LN003', amount: 280000, time: '1 day ago' }
 ];
 
 // Branch users storage
 const branchUsers = [
-    { username: 'branch1', password: 'branch123', fullName: 'Branch User 1', branchName: 'Main Branch', email: 'branch1@microfinance.com' }
+    { username: 'branch1', password: 'branch123', fullName: 'Grace Phiri', branchName: 'Main Branch', email: 'grace.phiri@uprise.com' },
+    { username: 'branch2', password: 'branch123', fullName: 'Moses Banda', branchName: 'East Branch', email: 'moses.banda@uprise.com' },
+    { username: 'branch3', password: 'branch123', fullName: 'Sarah Mwale', branchName: 'North Branch', email: 'sarah.mwale@uprise.com' },
+    { username: 'branch4', password: 'branch123', fullName: 'Patrick Chirwa', branchName: 'Central Branch', email: 'patrick.chirwa@uprise.com' }
 ];
 
 // Utility Functions
@@ -156,7 +187,7 @@ function loadPendingLoans() {
     pendingLoansDiv.innerHTML = '';
     
     if (pendingLoans.length === 0) {
-        pendingLoansDiv.innerHTML = '<p style="color: #666; padding: 20px;">No pending loan applications</p>';
+        pendingLoansDiv.innerHTML = '<p style="color: #666; padding: 20px; text-align: center;">No pending loan applications</p>';
     } else {
         pendingLoans.forEach(loan => {
             const loanCard = document.createElement('div');
@@ -172,11 +203,59 @@ function loadPendingLoans() {
                     <span class="badge badge-pending">Pending</span>
                 </div>
                 <div class="loan-actions">
-                    <button class="btn btn-success" onclick="approveLoan(${loan.id})">Approve</button>
-                    <button class="btn btn-danger" onclick="rejectLoan(${loan.id})">Reject</button>
+                    <button class="btn btn-success" onclick="approveLoan(${loan.id})">✓ Approve</button>
+                    <button class="btn btn-danger" onclick="rejectLoan(${loan.id})">✗ Reject</button>
                 </div>
             `;
             pendingLoansDiv.appendChild(loanCard);
+        });
+    }
+    
+    // Also load approved loans
+    loadApprovedLoans();
+}
+
+function loadApprovedLoans() {
+    const approvedLoans = mockLoans.filter(loan => loan.status === 'APPROVED');
+    const approvedLoansDiv = document.getElementById('approvedLoans');
+    
+    if (!approvedLoansDiv) return; // Only load if on admin loans tab
+    
+    approvedLoansDiv.innerHTML = '';
+    
+    if (approvedLoans.length === 0) {
+        approvedLoansDiv.innerHTML = '<p style="color: #666; padding: 20px; text-align: center;">No approved loans yet</p>';
+    } else {
+        approvedLoans.forEach(loan => {
+            const loanCard = document.createElement('div');
+            loanCard.className = 'loan-card approved-loan-card';
+            loanCard.innerHTML = `
+                <div class="loan-info">
+                    <h3>Loan #${loan.loanNumber}</h3>
+                    <p><strong>Client:</strong> ${loan.clientName}</p>
+                    <p><strong>Amount:</strong> ${formatCurrency(loan.requestedAmount)}</p>
+                    <p><strong>Period:</strong> ${loan.repaymentPeriodMonths} months</p>
+                    <p><strong>Purpose:</strong> ${loan.loanPurpose}</p>
+                    <p><strong>Branch:</strong> ${loan.branchName}</p>
+                    ${loan.disbursedAmount ? `<p><strong>Disbursed:</strong> ${formatCurrency(loan.disbursedAmount)}</p>` : ''}
+                    ${loan.collectedAmount ? `<p><strong>Collected:</strong> ${formatCurrency(loan.collectedAmount)}</p>` : ''}
+                    ${loan.disbursedDate ? `<p><strong>Disbursed Date:</strong> ${loan.disbursedDate}</p>` : ''}
+                    <span class="badge badge-approved">Approved</span>
+                </div>
+                <div class="loan-stats">
+                    <div class="loan-stat-item">
+                        <div class="loan-stat-label">Progress</div>
+                        <div class="loan-stat-value">${loan.disbursedAmount > 0 ? ((loan.collectedAmount / loan.disbursedAmount) * 100).toFixed(1) : 0}%</div>
+                    </div>
+                    ${loan.defaultAmount > 0 ? `
+                    <div class="loan-stat-item default-stat">
+                        <div class="loan-stat-label">Default</div>
+                        <div class="loan-stat-value">${formatCurrency(loan.defaultAmount)}</div>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+            approvedLoansDiv.appendChild(loanCard);
         });
     }
 }
@@ -185,9 +264,16 @@ function approveLoan(loanId) {
     const loan = mockLoans.find(l => l.id === loanId);
     if (loan) {
         loan.status = 'APPROVED';
-        showNotification('success', `Loan #${loan.loanNumber} approved successfully!`);
-        loadPendingLoans();
-        loadAdminData();
+        // Set disbursed amount and date when approved
+        if (!loan.disbursedAmount) {
+            loan.disbursedAmount = loan.requestedAmount;
+            loan.disbursedDate = new Date().toISOString().split('T')[0];
+            loan.collectedAmount = 0;
+            loan.defaultAmount = 0;
+        }
+        showNotification('success', `Loan #${loan.loanNumber} approved successfully! Amount: ${formatCurrency(loan.requestedAmount)}`);
+        loadPendingLoans(); // This will also reload approved loans
+        loadSystemOverview(); // Update overview stats
     }
 }
 
@@ -198,9 +284,10 @@ function rejectLoan(loanId) {
     const loan = mockLoans.find(l => l.id === loanId);
     if (loan) {
         loan.status = 'REJECTED';
-        showNotification('error', `Loan #${loan.loanNumber} has been rejected`);
-        loadPendingLoans();
-        loadAdminData();
+        loan.rejectionReason = reason;
+        showNotification('error', `Loan #${loan.loanNumber} has been rejected. Reason: ${reason}`);
+        loadPendingLoans(); // This will also reload approved loans
+        loadSystemOverview(); // Update overview stats
     }
 }
 
@@ -997,6 +1084,65 @@ function loadSystemOverview() {
     
     // Load recent activity
     loadRecentActivity();
+    
+    // Add click handlers to stat cards
+    addStatCardClickHandlers();
+}
+
+function addStatCardClickHandlers() {
+    // Total Clients card - show client breakdown by branch
+    const clientCountCard = document.getElementById('systemClientCount').closest('.stat-card');
+    if (clientCountCard) {
+        clientCountCard.style.cursor = 'pointer';
+        clientCountCard.onclick = function() {
+            showClientBreakdownModal();
+        };
+    }
+    
+    // Active Loans card - show all active loans
+    const activeLoansCard = document.getElementById('systemActiveLoans').closest('.stat-card');
+    if (activeLoansCard) {
+        activeLoansCard.style.cursor = 'pointer';
+        activeLoansCard.onclick = function() {
+            showActiveLoansModal();
+        };
+    }
+    
+    // Total Disbursed card - show disbursement breakdown
+    const disbursedCard = document.getElementById('systemDisbursed').closest('.stat-card');
+    if (disbursedCard) {
+        disbursedCard.style.cursor = 'pointer';
+        disbursedCard.onclick = function() {
+            showDisbursedBreakdownModal();
+        };
+    }
+    
+    // Default Rate card - show clients with defaults
+    const defaultsCard = document.getElementById('systemDefaults').closest('.stat-card');
+    if (defaultsCard) {
+        defaultsCard.style.cursor = 'pointer';
+        defaultsCard.onclick = function() {
+            showDefaultsModal();
+        };
+    }
+    
+    // Pending Loans card - show pending applications
+    const pendingCard = document.getElementById('systemCollected').closest('.stat-card');
+    if (pendingCard) {
+        pendingCard.style.cursor = 'pointer';
+        pendingCard.onclick = function() {
+            showCollectedBreakdownModal();
+        };
+    }
+    
+    // Total Branches card - show branch list
+    const branchesCard = document.getElementById('systemBranches').closest('.stat-card');
+    if (branchesCard) {
+        branchesCard.style.cursor = 'pointer';
+        branchesCard.onclick = function() {
+            showAdminTab('branches');
+        };
+    }
 }
 
 function loadBranchAnalytics() {
@@ -1388,4 +1534,387 @@ function viewClientDetail(clientId) {
 
 function closeClientModal() {
     document.getElementById('clientDetailModal').style.display = 'none';
+}
+
+// Show client breakdown by branch modal
+function showClientBreakdownModal() {
+    // Get unique branches
+    const branches = [...new Set(mockLoans.map(loan => loan.branchName))];
+    
+    // Calculate clients per branch
+    const branchClientData = branches.map(branchName => {
+        const branchClients = mockClients.filter(client => {
+            return mockLoans.some(loan => loan.clientId === client.id && loan.branchName === branchName);
+        });
+        return {
+            branchName: branchName,
+            clientCount: branchClients.length,
+            clients: branchClients
+        };
+    });
+    
+    // Sort by client count descending
+    branchClientData.sort((a, b) => b.clientCount - a.clientCount);
+    
+    const modal = document.createElement('div');
+    modal.className = 'client-modal';
+    modal.id = 'clientBreakdownModal';
+    modal.innerHTML = `
+        <div class="client-modal-content">
+            <div class="client-modal-header">
+                <h2>📊 Total Clients by Branch</h2>
+                <button class="modal-close" onclick="closeClientBreakdownModal()">✕</button>
+            </div>
+            <div class="client-modal-body">
+                <div class="branch-breakdown-summary">
+                    <div class="breakdown-total">
+                        <h3>Total Clients: ${mockClients.length}</h3>
+                        <p>Across ${branches.length} branches</p>
+                    </div>
+                </div>
+                
+                <div class="branch-breakdown-list">
+                    ${branchClientData.map(branch => `
+                        <div class="branch-breakdown-card">
+                            <div class="branch-breakdown-header">
+                                <h3>🏢 ${branch.branchName}</h3>
+                                <div class="branch-breakdown-count">${branch.clientCount} ${branch.clientCount === 1 ? 'Client' : 'Clients'}</div>
+                            </div>
+                            <div class="branch-breakdown-percentage">
+                                <div class="percentage-bar">
+                                    <div class="percentage-fill" style="width: ${(branch.clientCount / mockClients.length * 100).toFixed(1)}%"></div>
+                                </div>
+                                <span class="percentage-text">${(branch.clientCount / mockClients.length * 100).toFixed(1)}% of total</span>
+                            </div>
+                            ${branch.clients.length > 0 ? `
+                                <div class="branch-client-list">
+                                    <p><strong>Clients:</strong></p>
+                                    <ul>
+                                        ${branch.clients.slice(0, 5).map(client => `
+                                            <li>
+                                                <span class="client-name-link" onclick="closeClientBreakdownModal(); viewClientDetail(${client.id});">
+                                                    ${client.fullName || client.firstName + ' ' + client.lastName}
+                                                </span>
+                                            </li>
+                                        `).join('')}
+                                        ${branch.clients.length > 5 ? `<li class="more-clients">... and ${branch.clients.length - 5} more</li>` : ''}
+                                    </ul>
+                                </div>
+                            ` : ''}
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `;
+    
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            closeClientBreakdownModal();
+        }
+    };
+    
+    document.body.appendChild(modal);
+}
+
+function closeClientBreakdownModal() {
+    const modal = document.getElementById('clientBreakdownModal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+// Show Active Loans Modal
+function showActiveLoansModal() {
+    const activeLoans = mockLoans.filter(loan => loan.status === 'APPROVED');
+    
+    const modal = document.createElement('div');
+    modal.className = 'client-modal';
+    modal.id = 'activeLoansModal';
+    modal.innerHTML = `
+        <div class="client-modal-content" style="max-width: 1000px;">
+            <div class="client-modal-header">
+                <h2>✓ Active Loans</h2>
+                <button class="modal-close" onclick="closeModal('activeLoansModal')">✕</button>
+            </div>
+            <div class="client-modal-body">
+                <div class="branch-breakdown-summary">
+                    <div class="breakdown-total">
+                        <h3>Total Active Loans: ${activeLoans.length}</h3>
+                        <p>Total Amount: ${formatCurrency(activeLoans.reduce((sum, loan) => sum + loan.disbursedAmount, 0))}</p>
+                    </div>
+                </div>
+                
+                <div class="loans-list" style="margin-top: 20px;">
+                    ${activeLoans.map(loan => `
+                        <div class="loan-card approved-loan-card" style="margin-bottom: 15px;">
+                            <div class="loan-info">
+                                <h3>Loan #${loan.loanNumber}</h3>
+                                <p><strong>Client:</strong> <span class="client-name-link" onclick="closeModal('activeLoansModal'); viewClientDetail(${loan.clientId});">${loan.clientName}</span></p>
+                                <p><strong>Branch:</strong> ${loan.branchName}</p>
+                                <p><strong>Amount:</strong> ${formatCurrency(loan.requestedAmount)}</p>
+                                <p><strong>Disbursed:</strong> ${formatCurrency(loan.disbursedAmount)}</p>
+                                <p><strong>Collected:</strong> ${formatCurrency(loan.collectedAmount)}</p>
+                                <p><strong>Period:</strong> ${loan.repaymentPeriodMonths} months</p>
+                                ${loan.disbursedDate ? `<p><strong>Date:</strong> ${loan.disbursedDate}</p>` : ''}
+                                <span class="badge badge-approved">Active</span>
+                            </div>
+                            <div class="loan-stats">
+                                <div class="loan-stat-item">
+                                    <div class="loan-stat-label">Progress</div>
+                                    <div class="loan-stat-value">${loan.disbursedAmount > 0 ? ((loan.collectedAmount / loan.disbursedAmount) * 100).toFixed(1) : 0}%</div>
+                                </div>
+                                ${loan.defaultAmount > 0 ? `
+                                <div class="loan-stat-item default-stat">
+                                    <div class="loan-stat-label">Default</div>
+                                    <div class="loan-stat-value">${formatCurrency(loan.defaultAmount)}</div>
+                                </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `;
+    
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            closeModal('activeLoansModal');
+        }
+    };
+    
+    document.body.appendChild(modal);
+}
+
+// Show Disbursed Breakdown Modal
+function showDisbursedBreakdownModal() {
+    const approvedLoans = mockLoans.filter(loan => loan.status === 'APPROVED');
+    const totalDisbursed = approvedLoans.reduce((sum, loan) => sum + loan.disbursedAmount, 0);
+    
+    // Group by branch
+    const branches = [...new Set(mockLoans.map(loan => loan.branchName))];
+    const branchData = branches.map(branchName => {
+        const branchLoans = approvedLoans.filter(loan => loan.branchName === branchName);
+        const disbursed = branchLoans.reduce((sum, loan) => sum + loan.disbursedAmount, 0);
+        return {
+            branchName,
+            disbursed,
+            loanCount: branchLoans.length
+        };
+    }).sort((a, b) => b.disbursed - a.disbursed);
+    
+    const modal = document.createElement('div');
+    modal.className = 'client-modal';
+    modal.id = 'disbursedModal';
+    modal.innerHTML = `
+        <div class="client-modal-content">
+            <div class="client-modal-header">
+                <h2>💰 Total Disbursed</h2>
+                <button class="modal-close" onclick="closeModal('disbursedModal')">✕</button>
+            </div>
+            <div class="client-modal-body">
+                <div class="branch-breakdown-summary">
+                    <div class="breakdown-total">
+                        <h3>${formatCurrency(totalDisbursed)}</h3>
+                        <p>Across ${approvedLoans.length} active loans</p>
+                    </div>
+                </div>
+                
+                <div class="branch-breakdown-list">
+                    ${branchData.map(branch => `
+                        <div class="branch-breakdown-card">
+                            <div class="branch-breakdown-header">
+                                <h3>🏢 ${branch.branchName}</h3>
+                                <div class="branch-breakdown-count">${formatCurrency(branch.disbursed)}</div>
+                            </div>
+                            <div class="branch-breakdown-percentage">
+                                <div class="percentage-bar">
+                                    <div class="percentage-fill" style="width: ${(branch.disbursed / totalDisbursed * 100).toFixed(1)}%"></div>
+                                </div>
+                                <span class="percentage-text">${(branch.disbursed / totalDisbursed * 100).toFixed(1)}% of total • ${branch.loanCount} loans</span>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `;
+    
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            closeModal('disbursedModal');
+        }
+    };
+    
+    document.body.appendChild(modal);
+}
+
+// Show Collected Breakdown Modal
+function showCollectedBreakdownModal() {
+    const approvedLoans = mockLoans.filter(loan => loan.status === 'APPROVED');
+    const totalCollected = approvedLoans.reduce((sum, loan) => sum + loan.collectedAmount, 0);
+    const totalDisbursed = approvedLoans.reduce((sum, loan) => sum + loan.disbursedAmount, 0);
+    
+    // Group by branch
+    const branches = [...new Set(mockLoans.map(loan => loan.branchName))];
+    const branchData = branches.map(branchName => {
+        const branchLoans = approvedLoans.filter(loan => loan.branchName === branchName);
+        const collected = branchLoans.reduce((sum, loan) => sum + loan.collectedAmount, 0);
+        const disbursed = branchLoans.reduce((sum, loan) => sum + loan.disbursedAmount, 0);
+        return {
+            branchName,
+            collected,
+            disbursed,
+            loanCount: branchLoans.length
+        };
+    }).sort((a, b) => b.collected - a.collected);
+    
+    const modal = document.createElement('div');
+    modal.className = 'client-modal';
+    modal.id = 'collectedModal';
+    modal.innerHTML = `
+        <div class="client-modal-content">
+            <div class="client-modal-header">
+                <h2>✅ Loans Collected</h2>
+                <button class="modal-close" onclick="closeModal('collectedModal')">✕</button>
+            </div>
+            <div class="client-modal-body">
+                <div class="branch-breakdown-summary">
+                    <div class="breakdown-total">
+                        <h3>${formatCurrency(totalCollected)}</h3>
+                        <p>Collection Rate: ${totalDisbursed > 0 ? ((totalCollected / totalDisbursed) * 100).toFixed(1) : 0}%</p>
+                    </div>
+                </div>
+                
+                <div class="branch-breakdown-list">
+                    ${branchData.map(branch => `
+                        <div class="branch-breakdown-card">
+                            <div class="branch-breakdown-header">
+                                <h3>🏢 ${branch.branchName}</h3>
+                                <div class="branch-breakdown-count">${formatCurrency(branch.collected)}</div>
+                            </div>
+                            <div class="branch-breakdown-percentage">
+                                <div class="percentage-bar">
+                                    <div class="percentage-fill" style="width: ${branch.disbursed > 0 ? (branch.collected / branch.disbursed * 100).toFixed(1) : 0}%; background: linear-gradient(90deg, #28a745 0%, #20c997 100%);"></div>
+                                </div>
+                                <span class="percentage-text">${branch.disbursed > 0 ? ((branch.collected / branch.disbursed) * 100).toFixed(1) : 0}% collected • ${branch.loanCount} loans</span>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `;
+    
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            closeModal('collectedModal');
+        }
+    };
+    
+    document.body.appendChild(modal);
+}
+
+// Show Defaults Modal
+function showDefaultsModal() {
+    const defaultLoans = mockLoans.filter(loan => loan.defaultAmount > 0);
+    const totalDefaults = defaultLoans.reduce((sum, loan) => sum + loan.defaultAmount, 0);
+    
+    const modal = document.createElement('div');
+    modal.className = 'client-modal';
+    modal.id = 'defaultsModal';
+    modal.innerHTML = `
+        <div class="client-modal-content" style="max-width: 1000px;">
+            <div class="client-modal-header" style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);">
+                <h2>⚠️ Clients with Defaults</h2>
+                <button class="modal-close" onclick="closeModal('defaultsModal')">✕</button>
+            </div>
+            <div class="client-modal-body">
+                <div class="branch-breakdown-summary" style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);">
+                    <div class="breakdown-total">
+                        <h3>Total Defaults: ${formatCurrency(totalDefaults)}</h3>
+                        <p>${defaultLoans.length} clients with outstanding defaults</p>
+                    </div>
+                </div>
+                
+                <div class="defaults-list" style="margin-top: 20px;">
+                    ${defaultLoans.map(loan => {
+                        const client = mockClients.find(c => c.id === loan.clientId);
+                        if (!client) return '';
+                        
+                        return `
+                            <div class="default-card" style="margin-bottom: 15px;">
+                                <div class="default-card-header">
+                                    <h4>
+                                        <span class="client-name-link" onclick="closeModal('defaultsModal'); viewClientDetail(${client.id});">
+                                            ${client.fullName || client.firstName + ' ' + client.lastName}
+                                        </span>
+                                    </h4>
+                                    <span class="default-badge">DEFAULT</span>
+                                </div>
+                                <div class="default-details">
+                                    <div class="default-detail-item">
+                                        <strong>Loan #:</strong> ${loan.loanNumber}
+                                    </div>
+                                    <div class="default-detail-item">
+                                        <strong>Branch:</strong> ${loan.branchName}
+                                    </div>
+                                    <div class="default-detail-item">
+                                        <strong>Phone:</strong> ${client.phoneNumber}
+                                    </div>
+                                    <div class="default-detail-item">
+                                        <strong>ID Number:</strong> ${client.nationalId}
+                                    </div>
+                                    <div class="default-detail-item">
+                                        <strong>Disbursed:</strong> ${formatCurrency(loan.disbursedAmount)}
+                                    </div>
+                                    <div class="default-detail-item">
+                                        <strong>Collected:</strong> ${formatCurrency(loan.collectedAmount)}
+                                    </div>
+                                    <div class="default-detail-item">
+                                        <strong>Default Amount:</strong> <span style="color: #dc3545; font-weight: bold;">${formatCurrency(loan.defaultAmount)}</span>
+                                    </div>
+                                    <div class="default-detail-item">
+                                        <strong>District:</strong> ${client.district || 'N/A'}
+                                    </div>
+                                    <div class="default-detail-item">
+                                        <strong>Village:</strong> ${client.homeVillage || 'N/A'}
+                                    </div>
+                                    <div class="default-detail-item">
+                                        <strong>Employer:</strong> ${client.employerName || 'N/A'}
+                                    </div>
+                                    <div class="default-detail-item">
+                                        <strong>Witness:</strong> ${client.witnessName || 'N/A'}
+                                    </div>
+                                    <div class="default-detail-item">
+                                        <strong>Witness Phone:</strong> ${client.witnessContact || 'N/A'}
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary" onclick="closeModal('defaultsModal'); viewClientDetail(${client.id});" style="margin-top: 15px;">
+                                    View Full Details
+                                </button>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            </div>
+        </div>
+    `;
+    
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            closeModal('defaultsModal');
+        }
+    };
+    
+    document.body.appendChild(modal);
+}
+
+// Generic close modal function
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.remove();
+    }
 }
