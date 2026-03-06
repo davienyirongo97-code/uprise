@@ -9,7 +9,7 @@ spring:
     url: ${DATABASE_URL:jdbc:h2:mem:microfinance_db}
     username: ${PGUSER:sa}
     password: ${PGPASSWORD:}
-    driver-class-name: ${DB_DRIVER:org.postgresql.Driver}
+    driver-class-name: ${DB_DRIVER:org.h2.Driver}
   
   h2:
     console:
