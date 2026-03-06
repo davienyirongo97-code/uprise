@@ -1,6 +1,6 @@
 [build]
 builder = "NIXPACKS"
-buildCommand = "./mvnw clean package -DskipTests"
+buildCommand = "mvn clean package -DskipTests"
 
 [deploy]
 startCommand = "java -Dserver.port=$PORT -jar target/*.jar"
