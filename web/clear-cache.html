@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clear Cache & Reload</title>
+</head>
+<body>
+    <h1>Clearing cache and redirecting...</h1>
+    <script>
+        // Clear cache and redirect
+        if ('caches' in window) {
+            caches.keys().then(function(names) {
+                for (let name of names) caches.delete(name);
+            });
+        }
+        
+        // Force reload without cache
+        setTimeout(function() {
+            window.location.href = 'index.html?' + new Date().getTime();
+        }, 1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uprise Micro-Finance Portal</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/@zxing/library@latest"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Login Screen -->
+        <div id="loginScreen" class="screen active">
+            <div class="login-box">
+                <div class="login-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="80" height="80">
+                        <path d="M12 3L2 9v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V9l-10-6zm0 2.18l8 4.8v4.02c0 4.51-3.08 8.71-8 9.88-4.92-1.17-8-5.37-8-9.88V9.98l8-4.8zM11 11v6h2v-6h-2zm0-4v2h2V7h-2z"/>
+                        <path d="M4 10v5c0 3.87 2.13 7.47 5.5 9.31.51.27 1.07.48 1.65.63L12 25l.85-.06c.58-.15 1.14-.36 1.65-.63C17.87 22.47 20 18.87 20 15v-5l-8-4.7L4 10z" opacity="0.3"/>
+                    </svg>
+                </div>
+                <h1 class="login-title">Uprise Micro-Finance Portal</h1>
+                <form id="loginForm">
+                    <div class="form-group-login">
+                        <div class="input-with-icon">
+                            <span class="input-icon">👤</span>
+                            <input type="text" id="username" placeholder="Username" required>
+                        </div>
+                    </div>
+                    <div class="form-group-login">
+                        <div class="input-with-icon">
+                            <span class="input-icon">🔒</span>
+                            <input type="password" id="password" placeholder="Password" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-login">Login</button>
+                    <div id="loginError" class="error"></div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Admin Dashboard -->
+        <div id="adminDashboard" class="screen">
+            <nav class="navbar">
+                <div>
+                    <h1>Admin Dashboard</h1>
+                    <p class="welcome-text">Welcome Back, <span id="adminName">Admin</span>!</p>
+                </div>
+                <button onclick="logout()" class="btn btn-secondary">Logout</button>
+            </nav>
+            
+            <div class="dashboard-content">
+                <div class="admin-tabs">
+                    <button class="admin-tab-btn active" onclick="showAdminTab('overview')">📊 System Overview</button>
+                    <button class="admin-tab-btn" onclick="showAdminTab('branches')">🏢 Branches</button>
+                    <button class="admin-tab-btn" onclick="showAdminTab('defaults')">⚠️ Defaults</button>
+                    <button class="admin-tab-btn" onclick="showAdminTab('loans')">💰 Loans</button>
+                    <button class="admin-tab-btn" onclick="showAdminTab('users')">👥 Users</button>
+                </div>
+
+                <!-- System Overview Tab -->
+                <div id="overviewTab" class="admin-tab-content active">
+                    <div class="overview-section">
+                        <h3>System-Wide Overview - All Branches</h3>
+                    </div>
+                    
+                    <div class="stats">
+                        <div class="stat-card clickable-stat" onclick="showClientBreakdownModal()">
+                            <div class="stat-icon">👥</div>
+                            <div class="stat-content">
+                                <h3>Total Clients</h3>
+                                <p id="systemClientCount" class="stat-number">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card clickable-stat" onclick="showActiveLoansModal()">
+                            <div class="stat-icon">📊</div>
+                            <div class="stat-content">
+                                <h3>Active Loans</h3>
+                                <p id="systemActiveLoans" class="stat-number">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card clickable-stat" onclick="showDisbursedBreakdownModal()">
+                            <div class="stat-icon">💰</div>
+                            <div class="stat-content">
+                                <h3>Total Disbursed</h3>
+                                <p id="systemDisbursed" class="stat-number">MK 0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card clickable-stat" onclick="showDefaultsModal()">
+                            <div class="stat-icon">⚠️</div>
+                            <div class="stat-content">
+                                <h3>Total Defaults</h3>
+                                <p id="systemDefaults" class="stat-number">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card clickable-stat" onclick="showCollectedBreakdownModal()">
+                            <div class="stat-icon">✅</div>
+                            <div class="stat-content">
+                                <h3>Loans Collected</h3>
+                                <p id="systemCollected" class="stat-number">MK 0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card clickable-stat" onclick="showAdminTab('branches')">
+                            <div class="stat-icon">🏢</div>
+                            <div class="stat-content">
+                                <h3>Total Branches</h3>
+                                <p id="systemBranches" class="stat-number">0</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section main-section">
+                        <h2>Recent Activity</h2>
+                        <div id="recentActivity" class="activity-list"></div>
+                    </div>
+                </div>
+
+                <!-- Branches Tab -->
+                <div id="branchesTab" class="admin-tab-content">
+                    <div class="section">
+                        <h2>Branch Performance</h2>
+                        <div id="branchAnalytics" class="branch-analytics"></div>
+                    </div>
+                </div>
+
+                <!-- Defaults Tab -->
+                <div id="defaultsTab" class="admin-tab-content">
+                    <div class="section">
+                        <h2>Clients with Defaults</h2>
+                        <div class="filter-section">
+                            <select id="defaultBranchFilter" onchange="filterDefaults()">
+                                <option value="all">All Branches</option>
+                            </select>
+                        </div>
+                        <div id="defaultsList" class="defaults-list"></div>
+                    </div>
+                </div>
+
+                <!-- Loans Tab -->
+                <div id="loansTab" class="admin-tab-content">
+                    <div class="section">
+                        <h2>⏳ Pending Loan Applications</h2>
+                        <p style="color: #6c757d; margin-bottom: 20px;">Review and approve or reject loan applications</p>
+                        <div id="pendingLoans" class="loans-list"></div>
+                    </div>
+                
+<!-- Multi-Step Registration Form with Progress Indicator -->
+<div id="registerTab" class="tab-content">
+    <h2>Register New Client</h2>
+    
+    <!-- Progress Steps -->
+    <div class="progress-steps">
+        <div class="step active" data-step="1">
+            <div class="step-number">1</div>
+            <div class="step-label">Scan ID</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step" data-step="2">
+            <div class="step-number">2</div>
+            <div class="step-label">Personal Info</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step" data-step="3">
+            <div class="step-number">3</div>
+            <div class="step-label">Employment</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step" data-step="4">
+            <div class="step-number">4</div>
+            <div class="step-label">Bank & Witness</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step" data-step="5">
+            <div class="step-number">5</div>
+            <div class="step-label">ID Capture</div>
+        </div>
+    </div>
+
+    <form id="registerForm" class="multi-step-form">
+        
+        <!-- Step 1: Barcode Scanner -->
+        <div class="form-step active" data-step="1">
+            <div class="barcode-scanner-section">
+                <div class="step-icon">📱</div>
+                <h3>Quick Registration - Scan National ID</h3>
+                <p class="step-description">Scan the barcode on the back of the Malawi National ID to auto-fill information</p>
+                <button type="button" class="btn btn-scanner-large" onclick="startBarcodeScanner()">
+                    📸 Scan ID Barcode
+                </button>
+                <div class="or-divider">
+                    <span>OR</span>
+                </div>
+                <button type="button" class="btn btn-secondary" onclick="nextStep()">Skip & Enter Manually</button>
+            </div>
+        </div>
+
+        <!-- Step 2: Personal Information -->
+        <div class="form-step" data-step="2">
+            <div class="step-icon">👤</div>
+            <h3>Personal Information</h3>
+            <p class="step-description">Please provide your personal details</p>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>First Name <span class="required">*</span></label>
+                    <input type="text" id="clientFirstName" required placeholder="Enter first name">
+                </div>
+                <div class="form-group">
+                    <label>Last Name <span class="required">*</span></label>
+                    <input type="text" id="clientLastName" required placeholder="Enter last name">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Title</label>
+                    <select id="clientTitle">
+                        <option value="">Select Title</option>
+                        <option value="Mr">Mr</option>
+                        <option value="Mrs">Mrs</option>
+                        <option value="Miss">Miss</option>
+                        <option value="Dr">Dr</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Gender <span class="required">*</span></label>
+                    <select id="gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Date of Birth <span class="required">*</span></label>
+                    <input type="date" id="dob" required>
+                </div>
+                <div class="form-group">
+                    <label>Marital Status <span class="required">*</span></label>
+                    <select id="maritalStatus" required>
+                        <option value="">Select Status</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Divorced">Divorced</option>
+                        <option value="Widowed">Widowed</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>ID Type <span class="required">*</span></label>
+                    <select id="idType" required>
+                        <option value="">Select ID Type</option>
+                        <option value="National ID">National ID</option>
+                        <option value="Passport">Passport</option>
+                        <option value="Driver's License">Driver's License</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>ID Number <span class="required">*</span></label>
+                    <input type="text" id="nationalId" required placeholder="Enter ID number">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Phone Number <span class="required">*</span></label>
+                    <input type="tel" id="phone" required placeholder="+265">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="Optional">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>District <span class="required">*</span></label>
+                    <input type="text" id="district" required placeholder="Enter district">
+                </div>
+                <div class="form-group">
+                    <label>T/A (Traditional Authority)</label>
+                    <input type="text" id="traditionalAuthority" placeholder="Optional">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Home Village <span class="required">*</span></label>
+                    <input type="text" id="homeVillage" required placeholder="Enter village">
+                </div>
+                <div class="form-group">
+                    <label>Physical Address</label>
+                    <input type="text" id="address" placeholder="Optional">
+                </div>
+            </div>
+            
+            <div id="spouseSection" style="display: none;">
+                <h4 class="subsection-title">Spouse Information</h4>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Spouse Name</label>
+                        <input type="text" id="spouseName" placeholder="Enter spouse name">
+                    </div>
+                    <div class="form-group">
+                        <label>Spouse Contact</label>
+                        <input type="tel" id="spouseContact" placeholder="+265">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Employment Details -->
+        <div class="form-step" data-step="3">
+            <div class="step-icon">💼</div>
+            <h3>Employment Details</h3>
+            <p class="step-description">Tell us about your employment</p>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Name of Employer/Ministry <span class="required">*</span></label>
+                    <input type="text" id="employerName" required placeholder="Enter employer name">
+                </div>
+                <div class="form-group">
+                    <label>Department</label>
+                    <input type="text" id="department" placeholder="Optional">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Employment Number</label>
+                    <input type="text" id="employmentNumber" placeholder="Optional">
+                </div>
+                <div class="form-group">
+                    <label>Net Monthly Salary (MK) <span class="required">*</span></label>
+                    <input type="number" id="monthlySalary" required placeholder="Enter amount in MK">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Full Employment Status <span class="required">*</span></label>
+                    <select id="fullEmployment" required>
+                        <option value="">Select Status</option>
+                        <option value="Yes">Yes - Permanent</option>
+                        <option value="No">No - Contract/Temporary</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Length of Service</label>
+                    <input type="text" id="lengthOfService" placeholder="e.g., 5 years">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Work Address</label>
+                <input type="text" id="workAddress" placeholder="Enter work address">
+            </div>
+        </div>
+
+        <!-- Step 4: Bank & Witness Details -->
+        <div class="form-step" data-step="4">
+            <div class="step-icon">🏦</div>
+            <h3>Bank & Witness Details</h3>
+            <p class="step-description">Provide your bank and witness information</p>
+            
+            <h4 class="subsection-title">Bank Details</h4>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Bank Name <span class="required">*</span></label>
+                    <input type="text" id="bankName" required placeholder="Enter bank name">
+                </div>
+                <div class="form-group">
+                    <label>Account Number <span class="required">*</span></label>
+                    <input type="text" id="accountNumber" required placeholder="Enter account number">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Account Type <span class="required">*</span></label>
+                    <select id="accountType" required>
+                        <option value="">Select Type</option>
+                        <option value="Savings">Savings</option>
+                        <option value="Current">Current</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Branch</label>
+                    <input type="text" id="bankBranch" placeholder="Enter branch">
+                </div>
+            </div>
+            
+            <h4 class="subsection-title">Witness/Guarantor Details</h4>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Witness Name <span class="required">*</span></label>
+                    <input type="text" id="witnessName" required placeholder="Enter witness name">
+                </div>
+                <div class="form-group">
+                    <label>Witness Contact <span class="required">*</span></label>
+                    <input type="tel" id="witnessContact" required placeholder="+265">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Relationship to Client <span class="required">*</span></label>
+                    <input type="text" id="witnessRelationship" required placeholder="e.g., Brother, Friend">
+                </div>
+                <div class="form-group">
+                    <label>Witness Occupation</label>
+                    <input type="text" id="witnessOccupation" placeholder="Enter occupation">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Witness Monthly Income (MK)</label>
+                <input type="number" id="witnessIncome" placeholder="Enter amount in MK">
+            </div>
+        </div>
+
+        <!-- Step 5: ID Document Capture -->
+        <div class="form-step" data-step="5">
+            <div class="step-icon">📸</div>
+            <h3>ID Document Capture</h3>
+            <p class="step-description">Capture or upload both sides of your ID</p>
+            
+            <div class="id-capture-section">
+                <div class="id-capture-group">
+                    <label>ID Front Side <span class="required">*</span></label>
+                    <div class="id-upload-area" id="idFrontArea">
+                        <input type="file" id="idFront" accept="image/*" capture="environment" style="display: none;">
+                        <div class="upload-placeholder" id="idFrontPlaceholder">
+                            <div class="upload-icon">📷</div>
+                            <p>Capture ID Front</p>
+                            <div class="capture-buttons">
+                                <button type="button" class="btn btn-camera" onclick="openCamera('front')">📸 Camera</button>
+                                <button type="button" class="btn btn-upload" onclick="document.getElementById('idFront').click()">📁 Upload</button>
+                            </div>
+                        </div>
+                        <video id="cameraFront" class="camera-stream" style="display: none;" autoplay playsinline></video>
+                        <canvas id="canvasFront" style="display: none;"></canvas>
+                        <div id="cameraControlsFront" class="camera-controls" style="display: none;">
+                            <button type="button" class="btn btn-success" onclick="capturePhoto('front')">📸 Capture</button>
+                            <button type="button" class="btn btn-danger" onclick="closeCamera('front')">✕ Cancel</button>
+                        </div>
+                        <img id="idFrontPreview" class="id-preview" style="display: none;">
+                        <button type="button" class="btn-remove-image" id="removeIdFront" style="display: none;" onclick="removeIdImage('front')">✕</button>
+                    </div>
+                </div>
+                
+                <div class="id-capture-group">
+                    <label>ID Back Side <span class="required">*</span></label>
+                    <div class="id-upload-area" id="idBackArea">
+                        <input type="file" id="idBack" accept="image/*" capture="environment" style="display: none;">
+                        <div class="upload-placeholder" id="idBackPlaceholder">
+                            <div class="upload-icon">📷</div>
+                            <p>Capture ID Back</p>
+                            <div class="capture-buttons">
+                                <button type="button" class="btn btn-camera" onclick="openCamera('back')">📸 Camera</button>
+                                <button type="button" class="btn btn-upload" onclick="document.getElementById('idBack').click()">📁 Upload</button>
+                            </div>
+                        </div>
+                        <video id="cameraBack" class="camera-stream" style="display: none;" autoplay playsinline></video>
+                        <canvas id="canvasBack" style="display: none;"></canvas>
+                        <div id="cameraControlsBack" class="camera-controls" style="display: none;">
+                            <button type="button" class="btn btn-success" onclick="capturePhoto('back')">📸 Capture</button>
+                            <button type="button" class="btn btn-danger" onclick="closeCamera('back')">✕ Cancel</button>
+                        </div>
+                        <img id="idBackPreview" class="id-preview" style="display: none;">
+                        <button type="button" class="btn-remove-image" id="removeIdBack" style="display: none;" onclick="removeIdImage('back')">✕</button>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="form-note">📝 Both ID front and back images are required</p>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="form-navigation">
+            <button type="button" class="btn btn-secondary" id="prevBtn" onclick="prevStep()" style="display: none;">
+                ← Previous
+            </button>
+            <button type="button" class="btn btn-primary" id="nextBtn" onclick="nextStep()">
+                Next →
+            </button>
+            <button type="submit" class="btn btn-success" id="submitBtn" style="display: none;">
+                ✓ Register Client
+            </button>
+        </div>
+        
+        <div id="registerMessage" class="message"></div>
+    </form>
+    
+    <!-- Barcode Scanner Modal -->
+    <div id="barcodeScannerModal" class="scanner-modal" style="display: none;">
+        <div class="scanner-modal-content">
+            <div class="scanner-header">
+                <h3>📱 Scan National ID Barcode</h3>
+                <button class="modal-close" onclick="stopBarcodeScanner()">✕</button>
+            </div>
+            <div class="scanner-body">
+                <video id="barcodeVideo" class="barcode-video" autoplay playsinline></video>
+                <canvas id="barcodeCanvas" style="display: none;"></canvas>
+                <div class="scanner-overlay">
+                    <div class="scanner-frame"></div>
+                    <p class="scanner-instruction">Position the barcode within the frame</p>
+                </div>
+                <div id="scannerStatus" class="scanner-status"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                
+                <div id="applyTab" class="tab-content">
+                    <h2>Apply for Loan</h2>
+                    <form id="loanForm" class="form">
+                        <div class="form-group">
+                            <label>Select Client</label>
+                            <select id="loanClient" required>
+                                <option value="">-- Select Client --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Loan Amount</label>
+                            <input type="number" id="loanAmount" required min="1000">
+                        </div>
+                        <div class="form-group">
+                            <label>Repayment Period (months)</label>
+                            <input type="number" id="repaymentPeriod" required min="1" max="60">
+                        </div>
+                        <div class="form-group">
+                            <label>Loan Purpose</label>
+                            <textarea id="loanPurpose" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Application</button>
+                        <div id="loanMessage" class="message"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Client Detail Modal -->
+    <div id="clientDetailModal" class="client-modal" style="display: none;">
+        <div class="client-modal-content">
+            <div class="client-modal-header">
+                <h2>Client Details</h2>
+                <button class="modal-close" onclick="closeClientModal()">✕</button>
+            </div>
+            <div class="client-modal-body" id="clientDetailBody">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="app-enhanced.js"></script>
+</body>
+</html>

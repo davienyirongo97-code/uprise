@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Login</title>
+</head>
+<body>
+    <h1>Test Login</h1>
+    <form id="loginForm">
+        <input type="text" id="username" placeholder="Username" value="admin">
+        <input type="password" id="password" placeholder="Password" value="admin123">
+        <button type="submit">Login</button>
+    </form>
+    <div id="loginError" style="color: red;"></div>
+    <div id="result"></div>
+
+    <script>
+        console.log('Test page loaded');
+        
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            console.log('Form submitted');
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            console.log('Username:', username);
+            console.log('Password:', password);
+            
+            if (username === 'admin' && password === 'admin123') {
+                document.getElementById('result').innerHTML = '<h2 style="color: green;">LOGIN SUCCESS!</h2>';
+                console.log('Login successful');
+            } else {
+                document.getElementById('loginError').textContent = 'Invalid credentials';
+                console.log('Login failed');
+            }
+        });
+    </script>
+</body>
+</html>

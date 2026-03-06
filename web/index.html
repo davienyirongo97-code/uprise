@@ -1,34 +1,218 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uprise Micro-Finance Portal</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://unpkg.com/@zxing/library@latest"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
+
 <body>
     <div class="container">
+        <!-- Landing Page -->
+        <div id="landingPage" class="screen active">
+            <header class="landing-header">
+                <div class="logo-container">
+                    <img src="uprise_logo.png" alt="Uprise Logo" class="header-logo">
+                </div>
+                <nav class="landing-nav">
+                    <a href="#services">Services</a>
+                    <a href="#about">About</a>
+                    <button onclick="showScreen('loginScreen')" class="btn btn-primary-small">Login</button>
+                </nav>
+            </header>
+
+            <section class="hero-section">
+                <div class="hero-content">
+                    <span class="badge-new">Payday Loans Now Available</span>
+                    <h1>Empowering Your Financial Growth with <span class="text-gradient">Uprise</span></h1>
+                    <p>Fast, reliable, and transparent micro-finance solutions tailored for your immediate needs. Get
+                        your payday loan approved in minutes.</p>
+                    <div class="hero-cta">
+                        <button onclick="showScreen('loginScreen')" class="btn btn-hero">Apply Now <i
+                                data-lucide="arrow-right"></i></button>
+                        <button class="btn btn-secondary-hero">Learn More</button>
+                    </div>
+                    <p class="onboarding-note">
+                        <i data-lucide="info"></i> First-time user? Visit your nearest branch to get your account
+                        authenticated.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="h-stat">
+                            <span class="h-number">15%</span>
+                            <span class="h-label">Low Interest</span>
+                        </div>
+                        <div class="h-stat">
+                            <span class="h-number">24h</span>
+                            <span class="h-label">Fast Approval</span>
+                        </div>
+                        <div class="h-stat">
+                            <span class="h-number">10k+</span>
+                            <span class="h-label">Active Clients</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image-container">
+                    <img src="microfinance_hero_1772724592858.png" alt="Microfinance growth" class="hero-img">
+                </div>
+            </section>
+
+            <section id="services" class="features-section">
+                <div class="section-header">
+                    <h2>Our Specialized Services</h2>
+                    <p>Designed to provide financial stability when you need it most.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="f-icon"><i data-lucide="banknote"></i></div>
+                        <h3>Payday Loans</h3>
+                        <p>Quick cash advance to cover unexpected expenses until your next paycheck. Minimal
+                            documentation required.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="f-icon"><i data-lucide="briefcase"></i></div>
+                        <h3>Business Loans</h3>
+                        <p>Scale your business with our flexible capital injection options. Competitive rates for SMEs.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="f-icon"><i data-lucide="graduation-cap"></i></div>
+                        <h3>Education Loans</h3>
+                        <p>Invest in your future with our low-interest tuition financing plans.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="how-it-works" class="process-section">
+                <div class="section-header">
+                    <h2>How It Works</h2>
+                    <p>Get your payday loan in three simple steps.</p>
+                </div>
+                <div class="process-grid">
+                    <div class="process-step">
+                        <div class="step-num">01</div>
+                        <h3>Apply Online</h3>
+                        <p>Fill out our simple application form with your details and loan requirements.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-num">02</div>
+                        <h3>Quick Verification</h3>
+                        <p>Our team reviews your application within minutes for instant approval.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-num">03</div>
+                        <h3>Receive Cash</h3>
+                        <p>Funds are disbursed directly to your bank account or mobile money wallet.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="about" class="about-section">
+                <div class="about-content">
+                    <div class="about-text">
+                        <span class="badge-new">Success Stories</span>
+                        <h2>Real Impact, Real Growth</h2>
+                        <p>Join thousands of Malawians who have transformed their lives and businesses with Uprise. We
+                            provide the capital; you provide the vision.</p>
+
+                        <div class="carousel-container">
+                            <div class="carousel-track" id="storiesCarousel">
+                                <div class="story-item active">
+                                    <img src="happy_business_owner_1772725981628.png" alt="Successful Shop Owner">
+                                    <div class="story-content">
+                                        <h4>Grace's Boutique</h4>
+                                        <p>"The business loan from Uprise allowed me to double my stock just before the
+                                            festive season, leading to my record-breaking sales month."</p>
+                                    </div>
+                                </div>
+                                <div class="story-item">
+                                    <img src="smiling_professional_loan_1772726181017.png"
+                                        alt="Successful Professional">
+                                    <div class="story-content">
+                                        <h4>John's Career Success</h4>
+                                        <p>"A payday loan helped me secure a professional certification. Today, I am a
+                                            senior educator, all thanks to that quick support."</p>
+                                    </div>
+                                </div>
+                                <div class="story-item">
+                                    <img src="happy_farmer_loan_1772726978251.png" alt="Successful Farmer">
+                                    <div class="story-content">
+                                        <h4>Samuel's Agribusiness</h4>
+                                        <p>"With Uprise, I bought quality irrigation equipment. My harvest has tripled,
+                                            and I am now supplying markets across the district."</p>
+                                    </div>
+                                </div>
+                                <div class="story-item">
+                                    <img src="student_graduation_loan_1772727213635.png" alt="Successful Graduate">
+                                    <div class="story-content">
+                                        <h4>Chisomo's Education Journey</h4>
+                                        <p>"The tuition loan from Uprise ensured I never missed a semester. Graduating
+                                            today is a dream come true for my entire family."</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-dots" id="carouselDots">
+                                <span class="dot active"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="landing-footer">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <div class="logo-container">
+                            <div class="icon-wrapper">
+                                <i data-lucide="shield-check"></i>
+                            </div>
+                            <span class="logo-text">UPRISE</span>
+                        </div>
+                        <p>Your trusted partner in financial growth.</p>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Quick Links</h4>
+                        <a href="#landingPage">Home</a>
+                        <a href="#services">Services</a>
+                        <a href="#about">About Us</a>
+                    </div>
+                    <div class="footer-contact">
+                        <h4>Contact Us</h4>
+                        <p><i data-lucide="map-pin"></i> 123 Financial District, Lilongwe</p>
+                        <p><i data-lucide="phone"></i> +265 888 123 456</p>
+                        <p><i data-lucide="mail"></i> info@uprise-mw.com</p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2026 Uprise Micro-Finance. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+
         <!-- Login Screen -->
-        <div id="loginScreen" class="screen active">
+        <div id="loginScreen" class="screen">
             <div class="login-box">
                 <div class="login-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="80" height="80">
-                        <path d="M12 3L2 9v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V9l-10-6zm0 2.18l8 4.8v4.02c0 4.51-3.08 8.71-8 9.88-4.92-1.17-8-5.37-8-9.88V9.98l8-4.8zM11 11v6h2v-6h-2zm0-4v2h2V7h-2z"/>
-                        <path d="M4 10v5c0 3.87 2.13 7.47 5.5 9.31.51.27 1.07.48 1.65.63L12 25l.85-.06c.58-.15 1.14-.36 1.65-.63C17.87 22.47 20 18.87 20 15v-5l-8-4.7L4 10z" opacity="0.3"/>
-                    </svg>
+                    <img src="uprise_logo.png" alt="Uprise Logo" class="login-logo">
                 </div>
-                <h1 class="login-title">Uprise Micro-Finance Portal</h1>
+                <h1 class="login-title">Uprise Portal</h1>
+                <p class="login-subtitle">Visit your nearest branch for account setup.</p>
                 <form id="loginForm">
                     <div class="form-group-login">
                         <div class="input-with-icon">
-                            <span class="input-icon">👤</span>
+                            <span class="input-icon"><i data-lucide="user"></i></span>
                             <input type="text" id="username" placeholder="Username" required>
                         </div>
                     </div>
                     <div class="form-group-login">
                         <div class="input-with-icon">
-                            <span class="input-icon">🔒</span>
+                            <span class="input-icon"><i data-lucide="lock"></i></span>
                             <input type="password" id="password" placeholder="Password" required>
                         </div>
                     </div>
@@ -47,118 +231,145 @@
                 </div>
                 <button onclick="logout()" class="btn btn-secondary">Logout</button>
             </nav>
-            
+
             <div class="dashboard-content">
                 <div class="admin-tabs">
-                    <button class="admin-tab-btn active" onclick="showAdminTab('overview')">📊 System Overview</button>
-                    <button class="admin-tab-btn" onclick="showAdminTab('branches')">🏢 Branches</button>
-                    <button class="admin-tab-btn" onclick="showAdminTab('defaults')">⚠️ Defaults</button>
-                    <button class="admin-tab-btn" onclick="showAdminTab('loans')">💰 Loans</button>
-                    <button class="admin-tab-btn" onclick="showAdminTab('users')">👥 Users</button>
+                    <button class="admin-tab-btn active" onclick="showAdminTab('overview')"><i data-lucide="grid"></i>
+                        Overview</button>
+                    <button class="admin-tab-btn" onclick="showAdminTab('adminLoans')"><i data-lucide="file-text"></i>
+                        Loans</button>
+                    <button class="admin-tab-btn" onclick="showAdminTab('users')"><i data-lucide="users"></i>
+                        Manage Branches</button>
+                    <button class="admin-tab-btn" onclick="showAdminTab('settings')"><i data-lucide="settings"></i>
+                        Settings</button>
                 </div>
 
-                <!-- System Overview Tab -->
+                <!-- Overview Tab -->
                 <div id="overviewTab" class="admin-tab-content active">
                     <div class="overview-section">
-                        <h3>System-Wide Overview - All Branches</h3>
+                        <h3>System Analytics & Performance</h3>
                     </div>
-                    
+
                     <div class="stats">
-                        <div class="stat-card clickable-stat" onclick="showClientBreakdownModal()">
-                            <div class="stat-icon">👥</div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i data-lucide="users"></i></div>
                             <div class="stat-content">
                                 <h3>Total Clients</h3>
-                                <p id="systemClientCount" class="stat-number">0</p>
+                                <p id="clientCount" class="stat-number">0</p>
                             </div>
                         </div>
-                        <div class="stat-card clickable-stat" onclick="showActiveLoansModal()">
-                            <div class="stat-icon">📊</div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i data-lucide="activity"></i></div>
                             <div class="stat-content">
                                 <h3>Active Loans</h3>
-                                <p id="systemActiveLoans" class="stat-number">0</p>
+                                <p id="activeLoansCount" class="stat-number">0</p>
                             </div>
                         </div>
-                        <div class="stat-card clickable-stat" onclick="showDisbursedBreakdownModal()">
-                            <div class="stat-icon">💰</div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i data-lucide="banknote"></i></div>
                             <div class="stat-content">
                                 <h3>Total Disbursed</h3>
-                                <p id="systemDisbursed" class="stat-number">MK 0</p>
+                                <p id="totalDisbursed" class="stat-number">0</p>
                             </div>
                         </div>
-                        <div class="stat-card clickable-stat" onclick="showDefaultsModal()">
-                            <div class="stat-icon">⚠️</div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i data-lucide="trending-down"></i></div>
                             <div class="stat-content">
-                                <h3>Total Defaults</h3>
-                                <p id="systemDefaults" class="stat-number">0</p>
+                                <h3>Default Rate</h3>
+                                <p id="defaultRate" class="stat-number">0%</p>
                             </div>
                         </div>
-                        <div class="stat-card clickable-stat" onclick="showCollectedBreakdownModal()">
-                            <div class="stat-icon">✅</div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i data-lucide="clock"></i></div>
                             <div class="stat-content">
-                                <h3>Loans Collected</h3>
-                                <p id="systemCollected" class="stat-number">MK 0</p>
+                                <h3>Pending Review</h3>
+                                <p id="pendingCount" class="stat-number">0</p>
                             </div>
                         </div>
-                        <div class="stat-card clickable-stat" onclick="showAdminTab('branches')">
-                            <div class="stat-icon">🏢</div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i data-lucide="check-circle"></i></div>
                             <div class="stat-content">
-                                <h3>Total Branches</h3>
-                                <p id="systemBranches" class="stat-number">0</p>
+                                <h3>Approved Total</h3>
+                                <p id="approvedCount" class="stat-number">0</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="section main-section">
-                        <h2>Recent Activity</h2>
+                        <h2><i data-lucide="history"></i> Recent Activity</h2>
                         <div id="recentActivity" class="activity-list"></div>
                     </div>
                 </div>
 
-                <!-- Branches Tab -->
-                <div id="branchesTab" class="admin-tab-content">
-                    <div class="section">
-                        <h2>Branch Performance</h2>
-                        <div id="branchAnalytics" class="branch-analytics"></div>
-                    </div>
-                </div>
-
-                <!-- Defaults Tab -->
-                <div id="defaultsTab" class="admin-tab-content">
-                    <div class="section">
-                        <h2>Clients with Defaults</h2>
-                        <div class="filter-section">
-                            <select id="defaultBranchFilter" onchange="filterDefaults()">
-                                <option value="all">All Branches</option>
-                            </select>
-                        </div>
-                        <div id="defaultsList" class="defaults-list"></div>
-                    </div>
-                </div>
-
                 <!-- Loans Tab -->
-                <div id="loansTab" class="admin-tab-content">
-                    <div class="section">
-                        <h2>⏳ Pending Loan Applications</h2>
-                        <p style="color: #6c757d; margin-bottom: 20px;">Review and approve or reject loan applications</p>
-                        <div id="pendingLoans" class="loans-list"></div>
+                <div id="adminLoansTab" class="admin-tab-content">
+                    <div class="sub-tabs">
+                        <button class="sub-tab-btn active" onclick="showLoanSubTab('pending')">
+                            <i data-lucide="clock"></i> Pending
+                            <span id="pendingSubCount" class="sub-count-badge">0</span>
+                        </button>
+                        <button class="sub-tab-btn" onclick="showLoanSubTab('approved')">
+                            <i data-lucide="check-check"></i> Approved
+                            <span id="approvedSubCount" class="sub-count-badge">0</span>
+                        </button>
+                        <button class="sub-tab-btn" onclick="showLoanSubTab('rejected')">
+                            <i data-lucide="x-circle"></i> Rejected
+                            <span id="rejectedSubCount" class="sub-count-badge">0</span>
+                        </button>
                     </div>
-                    
-                    <div class="section" style="margin-top: 40px;">
-                        <h2>✅ Approved Loans</h2>
-                        <p style="color: #6c757d; margin-bottom: 20px;">All approved and active loans</p>
-                        <div id="approvedLoans" class="loans-list"></div>
+
+                    <div id="pendingLoansSubTab" class="loan-sub-content active">
+                        <div class="section">
+                            <h2><i data-lucide="clipboard-list"></i> Pending Loan Applications</h2>
+                            <div id="pendingLoans" class="loans-list"></div>
+                        </div>
+                    </div>
+
+                    <div id="approvedLoansSubTab" class="loan-sub-content">
+                        <div class="section">
+                            <h2><i data-lucide="check-circle-2"></i> Approved Loans History</h2>
+                            <div id="approvedLoans" class="loans-list"></div>
+                        </div>
+                    </div>
+
+                    <div id="rejectedLoansSubTab" class="loan-sub-content">
+                        <div class="section">
+                            <h2><i data-lucide="x-circle"></i> Rejected Loans</h2>
+                            <div id="rejectedLoans" class="loans-list"></div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Users Tab -->
                 <div id="usersTab" class="admin-tab-content">
-                    <div class="users-grid">
+                    <div class="sub-tabs">
+                        <button class="sub-tab-btn active" onclick="showBranchSubTab('branches')">
+                            <i data-lucide="building-2"></i> Branches
+                            <span id="branchesSubCount" class="sub-count-badge">0</span>
+                        </button>
+                        <button class="sub-tab-btn" onclick="showBranchSubTab('createBranch')">
+                            <i data-lucide="plus-circle"></i> Create New Branch
+                        </button>
+                    </div>
+
+                    <div id="branchesSubTab" class="branch-sub-content active">
                         <div class="section">
-                            <h2>Create New Branch User</h2>
+                            <h2><i data-lucide="building-2"></i> Branch Users</h2>
+                            <div id="usersList" class="users-list"></div>
+                        </div>
+                    </div>
+
+                    <div id="createBranchSubTab" class="branch-sub-content">
+                        <div class="section">
+                            <h2><i data-lucide="user-plus"></i> Create New Branch User</h2>
                             <form id="createUserForm" class="form">
                                 <div class="form-group">
                                     <label>Branch Name</label>
                                     <input type="text" id="branchName" required placeholder="e.g., Kigali Branch">
+                                </div>
+                                <div class="form-group">
+                                    <label>District</label>
+                                    <input type="text" id="branchDistrict" required placeholder="e.g., Kigali">
                                 </div>
                                 <div class="form-group">
                                     <label>Username</label>
@@ -180,10 +391,45 @@
                                 <div id="createUserMessage" class="message"></div>
                             </form>
                         </div>
-                        
-                        <div class="section">
-                            <h2>Branch Users</h2>
-                            <div id="usersList" class="users-list"></div>
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div id="settingsTab" class="admin-tab-content">
+                    <div class="section">
+                        <h2><i data-lucide="settings"></i> System Configuration</h2>
+                        <div class="settings-grid">
+                            <div class="settings-card">
+                                <h3><i data-lucide="percent"></i> Loan Interest & Fees</h3>
+                                <p>Control the default interest rates and processing fees applied across all branches.
+                                </p>
+                                <form id="settingsForm" class="form" onsubmit="updateGlobalSettings(event)">
+                                    <div class="form-group">
+                                        <label>Default Annual Interest Rate (%)</label>
+                                        <input type="number" id="adminInterestRate" required step="0.1" min="0"
+                                            placeholder="e.g., 15">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Default Loan Processing Fee (%)</label>
+                                        <input type="number" id="adminLoanFee" required step="0.1" min="0"
+                                            placeholder="e.g., 2.5">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Save Global Configuration</button>
+                                </form>
+                            </div>
+
+                            <div class="settings-card info-card">
+                                <h3><i data-lucide="info"></i> Quick Insights</h3>
+                                <div class="config-insight">
+                                    <p>Interest is calculated using the <strong>Simple Interest</strong> method.</p>
+                                    <p>Repayments are split equally across the selected term duration.</p>
+                                    <div class="alert alert-info" style="margin-top: 15px; border-radius: 8px;">
+                                        <i data-lucide="alert-circle"></i>
+                                        These global settings will be immediately reflected on all new loan application
+                                        screens at every branch.
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -201,92 +447,828 @@
             </nav>
             <div class="dashboard-content">
                 <div class="tabs">
-                    <button class="tab-btn active" onclick="showTab('clients')">Clients</button>
-                    <button class="tab-btn" onclick="showTab('loans')">Loans</button>
-                    <button class="tab-btn" onclick="showTab('register')">Register Client</button>
-                    <button class="tab-btn" onclick="showTab('apply')">Apply for Loan</button>
+                    <button class="tab-btn active" onclick="showTab('overview')"><i data-lucide="layout-dashboard"></i>
+                        Overview</button>
+                    <button class="tab-btn" onclick="showTab('clients')"><i data-lucide="users"></i>
+                        Clients</button>
+                    <button class="tab-btn" onclick="showTab('loans')"><i data-lucide="file-text"></i> Loans</button>
+                    <button class="tab-btn" onclick="showTab('register')"><i data-lucide="user-plus"></i>
+                        Register</button>
+                    <button class="tab-btn" onclick="showTab('apply')"><i data-lucide="hand-coins"></i> Apply</button>
                 </div>
-                
-                <div id="clientsTab" class="tab-content active">
-                    <h2>Registered Clients</h2>
+
+                <!-- Overview Tab -->
+                <div id="overviewTab" class="tab-content active">
+                    <div class="overview-section">
+                        <h3>Branch Analytics & Performance</h3>
+                    </div>
+
+                    <div class="stats">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i data-lucide="users"></i></div>
+                            <div class="stat-content">
+                                <h3>Total Clients</h3>
+                                <p id="branchClientCount" class="stat-number">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i data-lucide="activity"></i></div>
+                            <div class="stat-content">
+                                <h3>Active Loans</h3>
+                                <p id="branchActiveLoansCount" class="stat-number">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i data-lucide="banknote"></i></div>
+                            <div class="stat-content">
+                                <h3>Total Disbursed</h3>
+                                <p id="branchTotalDisbursed" class="stat-number">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i data-lucide="trending-down"></i></div>
+                            <div class="stat-content">
+                                <h3>Default Rate</h3>
+                                <p id="branchDefaultRate" class="stat-number">0%</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i data-lucide="clock"></i></div>
+                            <div class="stat-content">
+                                <h3>Pending Review</h3>
+                                <p id="branchPendingCount" class="stat-number">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i data-lucide="check-circle"></i></div>
+                            <div class="stat-content">
+                                <h3>Approved Total</h3>
+                                <p id="branchApprovedCount" class="stat-number">0</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section main-section">
+                        <h2><i data-lucide="history"></i> Recent Activity</h2>
+                        <div id="branchRecentActivity" class="activity-list"></div>
+                    </div>
+                </div>
+
+                <div id="clientsTab" class="tab-content">
+                    <h2><i data-lucide="users"></i> Registered Clients</h2>
                     <div id="clientsList" class="list"></div>
                 </div>
-                
+
                 <div id="loansTab" class="tab-content">
-                    <h2>Loan Applications</h2>
-                    <div id="loansList" class="list"></div>
+                    <div class="sub-tabs branch-loan-sub-tabs">
+                        <button class="sub-tab-btn active" id="branchPendingTabBtn"
+                            onclick="showBranchLoanSubTab('pending')">
+                            <i data-lucide="clock"></i> Pending Applications
+                            <span id="branchPendingSubCount" class="sub-count-badge">0</span>
+                        </button>
+                        <button class="sub-tab-btn" id="branchApprovedTabBtn"
+                            onclick="showBranchLoanSubTab('approved')">
+                            <i data-lucide="check-check"></i> Approved Loans
+                            <span id="branchApprovedSubCount" class="sub-count-badge">0</span>
+                        </button>
+                        <button class="sub-tab-btn" id="branchRejectedTabBtn"
+                            onclick="showBranchLoanSubTab('rejected')">
+                            <i data-lucide="x-circle"></i> Rejected Loans
+                            <span id="branchRejectedSubCount" class="sub-count-badge">0</span>
+                        </button>
+                    </div>
+
+                    <div id="branchPendingLoansSubTab" class="branch-loan-sub-content active">
+                        <h2><i data-lucide="clipboard-list"></i> Pending Loan Applications</h2>
+                        <div id="branchPendingLoansList" class="list"></div>
+                    </div>
+
+                    <div id="branchApprovedLoansSubTab" class="branch-loan-sub-content">
+                        <h2><i data-lucide="check-circle-2"></i> Approved Loans</h2>
+                        <div id="branchApprovedLoansList" class="list"></div>
+                    </div>
+
+                    <div id="branchRejectedLoansSubTab" class="branch-loan-sub-content">
+                        <h2><i data-lucide="alert-circle"></i> Rejected Loans</h2>
+                        <div id="branchRejectedLoansList" class="list"></div>
+                    </div>
                 </div>
-                
+
+                <!-- Multi-Step Registration Form with Progress Indicator -->
                 <div id="registerTab" class="tab-content">
                     <h2>Register New Client</h2>
-                    <form id="registerForm" class="form">
-                        <div class="form-group">
-                            <label>Full Name</label>
-                            <input type="text" id="clientName" required>
+
+                    <!-- Progress Steps -->
+                    <div class="progress-steps">
+                        <div class="step active" data-step="1">
+                            <div class="step-icon"><i data-lucide="scan"></i></div>
+                            <div class="step-label">Scan ID</div>
                         </div>
-                        <div class="form-group">
-                            <label>National ID</label>
-                            <input type="text" id="nationalId" required>
+                        <div class="step-line"></div>
+                        <div class="step" data-step="2">
+                            <div class="step-icon"><i data-lucide="user"></i></div>
+                            <div class="step-label">Personal</div>
                         </div>
-                        <div class="form-group">
-                            <label>Phone Number</label>
-                            <input type="tel" id="phone" required>
+                        <div class="step-line"></div>
+                        <div class="step" data-step="3">
+                            <div class="step-icon"><i data-lucide="briefcase"></i></div>
+                            <div class="step-label">Work</div>
                         </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" id="email">
+                        <div class="step-line"></div>
+                        <div class="step" data-step="4">
+                            <div class="step-icon"><i data-lucide="landmark"></i></div>
+                            <div class="step-label">Bank</div>
                         </div>
-                        <div class="form-group">
-                            <label>Address</label>
-                            <input type="text" id="address">
+                        <div class="step-line"></div>
+                        <div class="step" data-step="5">
+                            <div class="step-icon"><i data-lucide="camera"></i></div>
+                            <div class="step-label">Capture</div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Register Client</button>
+                    </div>
+
+                    <form id="registerForm" class="multi-step-form">
+
+                        <!-- Step 1: Barcode Scanner -->
+                        <div class="form-step active" data-step="1">
+                            <div class="barcode-scanner-section">
+                                <div class="step-icon" style="border: none; background: none; box-shadow: none;">
+                                    <div class="icon-wrapper" style="width: 100px; height: 100px; border-radius: 30px;">
+                                        <i data-lucide="smartphone" style="width: 50px; height: 50px;"></i>
+                                    </div>
+                                </div>
+                                <h3>Scan National ID Barcode</h3>
+                                <p class="step-description">Position the barcode on the back of the Malawi National ID
+                                    for instant data entry.</p>
+                                <button type="button" class="btn btn-scanner-large" onclick="startBarcodeScanner()">
+                                    <i data-lucide="camera"></i> Start Scanning
+                                </button>
+                                <div class="or-divider">
+                                    <span>OR</span>
+                                </div>
+                                <button type="button" class="btn btn-secondary" onclick="nextStep()">Manually Enter
+                                    Details</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Personal Information -->
+                        <div class="form-step" data-step="2">
+                            <div class="step-icon"><i data-lucide="user"></i></div>
+                            <h3>Personal Information</h3>
+                            <p class="step-description">Fill in the client's basic identity details.</p>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>First Name <span class="required">*</span></label>
+                                    <input type="text" id="clientFirstName" required placeholder="Enter first name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Last Name <span class="required">*</span></label>
+                                    <input type="text" id="clientLastName" required placeholder="Enter last name">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Title</label>
+                                    <select id="clientTitle">
+                                        <option value="">Select Title</option>
+                                        <option value="Mr">Mr</option>
+                                        <option value="Mrs">Mrs</option>
+                                        <option value="Miss">Miss</option>
+                                        <option value="Dr">Dr</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Gender <span class="required">*</span></label>
+                                    <select id="gender" required>
+                                        <option value="">Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Date of Birth <span class="required">*</span></label>
+                                    <input type="date" id="dob" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Marital Status <span class="required">*</span></label>
+                                    <select id="maritalStatus" required>
+                                        <option value="">Select Status</option>
+                                        <option value="Single">Single</option>
+                                        <option value="Married">Married</option>
+                                        <option value="Divorced">Divorced</option>
+                                        <option value="Widowed">Widowed</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>ID Type <span class="required">*</span></label>
+                                    <select id="idType" required>
+                                        <option value="">Select ID Type</option>
+                                        <option value="National ID">National ID</option>
+                                        <option value="Passport">Passport</option>
+                                        <option value="Driver's License">Driver's License</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>ID Number <span class="required">*</span></label>
+                                    <input type="text" id="nationalId" required placeholder="Enter ID number">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Phone Number <span class="required">*</span></label>
+                                    <input type="tel" id="phone" required placeholder="+265">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" id="email" placeholder="Optional">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>District <span class="required">*</span></label>
+                                    <input type="text" id="district" required placeholder="Enter district">
+                                </div>
+                                <div class="form-group">
+                                    <label>T/A (Traditional Authority)</label>
+                                    <input type="text" id="traditionalAuthority" placeholder="Optional">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Home Village <span class="required">*</span></label>
+                                    <input type="text" id="homeVillage" required placeholder="Enter village">
+                                </div>
+                                <div class="form-group">
+                                    <label>Physical Address</label>
+                                    <input type="text" id="address" placeholder="Optional">
+                                </div>
+                            </div>
+
+                            <div id="spouseSection" style="display: none;">
+                                <h4 class="subsection-title">Spouse Information</h4>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Spouse Name</label>
+                                        <input type="text" id="spouseName" placeholder="Enter spouse name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Spouse Contact</label>
+                                        <input type="tel" id="spouseContact" placeholder="+265">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Employment Details -->
+                        <div class="form-step" data-step="3">
+                            <div class="step-icon"><i data-lucide="briefcase"></i></div>
+                            <h3>Employment Details</h3>
+                            <p class="step-description">Information about the client's income source.</p>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Name of Employer/Ministry <span class="required">*</span></label>
+                                    <input type="text" id="employerName" required placeholder="Enter employer name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Department</label>
+                                    <input type="text" id="department" placeholder="Optional">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Employment Number</label>
+                                    <input type="text" id="employmentNumber" placeholder="Optional">
+                                </div>
+                                <div class="form-group">
+                                    <label>Net Monthly Salary (MK) <span class="required">*</span></label>
+                                    <input type="number" id="monthlySalary" required placeholder="Enter amount in MK">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Full Employment Status <span class="required">*</span></label>
+                                    <select id="fullEmployment" required>
+                                        <option value="">Select Status</option>
+                                        <option value="Yes">Yes - Permanent</option>
+                                        <option value="No">No - Contract/Temporary</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Length of Service</label>
+                                    <input type="text" id="lengthOfService" placeholder="e.g., 5 years">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Work Address</label>
+                                <input type="text" id="workAddress" placeholder="Enter work address">
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Bank & Witness Details -->
+                        <div class="form-step" data-step="4">
+                            <div class="step-icon"><i data-lucide="landmark"></i></div>
+                            <h3>Bank & Witness Details</h3>
+                            <p class="step-description">Verification and disbursement details.</p>
+
+                            <h4 class="subsection-title">Bank Details</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Bank Name <span class="required">*</span></label>
+                                    <input type="text" id="bankName" required placeholder="Enter bank name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Account Number <span class="required">*</span></label>
+                                    <input type="text" id="accountNumber" required placeholder="Enter account number">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Account Type <span class="required">*</span></label>
+                                    <select id="accountType" required>
+                                        <option value="">Select Type</option>
+                                        <option value="Savings">Savings</option>
+                                        <option value="Current">Current</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Branch</label>
+                                    <input type="text" id="bankBranch" placeholder="Enter branch">
+                                </div>
+                            </div>
+
+                            <h4 class="subsection-title">Witness/Guarantor Details</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Witness Name <span class="required">*</span></label>
+                                    <input type="text" id="witnessName" required placeholder="Enter witness name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Witness Contact <span class="required">*</span></label>
+                                    <input type="tel" id="witnessContact" required placeholder="+265">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Relationship to Client <span class="required">*</span></label>
+                                    <input type="text" id="witnessRelationship" required
+                                        placeholder="e.g., Brother, Friend">
+                                </div>
+                                <div class="form-group">
+                                    <label>Witness Occupation</label>
+                                    <input type="text" id="witnessOccupation" placeholder="Enter occupation">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Witness Monthly Income (MK)</label>
+                                <input type="number" id="witnessIncome" placeholder="Enter amount in MK">
+                            </div>
+                        </div>
+
+                        <!-- Step 5: ID Document Capture -->
+                        <div class="form-step" data-step="5">
+                            <div class="step-icon"><i data-lucide="camera"></i></div>
+                            <h3>Identity Verification</h3>
+                            <p class="step-description">Upload proof of identity to complete the application.</p>
+
+                            <div class="id-capture-section">
+                                <div class="id-capture-group">
+                                    <label>ID Front Side <span class="required">*</span></label>
+                                    <div class="id-upload-area" id="idFrontArea">
+                                        <input type="file" id="idFront" accept="image/*" capture="environment"
+                                            style="display: none;">
+                                        <div class="upload-placeholder" id="idFrontPlaceholder">
+                                            <div class="upload-icon"
+                                                style="background: none; border: none; padding: 0;">
+                                                <div class="icon-wrapper"><i data-lucide="camera"></i></div>
+                                            </div>
+                                            <p>Capture Front</p>
+                                            <div class="capture-buttons">
+                                                <button type="button" class="btn btn-camera"
+                                                    onclick="openCamera('front')"><i data-lucide="camera"></i>
+                                                    Camera</button>
+                                                <button type="button" class="btn btn-upload"
+                                                    onclick="document.getElementById('idFront').click()"><i
+                                                        data-lucide="upload-cloud"></i> Upload</button>
+                                            </div>
+                                        </div>
+                                        <video id="cameraFront" class="camera-stream" style="display: none;" autoplay
+                                            playsinline></video>
+                                        <canvas id="canvasFront" style="display: none;"></canvas>
+                                        <div id="cameraControlsFront" class="camera-controls" style="display: none;">
+                                            <button type="button" class="btn btn-success"
+                                                onclick="capturePhoto('front')"><i data-lucide="camera"></i>
+                                                Capture</button>
+                                            <button type="button" class="btn btn-danger"
+                                                onclick="closeCamera('front')">&times; Cancel</button>
+                                        </div>
+                                        <img id="idFrontPreview" class="id-preview" style="display: none;">
+                                        <button type="button" class="btn-remove-image" id="removeIdFront"
+                                            style="display: none;" onclick="removeIdImage('front')">&times;</button>
+                                    </div>
+                                </div>
+
+                                <div class="id-capture-group">
+                                    <label>ID Back Side <span class="required">*</span></label>
+                                    <div class="id-upload-area" id="idBackArea">
+                                        <input type="file" id="idBack" accept="image/*" capture="environment"
+                                            style="display: none;">
+                                        <div class="upload-placeholder" id="idBackPlaceholder">
+                                            <div class="upload-icon"
+                                                style="background: none; border: none; padding: 0;">
+                                                <div class="icon-wrapper"><i data-lucide="camera"></i></div>
+                                            </div>
+                                            <p>Capture Back</p>
+                                            <div class="capture-buttons">
+                                                <button type="button" class="btn btn-camera"
+                                                    onclick="openCamera('back')"><i data-lucide="camera"></i>
+                                                    Camera</button>
+                                                <button type="button" class="btn btn-upload"
+                                                    onclick="document.getElementById('idBack').click()"><i
+                                                        data-lucide="upload-cloud"></i> Upload</button>
+                                            </div>
+                                        </div>
+                                        <video id="cameraBack" class="camera-stream" style="display: none;" autoplay
+                                            playsinline></video>
+                                        <canvas id="canvasBack" style="display: none;"></canvas>
+                                        <div id="cameraControlsBack" class="camera-controls" style="display: none;">
+                                            <button type="button" class="btn btn-success"
+                                                onclick="capturePhoto('back')"><i data-lucide="camera"></i>
+                                                Capture</button>
+                                            <button type="button" class="btn btn-danger"
+                                                onclick="closeCamera('back')">&times; Cancel</button>
+                                        </div>
+                                        <img id="idBackPreview" class="id-preview" style="display: none;">
+                                        <button type="button" class="btn-remove-image" id="removeIdBack"
+                                            style="display: none;" onclick="removeIdImage('back')">&times;</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="form-note"><i data-lucide="info"></i> Document images are used for verification
+                                purposes only.</p>
+                        </div>
+
+                        <!-- Navigation Buttons -->
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-secondary" id="prevBtn" onclick="prevStep()"
+                                style="display: none;">
+                                &larr; Previous
+                            </button>
+                            <button type="button" class="btn btn-primary" id="nextBtn" onclick="nextStep()">
+                                Next &rarr;
+                            </button>
+                            <button type="submit" class="btn btn-success" id="submitBtn" style="display: none;">
+                                <i data-lucide="check-circle-2"></i> Register Client
+                            </button>
+                        </div>
+
                         <div id="registerMessage" class="message"></div>
                     </form>
+
+                    <!-- Barcode Scanner Modal -->
+                    <div id="barcodeScannerModal" class="scanner-modal" style="display: none;">
+                        <div class="scanner-modal-content">
+                            <div class="scanner-header">
+                                <h3><i data-lucide="scan-face"></i> Scan Identity Card</h3>
+                                <button class="modal-close" onclick="stopBarcodeScanner()">&times;</button>
+                            </div>
+                            <div class="scanner-body">
+                                <video id="barcodeVideo" class="barcode-video" autoplay playsinline></video>
+                                <canvas id="barcodeCanvas" style="display: none;"></canvas>
+                                <div class="scanner-overlay">
+                                    <div class="scanner-frame"></div>
+                                    <p class="scanner-instruction">Align the barcode on the back of the ID</p>
+                                </div>
+                                <div id="scannerStatus" class="scanner-status"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
+
                 <div id="applyTab" class="tab-content">
-                    <h2>Apply for Loan</h2>
+                    <h2><i data-lucide="hand-coins"></i> Loan Application</h2>
                     <form id="loanForm" class="form">
                         <div class="form-group">
-                            <label>Select Client</label>
+                            <label>Select Registered Client</label>
                             <select id="loanClient" required>
-                                <option value="">-- Select Client --</option>
+                                <option value="">-- Select --</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Loan Amount</label>
-                            <input type="number" id="loanAmount" required min="1000">
+                            <label>Requested Principal Amount (MK)</label>
+                            <input type="number" id="loanAmount" required min="1000" placeholder="e.g., 500,000">
                         </div>
                         <div class="form-group">
-                            <label>Repayment Period (months)</label>
-                            <input type="number" id="repaymentPeriod" required min="1" max="60">
+                            <label>Applied Monthly Interest Rate</label>
+                            <input type="text" id="appliedInterestRate" readonly class="readonly-input" value="0%">
                         </div>
                         <div class="form-group">
-                            <label>Loan Purpose</label>
-                            <textarea id="loanPurpose" rows="3" required></textarea>
+                            <label>Repayment Term (months)</label>
+                            <input type="number" id="repaymentPeriod" required min="1" max="60" value="12">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i data-lucide="percent"
+                                        style="width:15px;height:15px;margin-right:4px;color:#f39c12;"></i> Interest
+                                    Amount (MK)</label>
+                                <input type="text" id="totalInterest" readonly class="readonly-input calc-highlight"
+                                    value="MK 0" placeholder="Auto-calculated">
+                            </div>
+                            <div class="form-group">
+                                <label><i data-lucide="landmark"
+                                        style="width:15px;height:15px;margin-right:4px;color:#28a745;"></i> Total Loan
+                                    Amount (MK)</label>
+                                <input type="text" id="totalRepayment" readonly
+                                    class="readonly-input calc-highlight-total" value="MK 0"
+                                    placeholder="Principal + Interest">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Receiving Method</label>
+                            <select id="receivingMethod" required onchange="toggleReceivingMethod()">
+                                <option value="">-- Select Method --</option>
+                                <option value="Bank">Bank</option>
+                                <option value="Airtel Money">Airtel Money</option>
+                                <option value="TNM Mpamba">TNM Mpamba</option>
+                            </select>
+                        </div>
+
+                        <div id="bankDetails" style="display: none;">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Bank Name <span class="required">*</span></label>
+                                    <input type="text" id="bankName" placeholder="e.g., National Bank">
+                                </div>
+                                <div class="form-group">
+                                    <label>Account Number <span class="required">*</span></label>
+                                    <input type="text" id="accountNumber" placeholder="Enter account number">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="mobileMoneyDetails" class="form-group" style="display: none;">
+                            <label>Mobile Money Phone Number <span class="required">*</span></label>
+                            <input type="tel" id="mobileMoneyPhone" placeholder="Enter phone number">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Purpose of Loan</label>
+                            <textarea id="loanPurpose" rows="3" required
+                                placeholder="Describe how the funds will be used"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit Application</button>
                         <div id="loanMessage" class="message"></div>
+
+                        <!-- Repayment Estimate Section -->
+                        <div id="repaymentEstimate" class="repayment-estimate-box" style="display: none;">
+                            <div class="estimate-header">
+                                <h3><i data-lucide="calculator"></i> Repayment estimate</h3>
+                            </div>
+                            <div class="estimate-grid">
+                                <div class="estimate-item">
+                                    <span class="estimate-label">Interest (Total)</span>
+                                    <span class="estimate-value highlight" id="estInterest">0</span>
+                                </div>
+                                <div class="estimate-item">
+                                    <span class="estimate-label">Processing Fee</span>
+                                    <span class="estimate-value" id="estProcessingFee">0</span>
+                                </div>
+                                <div class="estimate-item">
+                                    <span class="estimate-label">Total Repayment</span>
+                                    <span class="estimate-value highlight-total" id="estTotal">0</span>
+                                </div>
+                                <div class="estimate-item">
+                                    <span class="estimate-label">Monthly Installment</span>
+                                    <span class="estimate-value highlight" id="estMonthly">0</span>
+                                </div>
+                            </div>
+                            <p class="estimate-note">Note: This is an estimated amount. Final totals may vary slightly
+                                based on the disbursement date.</p>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Client Detail Modal -->
-    <div id="clientDetailModal" class="client-modal" style="display: none;">
-        <div class="client-modal-content">
-            <div class="client-modal-header">
-                <h2>Client Details</h2>
-                <button class="modal-close" onclick="closeClientModal()">✕</button>
-            </div>
-            <div class="client-modal-body" id="clientDetailBody">
-                <!-- Content will be populated by JavaScript -->
+        <!-- Client Dashboard -->
+        <div id="clientDashboard" class="screen">
+            <nav class="navbar client-navbar">
+                <div class="client-brand">
+                    <img src="uprise_logo.png" alt="Uprise Logo" class="nav-logo">
+                    <div>
+                        <h1 class="client-welcome">Hello, <span id="clientProfileName">Customer</span></h1>
+                        <p class="last-login">Your financial journey with Uprise</p>
+                    </div>
+                </div>
+                <div class="nav-actions">
+                    <button class="btn btn-icon"><i data-lucide="bell"></i></button>
+                    <button onclick="logout()" class="btn btn-outline">Logout</button>
+                </div>
+            </nav>
+
+            <div class="dashboard-content client-content">
+                <!-- Notification Banner -->
+                <div id="clientDueNotification" class="client-notification-banner" style="display: none;">
+                    <div class="notif-icon"><i data-lucide="bell-ring"></i></div>
+                    <div class="notif-body">
+                        <h4>Payment Reminder</h4>
+                        <p>Your next repayment of <strong id="notifAmount">MK 0</strong> is due on <strong
+                                id="notifDate">March 25, 2026</strong>.</p>
+                    </div>
+                    <div class="notif-actions">
+                        <button class="btn btn-glass-small" onclick="showTab('schedule')">Review Schedule</button>
+                        <button class="notif-close"
+                            onclick="this.parentElement.parentElement.style.display='none'">✕</button>
+                    </div>
+                </div>
+
+                <!-- Financial Snapshot -->
+                <div class="client-stats-grid">
+                    <!-- Total Approved Card -->
+                    <div class="stat-card premium-card">
+                        <div class="stat-icon"><i data-lucide="award"></i></div>
+                        <div class="stat-content">
+                            <h3>Total Approved</h3>
+                            <p id="clientTotalApproved" class="stat-number">MK 0</p>
+                        </div>
+                    </div>
+
+                    <!-- Total Repaid Card -->
+                    <div class="stat-card glass-card">
+                        <div class="stat-icon repaid-icon"><i data-lucide="check-circle"></i></div>
+                        <div class="stat-content">
+                            <span class="stat-label">Total Repaid</span>
+                            <p id="clientTotalRepaid" class="stat-number">MK 0</p>
+                        </div>
+                    </div>
+
+                    <!-- Remaining Balance Card -->
+                    <div class="stat-card glass-card due-date-card">
+                        <div class="due-date-badge">Next Due: <span id="clientNextDueDate">N/A</span></div>
+                        <div class="stat-icon balance-icon"><i data-lucide="wallet"></i></div>
+                        <div class="stat-content">
+                            <span class="stat-label">Remaining Balance</span>
+                            <p id="clientBalance" class="stat-number">MK 0</p>
+                        </div>
+                    </div>
+
+                    <!-- Default Amount Card -->
+                    <div class="stat-card glass-card">
+                        <div class="stat-icon default-icon"><i data-lucide="alert-triangle"></i></div>
+                        <div class="stat-content">
+                            <span class="stat-label">Default Amount</span>
+                            <p id="clientDefaultAmount" class="stat-number" style="color: #dc3545;">MK 0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="client-main-grid">
+                    <!-- Left Column: Express Apply -->
+                    <div class="client-left-col">
+                        <div class="section-card express-apply-card">
+                            <div class="express-badge"><i data-lucide="zap"></i> Fast Approval</div>
+                            <h2>Quick Loan Apply</h2>
+                            <p>Need extra funds? Apply in seconds.</p>
+                            <form id="clientQuickApply" class="quick-form">
+                                <div class="form-group">
+                                    <label>Requested Principal Amount (MK)</label>
+                                    <input type="number" id="quickAmount" placeholder="e.g., 500,000" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Applied Monthly Interest Rate</label>
+                                    <input type="text" id="quickInterestRate" readonly class="readonly-input"
+                                        value="0%">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Repayment Term (months)</label>
+                                    <input type="number" id="quickTerm" required min="1" max="60" value="12">
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label><i data-lucide="percent"
+                                                style="width:15px;height:12px;margin-right:2px;color:#f39c12;"></i>
+                                            Interest Amount (MK)</label>
+                                        <input type="text" id="quickInterestAmount" readonly
+                                            class="readonly-input calc-highlight" value="MK 0">
+                                    </div>
+                                    <div class="form-group">
+                                        <label><i data-lucide="landmark"
+                                                style="width:15px;height:12px;margin-right:2px;color:#28a745;"></i>
+                                            Total Loan Amount (MK)</label>
+                                        <input type="text" id="quickTotalAmount" readonly
+                                            class="readonly-input calc-highlight-total" value="MK 0">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Receiving Method</label>
+                                    <select id="quickReceivingMethod" required>
+                                        <option value="">-- Select Method --</option>
+                                        <option value="Bank">Bank Account</option>
+                                        <option value="Airtel Money">Airtel Money</option>
+                                        <option value="TNM Mpamba">TNM Mpamba</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Purpose of Loan</label>
+                                    <textarea id="quickPurpose" rows="3" required
+                                        placeholder="Describe how the funds will be used"></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary"
+                                    style="background: #5f76e8; margin-top: 10px;">
+                                    Submit Application
+                                </button>
+                            </form>
+                            <div id="quickApplyMessage" class="message"></div>
+                        </div>
+
+                        <div class="support-card">
+                            <div class="support-icon"><i data-lucide="message-square"></i></div>
+                            <h3>Need Assistance?</h3>
+                            <p>Speak to our loan officer at your branch.</p>
+                            <button class="btn btn-secondary-small">Call Support</button>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Loan Journey & Schedule -->
+                    <div class="client-right-col">
+                        <div class="section-card">
+                            <div class="card-header">
+                                <h2><i data-lucide="map"></i> My Loan Journey</h2>
+                            </div>
+                            <div id="clientLoanHistory" class="loan-history-list">
+                                <!-- Populated by JS -->
+                                <div class="empty-state">No active loans found.</div>
+                            </div>
+                        </div>
+
+                        <div class="section-card">
+                            <div class="card-header">
+                                <h2><i data-lucide="list-checks"></i> Upcoming Repayments</h2>
+                            </div>
+                            <div class="table-container">
+                                <table class="uprise-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Amount</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="clientRepaymentTable">
+                                        <!-- Populated by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <script src="app-enhanced.js"></script>
+        <!-- Client Detail Modal -->
+        <div id="clientDetailModal" class="client-modal" style="display: none;">
+            <div class="client-modal-content">
+                <div class="client-modal-header">
+                    <h2>Client Portfolio</h2>
+                    <button class="modal-close" onclick="closeClientModal()">&times;</button>
+                </div>
+                <div class="client-modal-body" id="clientDetailBody">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+        <script src="app-enhanced.js"></script>
+        <script>
+            // Initialize Lucide icons on page load
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+            setupLoginForm();
+        </script>
 </body>
+
 </html>

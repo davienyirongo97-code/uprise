@@ -15,7 +15,7 @@ timeout /t 15 /nobreak
 echo.
 echo Opening web application...
 cd ..\web
-start index.html
+start "" "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe" "index.html"
 
 echo.
 echo ========================================

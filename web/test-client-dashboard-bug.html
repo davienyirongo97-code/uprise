@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Dashboard Bug Condition Exploration Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #667EEA;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #667EEA;
+            margin-top: 20px;
+        }
+        .test-result {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 4px solid;
+        }
+        .test-pass {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        .test-fail {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        .test-info {
+            background: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+        .test-warning {
+            background: #fff3cd;
+            border-color: #ffc107;
+            color: #856404;
+        }
+        .counterexample {
+            background: #f8f9fa;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 3px solid #dc3545;
+            font-family: monospace;
+        }
+        .summary {
+            background: #667EEA;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        button {
+            background: #667EEA;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px 10px 0;
+        }
+        button:hover {
+            background: #5568d3;
+        }
+        .test-code {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔍 Bug Condition Exploration Test</h1>
+        <p><strong>Purpose:</strong> This test validates that the client dashboard bug exists in the UNFIXED code.</p>
+        <p><strong>Expected Outcome:</strong> All tests should FAIL (this confirms the bug exists)</p>
+        <p><strong>Property 1:</strong> Fault Condition - Client Dashboard Renders After Login</p>
+        
+        <div class="test-info">
+            <strong>⚠️ IMPORTANT:</strong> This test is designed to FAIL on unfixed code. When it fails, it proves the bug exists.
+            After the fix is implemented, this same test should PASS, confirming the bug is resolved.
+        </div>
+
+        <button onclick="runAllTests()">▶️ Run All Tests</button>
+        <button onclick="location.reload()">🔄 Reset</button>
+    </div>
+
+    <div id="testResults"></div>
+
+    <iframe id="testFrame" src="index.html" style="display: none;"></iframe>
+
+    <script>
+        let testResults = [];
+        let counterexamples = [];
+
+        function logResult(testName, passed, message, isCounterexample = false) {
+            testResults.push({ testName, passed, message });
+            if (!passed && isCounterexample) {
+                counterexamples.push({ testName, message });
+            }
+        }
+
+        function displayResults() {
+            const container = document.getElementById('testResults');
+            let html = '<div class="test-container"><h2>📊 Test Results</h2>';
+
+            testResults.forEach(result => {
+                const cssClass = result.passed ? 'test-pass' : 'test-fail';
+                const icon = result.passed ? '✅' : '❌';
+                html += `
+                    <div class="test-result ${cssClass}">
+                        <strong>${icon} ${result.testName}</strong><br>
+                        ${result.message}
+                    </div>
+                `;
+            });
+
+            // Display counterexamples
+            if (counterexamples.length > 0) {
+                html += '<h2>🐛 Counterexamples Found (Bug Evidence)</h2>';
+                html += '<div class="test-warning">';
+                html += '<p><strong>These counterexamples prove the bug exists:</strong></p>';
+                counterexamples.forEach(ce => {
+                    html += `<div class="counterexample"><strong>${ce.testName}:</strong><br>${ce.message}</div>`;
+                });
+                html += '</div>';
+            }
+
+            // Summary
+            const totalTests = testResults.length;
+            const failedTests = testResults.filter(r => !r.passed).length;
+            const passedTests = totalTests - failedTests;
+
+            html += '<div class="summary">';
+            html += '<h2>📈 Summary</h2>';
+            html += `<p><strong>Total Tests:</strong> ${totalTests}</p>`;
+            html += `<p><strong>Failed (Expected):</strong> ${failedTests}</p>`;
+            html += `<p><strong>Passed (Unexpected):</strong> ${passedTests}</p>`;
+            
+            if (failedTests === totalTests) {
+                html += '<p style="font-size: 18px; margin-top: 15px;">✅ <strong>SUCCESS:</strong> All tests failed as expected. The bug is confirmed to exist.</p>';
+                html += '<p>These test failures are CORRECT - they prove the bug exists in the unfixed code.</p>';
+            } else if (passedTests === totalTests) {
+                html += '<p style="font-size: 18px; margin-top: 15px;">⚠️ <strong>UNEXPECTED:</strong> All tests passed. The bug may already be fixed, or the tests need adjustment.</p>';
+            } else {
+                html += '<p style="font-size: 18px; margin-top: 15px;">⚠️ <strong>PARTIAL:</strong> Some tests passed unexpectedly. Review the results.</p>';
+            }
+            html += '</div>';
+
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function runAllTests() {
+            testResults = [];
+            counterexamples = [];
+            document.getElementById('testResults').innerHTML = '<div class="test-container"><p>Running tests...</p></div>';
+
+            // Wait for iframe to load
+            setTimeout(() => {
+                const iframe = document.getElementById('testFrame');
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+                // Test 1: Check if clientDashboard element exists
+                test1_ClientDashboardExists(iframeDoc);
+
+                // Test 2: Check if required child elements exist
+                test2_RequiredChildElementsExist(iframeDoc);
+
+                // Test 3: Check if showScreen function can display clientDashboard
+                test3_ShowScreenFunctionality(iframe.contentWindow, iframeDoc);
+
+                // Test 4: Check registration form for corruption
+                test4_RegistrationFormStructure(iframeDoc);
+
+                // Display all results
+                displayResults();
+            }, 1000);
+        }
+
+        function test1_ClientDashboardExists(doc) {
+            const testName = "Test 1: Client Dashboard Element Exists";
+            const clientDashboard = doc.getElementById('clientDashboard');
+            
+            if (clientDashboard === null) {
+                logResult(
+                    testName,
+                    false,
+                    "❌ FAILED (Expected): document.getElementById('clientDashboard') returns null. The clientDashboard element does not exist in the DOM.",
+                    true
+                );
+            } else {
+                logResult(
+                    testName,
+                    true,
+                    "✅ PASSED (Unexpected): clientDashboard element exists. This suggests the bug may already be fixed."
+                );
+            }
+        }
+
+        function test2_RequiredChildElementsExist(doc) {
+            const testName = "Test 2: Required Child Elements Exist";
+            const requiredElements = [
+                'clientProfileName',
+                'clientBalance',
+                'clientTotalRepaid',
+                'loanProgressBar',
+                'clientNextInstallment',
+                'clientNextDueDate',
+                'clientLoanHistory',
+                'clientRepaymentTable'
+            ];
+
+            const missingElements = [];
+            requiredElements.forEach(elementId => {
+                if (doc.getElementById(elementId) === null) {
+                    missingElements.push(elementId);
+                }
+            });
+
+            if (missingElements.length > 0) {
+                logResult(
+                    testName,
+                    false,
+                    `❌ FAILED (Expected): ${missingElements.length} required elements are missing: ${missingElements.join(', ')}`,
+                    true
+                );
+            } else {
+                logResult(
+                    testName,
+                    true,
+                    "✅ PASSED (Unexpected): All required child elements exist. This suggests the bug may already be fixed."
+                );
+            }
+        }
+
+        function test3_ShowScreenFunctionality(win, doc) {
+            const testName = "Test 3: showScreen('clientDashboard') Functionality";
+            
+            try {
+                // Check if showScreen function exists
+                if (typeof win.showScreen !== 'function') {
+                    logResult(
+                        testName,
+                        false,
+                        "❌ FAILED: showScreen function does not exist in the window object.",
+                        true
+                    );
+                    return;
+                }
+
+                // Try to call showScreen
+                win.showScreen('clientDashboard');
+
+                // Check if clientDashboard is now visible
+                const clientDashboard = doc.getElementById('clientDashboard');
+                
+                if (clientDashboard === null) {
+                    logResult(
+                        testName,
+                        false,
+                        "❌ FAILED (Expected): showScreen('clientDashboard') was called, but the element does not exist in the DOM, so it cannot be displayed.",
+                        true
+                    );
+                } else if (clientDashboard.classList.contains('active') || clientDashboard.style.display !== 'none') {
+                    logResult(
+                        testName,
+                        true,
+                        "✅ PASSED (Unexpected): showScreen successfully displayed the clientDashboard. This suggests the bug may already be fixed."
+                    );
+                } else {
+                    logResult(
+                        testName,
+                        false,
+                        "❌ FAILED (Expected): clientDashboard element exists but is not visible after calling showScreen.",
+                        true
+                    );
+                }
+            } catch (error) {
+                logResult(
+                    testName,
+                    false,
+                    `❌ FAILED (Expected): Error calling showScreen: ${error.message}`,
+                    true
+                );
+            }
+        }
+
+        function test4_RegistrationFormStructure(doc) {
+            const testName = "Test 4: Registration Form Structure (No Navbar Corruption)";
+            
+            // Find the registration form section
+            const registerTab = doc.getElementById('registerTab');
+            
+            if (!registerTab) {
+                logResult(
+                    testName,
+                    false,
+                    "❌ FAILED: Could not find registerTab element to check for corruption.",
+                    false
+                );
+                return;
+            }
+
+            // Check if there's a navbar element inside the registration form
+            const navbarInForm = registerTab.querySelector('nav.navbar, nav.client-navbar');
+            
+            if (navbarInForm) {
+                logResult(
+                    testName,
+                    false,
+                    "❌ FAILED (Expected): Found navbar element inside registration form section. This is the HTML corruption mentioned in the bug report.",
+                    true
+                );
+            } else {
+                logResult(
+                    testName,
+                    true,
+                    "✅ PASSED (Unexpected): No navbar corruption found in registration form. This suggests the bug may already be fixed."
+                );
+            }
+
+            // Additional check: Look for client dashboard elements in registration form
+            const clientDashboardElementsInForm = registerTab.querySelector('#clientProfileName, #clientBalance, #clientTotalRepaid');
+            
+            if (clientDashboardElementsInForm) {
+                logResult(
+                    testName + " (Additional Check)",
+                    false,
+                    "❌ FAILED (Expected): Found client dashboard elements inside registration form section.",
+                    true
+                );
+            }
+        }
+
+        // Auto-run tests on page load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('testResults').innerHTML = '<div class="test-container"><p>Click "Run All Tests" to start the bug condition exploration.</p></div>';
+            }, 500);
+        });
+    </script>
+</body>
+</html>
