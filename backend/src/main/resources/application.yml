@@ -35,7 +35,7 @@ spring:
       max-request-size: 10MB
 
 jwt:
-  secret: your-secret-key-change-this-in-production
+  secret: ${JWT_SECRET:aW50ZXJuYWxfand0X3NlY3JldF9rZXlfZm9yX3VwcmlzZV9taWNyb2ZpbmFuY2VfMjAyNl9wcm9kdWN0aW9u}
   expiration: 86400000
 
 app:
