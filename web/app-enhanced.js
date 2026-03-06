@@ -255,7 +255,7 @@ function setupLoginForm() {
                 }
                 currentUser = branch;
                 showScreen('branchDashboard');
-                showTab('overview');
+                showTab('clients');
                 const welcomeText = document.querySelector('#branchDashboard .welcome-text span');
                 if (welcomeText) welcomeText.textContent = branch.fullName;
             } else if (client) {

@@ -448,9 +448,7 @@
             </nav>
             <div class="dashboard-content">
                 <div class="tabs">
-                    <button class="tab-btn active" onclick="showTab('overview')"><i data-lucide="layout-dashboard"></i>
-                        Overview</button>
-                    <button class="tab-btn" onclick="showTab('clients')"><i data-lucide="users"></i>
+                    <button class="tab-btn active" onclick="showTab('clients')"><i data-lucide="users"></i>
                         Clients</button>
                     <button class="tab-btn" onclick="showTab('loans')"><i data-lucide="file-text"></i> Loans</button>
                     <button class="tab-btn" onclick="showTab('register')"><i data-lucide="user-plus"></i>
@@ -458,64 +456,8 @@
                     <button class="tab-btn" onclick="showTab('apply')"><i data-lucide="hand-coins"></i> Apply</button>
                 </div>
 
-                <!-- Overview Tab -->
-                <div id="overviewTab" class="tab-content active">
-                    <div class="overview-section">
-                        <h3>Branch Analytics & Performance</h3>
-                    </div>
 
-                    <div class="stats">
-                        <div class="stat-card">
-                            <div class="stat-icon"><i data-lucide="users"></i></div>
-                            <div class="stat-content">
-                                <h3>Total Clients</h3>
-                                <p id="branchClientCount" class="stat-number">0</p>
-                            </div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon"><i data-lucide="activity"></i></div>
-                            <div class="stat-content">
-                                <h3>Active Loans</h3>
-                                <p id="branchActiveLoansCount" class="stat-number">0</p>
-                            </div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon"><i data-lucide="banknote"></i></div>
-                            <div class="stat-content">
-                                <h3>Total Disbursed</h3>
-                                <p id="branchTotalDisbursed" class="stat-number">0</p>
-                            </div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon"><i data-lucide="trending-down"></i></div>
-                            <div class="stat-content">
-                                <h3>Default Rate</h3>
-                                <p id="branchDefaultRate" class="stat-number">0%</p>
-                            </div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon"><i data-lucide="clock"></i></div>
-                            <div class="stat-content">
-                                <h3>Pending Review</h3>
-                                <p id="branchPendingCount" class="stat-number">0</p>
-                            </div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon"><i data-lucide="check-circle"></i></div>
-                            <div class="stat-content">
-                                <h3>Approved Total</h3>
-                                <p id="branchApprovedCount" class="stat-number">0</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="section main-section">
-                        <h2><i data-lucide="history"></i> Recent Activity</h2>
-                        <div id="branchRecentActivity" class="activity-list"></div>
-                    </div>
-                </div>
-
-                <div id="clientsTab" class="tab-content">
+                <div id="clientsTab" class="tab-content active">
                     <h2><i data-lucide="users"></i> Registered Clients</h2>
                     <div id="clientsList" class="list"></div>
                 </div>
