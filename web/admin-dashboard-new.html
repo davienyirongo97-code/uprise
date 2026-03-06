@@ -1,0 +1,105 @@
+<!-- Admin Dashboard - Exact Match to Screenshot -->
+<div id="adminDashboard" class="screen">
+    <nav class="navbar">
+        <div>
+            <h1>Admin Dashboard</h1>
+            <p class="welcome-text">Welcome Back, <span id="adminName">Admin</span>!</p>
+        </div>
+        <button onclick="logout()" class="btn btn-logout">Logout</button>
+    </nav>
+    
+    <div class="dashboard-content">
+        <div class="admin-tabs">
+            <button class="admin-tab-btn active" onclick="showAdminTab('overview')">
+                <i class="fas fa-chart-pie"></i> Overview
+            </button>
+            <button class="admin-tab-btn" onclick="showAdminTab('loans')">
+                <i class="fas fa-file-invoice-dollar"></i> Loans
+            </button>
+            <button class="admin-tab-btn" onclick="showAdminTab('branches')">
+                <i class="fas fa-code-branch"></i> Manage Branches
+            </button>
+            <button class="admin-tab-btn" onclick="showAdminTab('settings')">
+                <i class="fas fa-cog"></i> Settings
+            </button>
+        </div>
+
+        <!-- Overview Tab -->
+        <div id="overviewTab" class="admin-tab-content active">
+            <div class="overview-section">
+                <h3>System Analytics & Performance</h3>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card-new">
+                    <div class="stat-icon-new stat-icon-blue">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content-new">
+                        <p class="stat-label-new">Total Clients</p>
+                        <h2 class="stat-number-new" id="systemClientCount">12</h2>
+                    </div>
+                </div>
+                
+                <div class="stat-card-new">
+                    <div class="stat-icon-new stat-icon-green">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-content-new">
+                        <p class="stat-label-new">Active Loans</p>
+                        <h2 class="stat-number-new" id="systemActiveLoans">8</h2>
+                    </div>
+                </div>
+                
+                <div class="stat-card-new">
+                    <div class="stat-icon-new stat-icon-yellow">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <div class="stat-content-new">
+                        <p class="stat-label-new">Total Disbursed</p>
+                        <h2 class="stat-number-new" id="systemDisbursed">MK 25.0M</h2>
+                    </div>
+                </div>
+                
+                <div class="stat-card-new">
+                    <div class="stat-icon-new stat-icon-orange">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="stat-content-new">
+                        <p class="stat-label-new">Default Rate</p>
+                        <h2 class="stat-number-new" id="systemDefaultRate">15%</h2>
+                    </div>
+                </div>
+                
+                <div class="stat-card-new">
+                    <div class="stat-icon-new stat-icon-lightblue">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-content-new">
+                        <p class="stat-label-new">Pending Review</p>
+                        <h2 class="stat-number-new" id="systemPendingReview">4</h2>
+                    </div>
+                </div>
+                
+                <div class="stat-card-new">
+                    <div class="stat-icon-new stat-icon-purple">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-content-new">
+                        <p class="stat-label-new">Approved Total</p>
+                        <h2 class="stat-number-new" id="systemApprovedTotal">8</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recent-activity-section">
+                <h2><i class="fas fa-history"></i> Recent Activity</h2>
+                <div id="recentActivity" class="activity-list-new">
+                    <!-- Activity items will be populated here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Other tabs content here -->
+    </div>
+</div>
