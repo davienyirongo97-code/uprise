@@ -1,7 +1,7 @@
 // Backend API Configuration
 const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? 'http://localhost:8081/api'
-    : 'https://uprise-backend.onrender.com/api'; // Replace 'uprise-backend' with your Render service name if different
+    : 'https://YOUR-BACKEND-URL.up.railway.app/api'; // Replace with your Railway backend URL
 let currentUser = null;
 let authToken = null;
 
