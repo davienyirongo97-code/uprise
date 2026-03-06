@@ -1,5 +1,7 @@
 // Backend API Configuration
-const API_BASE_URL = 'http://localhost:8081/api';
+const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:8081/api'
+    : 'https://uprise-backend.onrender.com/api'; // Replace 'uprise-backend' with your Render service name if different
 let currentUser = null;
 let authToken = null;
 
@@ -66,76 +68,78 @@ async function apiCall(endpoint, options = {}) {
 // Initialize mock data - DO NOT load from localStorage yet, use defaults first
 let mockClients = [
     // Main Branch Clients
-    { id: 1, firstName: "Chisomo", lastName: "Banda", fullName: "Chisomo Banda", nationalId: "MWI001234567", username: "chisomo", password: "1234", phoneNumber: "+265888123456", email: "chisomo.banda@email.com", district: "Lilongwe", homeVillage: "Area 25", employerName: "Ministry of Health", monthlySalary: 450000, witnessName: "Grace Phiri", witnessContact: "+265999234567" },
-    { id: 2, firstName: "Thoko", lastName: "Mwale", fullName: "Thoko Mwale", nationalId: "MWI002345678", phoneNumber: "+265888234567", email: "thoko.mwale@email.com", district: "Lilongwe", homeVillage: "Area 18", employerName: "Malawi Revenue Authority", monthlySalary: 650000, witnessName: "John Kamwendo", witnessContact: "+265999345678" },
-    { id: 3, firstName: "Mphatso", lastName: "Chirwa", fullName: "Mphatso Chirwa", nationalId: "MWI003456789", phoneNumber: "+265888345678", email: "mphatso.chirwa@email.com", district: "Lilongwe", homeVillage: "Area 47", employerName: "Reserve Bank of Malawi", monthlySalary: 850000, witnessName: "Mercy Banda", witnessContact: "+265999456789" },
-    { id: 4, firstName: "Kondwani", lastName: "Phiri", fullName: "Kondwani Phiri", nationalId: "MWI004567890", phoneNumber: "+265888456789", email: "kondwani.phiri@email.com", district: "Lilongwe", homeVillage: "Area 36", employerName: "Airtel Malawi", monthlySalary: 550000, witnessName: "Esther Nyirenda", witnessContact: "+265999567890" },
-    { id: 5, firstName: "Tamanda", lastName: "Nyirenda", fullName: "Tamanda Nyirenda", nationalId: "MWI005678901", phoneNumber: "+265888567890", email: "tamanda.nyirenda@email.com", district: "Lilongwe", homeVillage: "Area 49", employerName: "TNM Plc", monthlySalary: 480000, witnessName: "Patrick Mbewe", witnessContact: "+265999678901" },
+    { id: 1, firstName: "Chisomo", lastName: "Banda", fullName: "Chisomo Banda", nationalId: "MWI001234567", username: "chisomo", password: "1234", phoneNumber: "+265888123456", email: "chisomo.banda@email.com", district: "Lilongwe", homeVillage: "Area 25", employerName: "Ministry of Health", monthlySalary: 450000, witnessName: "Grace Phiri", witnessContact: "+265999234567", branchName: "Main Branch" },
+    { id: 2, firstName: "Thoko", lastName: "Mwale", fullName: "Thoko Mwale", nationalId: "MWI002345678", phoneNumber: "+265888234567", email: "thoko.mwale@email.com", district: "Lilongwe", homeVillage: "Area 18", employerName: "Malawi Revenue Authority", monthlySalary: 650000, witnessName: "John Kamwendo", witnessContact: "+265999345678", branchName: "Main Branch" },
+    { id: 3, firstName: "Mphatso", lastName: "Chirwa", fullName: "Mphatso Chirwa", nationalId: "MWI003456789", phoneNumber: "+265888345678", email: "mphatso.chirwa@email.com", district: "Lilongwe", homeVillage: "Area 47", employerName: "Reserve Bank of Malawi", monthlySalary: 850000, witnessName: "Mercy Banda", witnessContact: "+265999456789", branchName: "Main Branch" },
+    { id: 4, firstName: "Kondwani", lastName: "Phiri", fullName: "Kondwani Phiri", nationalId: "MWI004567890", phoneNumber: "+265888456789", email: "kondwani.phiri@email.com", district: "Lilongwe", homeVillage: "Area 36", employerName: "Airtel Malawi", monthlySalary: 550000, witnessName: "Esther Nyirenda", witnessContact: "+265999567890", branchName: "Main Branch" },
+    { id: 5, firstName: "Tamanda", lastName: "Nyirenda", fullName: "Tamanda Nyirenda", nationalId: "MWI005678901", phoneNumber: "+265888567890", email: "tamanda.nyirenda@email.com", district: "Lilongwe", homeVillage: "Area 49", employerName: "TNM Plc", monthlySalary: 480000, witnessName: "Patrick Mbewe", witnessContact: "+265999678901", branchName: "Main Branch" },
 
-    // East Branch Clients
-    { id: 6, firstName: "Chimwemwe", lastName: "Kachingwe", fullName: "Chimwemwe Kachingwe", nationalId: "MWI006789012", phoneNumber: "+265888678901", email: "chimwemwe.k@email.com", district: "Blantyre", homeVillage: "Ndirande", employerName: "Blantyre City Council", monthlySalary: 420000, witnessName: "Linda Banda", witnessContact: "+265999789012" },
-    { id: 7, firstName: "Pemphero", lastName: "Gondwe", fullName: "Pemphero Gondwe", nationalId: "MWI007890123", phoneNumber: "+265888789012", email: "pemphero.g@email.com", district: "Blantyre", homeVillage: "Chilomoni", employerName: "Malawi Posts Corporation", monthlySalary: 380000, witnessName: "Moses Phiri", witnessContact: "+265999890123" },
-    { id: 8, firstName: "Alinafe", lastName: "Mkandawire", fullName: "Alinafe Mkandawire", nationalId: "MWI008901234", phoneNumber: "+265888890123", email: "alinafe.m@email.com", district: "Blantyre", homeVillage: "Zingwangwa", employerName: "ESCOM", monthlySalary: 520000, witnessName: "Ruth Kamwendo", witnessContact: "+265999901234" },
+    // Santhe Branch Clients (Kasungu)
+    { id: 6, firstName: "Chimwemwe", lastName: "Kachingwe", fullName: "Chimwemwe Kachingwe", nationalId: "MWI006789012", phoneNumber: "+265888678901", email: "chimwemwe.k@email.com", district: "Kasungu", homeVillage: "Santhe", employerName: "Tobacco Commission", monthlySalary: 420000, witnessName: "Linda Banda", witnessContact: "+265999789012", branchName: "Santhe Branch" },
+    { id: 7, firstName: "Pemphero", lastName: "Gondwe", fullName: "Pemphero Gondwe", nationalId: "MWI007890123", phoneNumber: "+265888789012", email: "pemphero.g@email.com", district: "Kasungu", homeVillage: "Wimbe", employerName: "Kasungu District Council", monthlySalary: 380000, witnessName: "Moses Phiri", witnessContact: "+265999890123", branchName: "Santhe Branch" },
 
-    // North Branch Clients
-    { id: 9, firstName: "Dalitso", lastName: "Tembo", fullName: "Dalitso Tembo", nationalId: "MWI009012345", phoneNumber: "+265888901234", email: "dalitso.t@email.com", district: "Mzuzu", homeVillage: "Chibavi", employerName: "Mzuzu University", monthlySalary: 720000, witnessName: "Sarah Nyirongo", witnessContact: "+265999012345" },
-    { id: 10, firstName: "Wongani", lastName: "Lungu", fullName: "Wongani Lungu", nationalId: "MWI010123456", phoneNumber: "+265888012345", email: "wongani.l@email.com", district: "Mzuzu", homeVillage: "Katoto", employerName: "Northern Region Water Board", monthlySalary: 460000, witnessName: "James Mhango", witnessContact: "+265999123456" },
+    // Chithiba Branch Clients (Kasungu)
+    { id: 8, firstName: "Alinafe", lastName: "Mkandawire", fullName: "Alinafe Mkandawire", nationalId: "MWI008901234", phoneNumber: "+265888890123", email: "alinafe.m@email.com", district: "Kasungu", homeVillage: "Chithiba", employerName: "Kasungu Inn", monthlySalary: 520000, witnessName: "Ruth Kamwendo", witnessContact: "+265999901234", branchName: "Chithiba Branch" },
+    { id: 9, firstName: "Dalitso", lastName: "Tembo", fullName: "Dalitso Tembo", nationalId: "MWI009012345", phoneNumber: "+265888901234", email: "dalitso.t@email.com", district: "Kasungu", homeVillage: "Lisasadzi", employerName: "Ministry of Agriculture", monthlySalary: 720000, witnessName: "Sarah Nyirongo", witnessContact: "+265999012345", branchName: "Chithiba Branch" },
 
-    // Central Branch Clients
-    { id: 11, firstName: "Tawonga", lastName: "Zimba", fullName: "Tawonga Zimba", nationalId: "MWI011234567", phoneNumber: "+265888112345", email: "tawonga.z@email.com", district: "Dedza", homeVillage: "Dedza Boma", employerName: "Ministry of Education", monthlySalary: 410000, witnessName: "Agnes Phiri", witnessContact: "+265999212345" },
-    { id: 12, firstName: "Limbani", lastName: "Sakala", fullName: "Limbani Sakala", nationalId: "MWI012345678", phoneNumber: "+265888212345", email: "limbani.s@email.com", district: "Dedza", homeVillage: "Mtakataka", employerName: "Agricultural Development Division", monthlySalary: 390000, witnessName: "Peter Banda", witnessContact: "+265999312345" }
+    // Jenda Branch Clients (Mzimba)
+    { id: 10, firstName: "Wongani", lastName: "Lungu", fullName: "Wongani Lungu", nationalId: "MWI010123456", phoneNumber: "+265888012345", email: "wongani.l@email.com", district: "Mzimba", homeVillage: "Jenda", employerName: "Mzimba District Council", monthlySalary: 460000, witnessName: "James Mhango", witnessContact: "+265999123456", branchName: "Jenda Branch" },
+    { id: 11, firstName: "Tawonga", lastName: "Zimba", fullName: "Tawonga Zimba", nationalId: "MWI011234567", phoneNumber: "+265888112345", email: "tawonga.z@email.com", district: "Mzimba", homeVillage: "Ekwendeni", employerName: "Ministry of Education", monthlySalary: 410000, witnessName: "Agnes Phiri", witnessContact: "+265999212345", branchName: "Jenda Branch" },
+    { id: 12, firstName: "Limbani", lastName: "Sakala", fullName: "Limbani Sakala", nationalId: "MWI012345678", phoneNumber: "+265888212345", email: "limbani.s@email.com", district: "Mzimba", homeVillage: "Mzimba Boma", employerName: "Agricultural Development Division", monthlySalary: 390000, witnessName: "Peter Banda", witnessContact: "+265999312345", branchName: "Jenda Branch" }
 ];
 
 let mockLoans = [
-    // Main Branch Loans
+    // Main Branch Loans (Lilongwe)
     { id: 1, loanNumber: "LN001", clientName: "Chisomo Banda", clientId: 1, requestedAmount: 2500000, repaymentPeriodMonths: 12, loanPurpose: "Business expansion - grocery shop", status: "APPROVED", branchName: "Main Branch", disbursedAmount: 2500000, collectedAmount: 1800000, defaultAmount: 0, disbursedDate: "2024-01-15" },
     { id: 2, loanNumber: "LN002", clientName: "Thoko Mwale", clientId: 2, requestedAmount: 3500000, repaymentPeriodMonths: 18, loanPurpose: "Home renovation", status: "APPROVED", branchName: "Main Branch", disbursedAmount: 3500000, collectedAmount: 3500000, defaultAmount: 0, disbursedDate: "2023-12-01" },
-    { id: 3, loanNumber: "LN003", clientName: "Mphatso Chirwa", clientId: 3, requestedAmount: 5000000, repaymentPeriodMonths: 24, loanPurpose: "Vehicle purchase", status: "APPROVED", branchName: "Main Branch", disbursedAmount: 5000000, collectedAmount: 3200000, defaultAmount: 800000, disbursedDate: "2023-10-10" },
     { id: 4, loanNumber: "LN004", clientName: "Kondwani Phiri", clientId: 4, requestedAmount: 1800000, repaymentPeriodMonths: 12, loanPurpose: "Education - university fees", status: "PENDING", branchName: "Main Branch", disbursedAmount: 0, collectedAmount: 0, defaultAmount: 0 },
-    { id: 5, loanNumber: "LN005", clientName: "Tamanda Nyirenda", clientId: 5, requestedAmount: 2200000, repaymentPeriodMonths: 15, loanPurpose: "Small business startup", status: "APPROVED", branchName: "Main Branch", disbursedAmount: 2200000, collectedAmount: 1500000, defaultAmount: 0, disbursedDate: "2024-02-01" },
-
-    // East Branch Loans
-    { id: 6, loanNumber: "LN006", clientName: "Chimwemwe Kachingwe", clientId: 6, requestedAmount: 1500000, repaymentPeriodMonths: 12, loanPurpose: "Agricultural inputs", status: "APPROVED", branchName: "East Branch", disbursedAmount: 1500000, collectedAmount: 800000, defaultAmount: 400000, disbursedDate: "2024-01-20" },
-    { id: 7, loanNumber: "LN007", clientName: "Pemphero Gondwe", clientId: 7, requestedAmount: 2800000, repaymentPeriodMonths: 18, loanPurpose: "Tailoring business equipment", status: "PENDING", branchName: "East Branch", disbursedAmount: 0, collectedAmount: 0, defaultAmount: 0 },
-    { id: 8, loanNumber: "LN008", clientName: "Alinafe Mkandawire", clientId: 8, requestedAmount: 3200000, repaymentPeriodMonths: 24, loanPurpose: "House construction", status: "APPROVED", branchName: "East Branch", disbursedAmount: 3200000, collectedAmount: 2100000, defaultAmount: 0, disbursedDate: "2023-11-15" },
-
-    // North Branch Loans
-    { id: 9, loanNumber: "LN009", clientName: "Dalitso Tembo", clientId: 9, requestedAmount: 4500000, repaymentPeriodMonths: 24, loanPurpose: "Rental property investment", status: "APPROVED", branchName: "North Branch", disbursedAmount: 4500000, collectedAmount: 2800000, defaultAmount: 0, disbursedDate: "2023-09-01" },
-    { id: 10, loanNumber: "LN010", clientName: "Wongani Lungu", clientId: 10, requestedAmount: 1900000, repaymentPeriodMonths: 12, loanPurpose: "Livestock farming", status: "PENDING", branchName: "North Branch", disbursedAmount: 0, collectedAmount: 0, defaultAmount: 0 },
-
-    // Central Branch Loans
-    { id: 11, loanNumber: "LN011", clientName: "Tawonga Zimba", clientId: 11, requestedAmount: 2600000, repaymentPeriodMonths: 18, loanPurpose: "Motorcycle purchase for transport business", status: "APPROVED", branchName: "Central Branch", disbursedAmount: 2600000, collectedAmount: 1400000, defaultAmount: 600000, disbursedDate: "2024-01-05" },
-    { id: 12, loanNumber: "LN012", clientName: "Limbani Sakala", clientId: 12, requestedAmount: 3100000, repaymentPeriodMonths: 24, loanPurpose: "Farm equipment and seeds", status: "PENDING", branchName: "Central Branch", disbursedAmount: 0, collectedAmount: 0, defaultAmount: 0 },
-
-    // Mock Rejected Loans for Branch Enhancement Demo
     { id: 13, loanNumber: "LN013", clientName: "Gift Phiri", clientId: 1, requestedAmount: 500000, repaymentPeriodMonths: 12, loanPurpose: "Business Expansion - small tuckshop", status: "REJECTED", branchName: "Main Branch", disbursedAmount: 0, collectedAmount: 0, defaultAmount: 0 },
-    { id: 14, loanNumber: "LN014", clientName: "Mercy Chilua", clientId: 2, requestedAmount: 200000, repaymentPeriodMonths: 4, loanPurpose: "Emergency Medical - surgery", status: "REJECTED", branchName: "Main Branch", disbursedAmount: 0, collectedAmount: 0, defaultAmount: 0 }
+
+    // Santhe Branch Loans (Kasungu)
+    { id: 6, loanNumber: "LN006", clientName: "Chimwemwe Kachingwe", clientId: 6, requestedAmount: 1500000, repaymentPeriodMonths: 12, loanPurpose: "Agricultural inputs", status: "APPROVED", branchName: "Santhe Branch", disbursedAmount: 1500000, collectedAmount: 800000, defaultAmount: 400000, disbursedDate: "2024-01-20" },
+    { id: 7, loanNumber: "LN007", clientName: "Pemphero Gondwe", clientId: 7, requestedAmount: 2800000, repaymentPeriodMonths: 18, loanPurpose: "Tailoring business equipment", status: "PENDING", branchName: "Santhe Branch", disbursedAmount: 0, collectedAmount: 0, defaultAmount: 0 },
+
+    // Chithiba Branch Loans (Kasungu)
+    { id: 8, loanNumber: "LN008", clientName: "Alinafe Mkandawire", clientId: 8, requestedAmount: 3200000, repaymentPeriodMonths: 24, loanPurpose: "House construction", status: "APPROVED", branchName: "Chithiba Branch", disbursedAmount: 3200000, collectedAmount: 2100000, defaultAmount: 0, disbursedDate: "2023-11-15" },
+    { id: 9, loanNumber: "LN009", clientName: "Dalitso Tembo", clientId: 9, requestedAmount: 4500000, repaymentPeriodMonths: 24, loanPurpose: "Rental property investment", status: "APPROVED", branchName: "Chithiba Branch", disbursedAmount: 4500000, collectedAmount: 2800000, defaultAmount: 0, disbursedDate: "2023-09-01" },
+
+    // Jenda Branch Loans (Mzimba)
+    { id: 11, loanNumber: "LN011", clientName: "Tawonga Zimba", clientId: 11, requestedAmount: 2600000, repaymentPeriodMonths: 18, loanPurpose: "Motorcycle purchase for transport business", status: "APPROVED", branchName: "Jenda Branch", disbursedAmount: 2600000, collectedAmount: 1400000, defaultAmount: 600000, disbursedDate: "2024-01-05" },
+    { id: 12, loanNumber: "LN012", clientName: "Limbani Sakala", clientId: 12, requestedAmount: 3100000, repaymentPeriodMonths: 24, loanPurpose: "Farm equipment and seeds", status: "PENDING", branchName: "Jenda Branch", disbursedAmount: 0, collectedAmount: 0, defaultAmount: 0 }
 ];
 
 // Branch users storage - also use localStorage
 let branchUsers = [
     { username: 'branch1', password: 'branch123', fullName: 'Grace Phiri', branchName: 'Main Branch', district: 'Lilongwe', email: 'grace.phiri@uprise.com', role: 'Branch Manager', isActive: true },
-    { username: 'branch2', password: 'branch123', fullName: 'Moses Banda', branchName: 'East Branch', district: 'Blantyre', email: 'moses.banda@uprise.com', role: 'Branch Manager', isActive: true },
-    { username: 'branch3', password: 'branch123', fullName: 'Sarah Mwale', branchName: 'North Branch', district: 'Mzuzu', email: 'sarah.mwale@uprise.com', role: 'Branch Manager', isActive: true },
-    { username: 'branch4', password: 'branch123', fullName: 'Patrick Chirwa', branchName: 'Central Branch', district: 'Dedza', email: 'patrick.chirwa@uprise.com', role: 'Branch Manager', isActive: true },
-    { username: 'officer1', password: 'officer123', fullName: 'Mercy Nyirenda', branchName: 'Main Branch', district: 'Lilongwe', email: 'mercy.nyirenda@uprise.com', role: 'Loan Officer', isActive: true },
-    { username: 'officer2', password: 'officer123', fullName: 'James Phiri', branchName: 'East Branch', district: 'Blantyre', email: 'james.phiri@uprise.com', role: 'Loan Officer', isActive: true }
+    { username: 'branch2', password: 'branch123', fullName: 'Santhe Manager', branchName: 'Santhe Branch', district: 'Kasungu', email: 'santhe@uprise.com', role: 'Branch Manager', isActive: true },
+    { username: 'branch3', password: 'branch123', fullName: 'Chithiba Manager', branchName: 'Chithiba Branch', district: 'Kasungu', email: 'chithiba@uprise.com', role: 'Branch Manager', isActive: true },
+    { username: 'branch4', password: 'branch123', fullName: 'Jenda Manager', branchName: 'Jenda Branch', district: 'Mzimba', email: 'jenda@uprise.com', role: 'Branch Manager', isActive: true },
+    { username: 'officer1', password: 'officer123', fullName: 'Mercy Nyirenda', branchName: 'Main Branch', district: 'Lilongwe', email: 'mercy.nyirenda@uprise.com', role: 'Loan Officer', isActive: true }
 ];
 
 const recentActivities = [
     { type: 'payment', client: 'Chisomo Banda - LN001', amount: 'MK 250,000', time: '2 hours ago', branch: 'Main Branch' },
-    { type: 'payment', client: 'Alinafe Mkandawire - LN008', amount: 'MK 180,000', time: '4 hours ago', branch: 'East Branch' },
+    { type: 'payment', client: 'Alinafe Mkandawire - LN008', amount: 'MK 180,000', time: '4 hours ago', branch: 'Chithiba Branch' },
     { type: 'payment', client: 'Tamanda Nyirenda - LN005', amount: 'MK 200,000', time: '6 hours ago', branch: 'Main Branch' },
     { type: 'approval', client: 'Thoko Mwale - LN002', amount: 'MK 3,500,000', time: '8 hours ago', branch: 'Main Branch' },
-    { type: 'payment', client: 'Dalitso Tembo - LN009', amount: 'MK 350,000', time: '1 day ago', branch: 'North Branch' },
+    { type: 'payment', client: 'Dalitso Tembo - LN009', amount: 'MK 350,000', time: '1 day ago', branch: 'Chithiba Branch' },
     { type: 'payment', client: 'Mphatso Chirwa - LN003', amount: 'MK 280,000', time: '1 day ago', branch: 'Main Branch' },
-    { type: 'registration', client: 'Wongani Lungu', amount: 'New Client', time: '1 day ago', branch: 'North Branch' },
-    { type: 'payment', client: 'Tawonga Zimba - LN011', amount: 'MK 150,000', time: '2 days ago', branch: 'Central Branch' },
-    { type: 'approval', client: 'Chimwemwe Kachingwe - LN006', amount: 'MK 1,500,000', time: '2 days ago', branch: 'East Branch' },
-    { type: 'payment', client: 'Alinafe Mkandawire - LN008', amount: 'MK 200,000', time: '3 days ago', branch: 'East Branch' }
+    { type: 'payment', client: 'Tawonga Zimba - LN011', amount: 'MK 150,000', time: '2 days ago', branch: 'Jenda Branch' },
+    { type: 'approval', client: 'Chimwemwe Kachingwe - LN006', amount: 'MK 1,500,000', time: '2 days ago', branch: 'Santhe Branch' }
 ];
 
 // Utility Functions
+function toggleLoading(show, message = 'Processing...') {
+    const overlay = document.getElementById('loadingOverlay');
+    const text = overlay.querySelector('.loading-text');
+    if (show) {
+        text.textContent = message;
+        overlay.classList.add('active');
+    } else {
+        overlay.classList.remove('active');
+    }
+}
+
 function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(screen => {
         screen.classList.remove('active');
@@ -144,159 +148,131 @@ function showScreen(screenId) {
 }
 
 function showTab(tabName) {
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    document.querySelectorAll('.tab-content').forEach(content => {
-        content.classList.remove('active');
-    });
+    toggleLoading(true, 'Updating view...');
 
-    event.target.classList.add('active');
-    document.getElementById(tabName + 'Tab').classList.add('active');
+    setTimeout(() => {
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.remove('active');
+        });
 
-    if (tabName === 'overview') {
-        loadBranchOverview();
-    } else if (tabName === 'clients') {
-        loadClients();
-    } else if (tabName === 'loans') {
-        showBranchLoanSubTab('pending');
-    } else if (tabName === 'apply') {
-        loadClientsForLoan();
+        const targetBtn = event && event.target ? event.target : Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick').includes(`'${tabName}'`));
+        if (targetBtn) targetBtn.classList.add('active');
 
-        // Show the current global interest rate on the form
-        const rateInput = document.getElementById('appliedInterestRate');
-        if (rateInput) rateInput.value = globalSettings.interestRate + '%';
+        document.getElementById(tabName + 'Tab').classList.add('active');
 
-        // Setup calculator listeners for instant updates
-        const amountInput = document.getElementById('loanAmount');
-        const periodInput = document.getElementById('repaymentPeriod');
+        if (tabName === 'overview') {
+            loadBranchOverview();
+        } else if (tabName === 'clients') {
+            loadClients();
+        } else if (tabName === 'loans') {
+            showBranchLoanSubTab('pending');
+        } else if (tabName === 'apply') {
+            loadClientsForLoan();
+            const rateInput = document.getElementById('appliedInterestRate');
+            if (rateInput) rateInput.value = (globalSettings.interestRate || 15) + '%';
 
-        const triggerUpdate = () => updateRepaymentEstimate();
+            const amountInput = document.getElementById('loanAmount');
+            const periodInput = document.getElementById('repaymentPeriod');
+            const triggerUpdate = () => updateRepaymentEstimate();
 
-        if (amountInput) {
-            amountInput.addEventListener('input', triggerUpdate);
-            amountInput.addEventListener('keyup', triggerUpdate);
+            if (amountInput) {
+                amountInput.addEventListener('input', triggerUpdate);
+                amountInput.addEventListener('keyup', triggerUpdate);
+            }
+            if (periodInput) {
+                periodInput.addEventListener('input', triggerUpdate);
+                periodInput.addEventListener('change', triggerUpdate);
+            }
         }
-        if (periodInput) {
-            periodInput.addEventListener('input', triggerUpdate);
-            periodInput.addEventListener('change', triggerUpdate);
-        }
-    }
+
+        toggleLoading(false);
+    }, 400);
 }
 
 function showAdminTab(tabName) {
-    document.querySelectorAll('.admin-tab-btn').forEach(btn => btn.classList.remove('active'));
-    document.querySelectorAll('.admin-tab-content').forEach(content => content.classList.remove('active'));
+    toggleLoading(true, 'Accessing data...');
 
-    const activeTab = document.getElementById(tabName + 'Tab');
-    if (activeTab) {
-        activeTab.classList.add('active');
-        // Find the button and add active class
-        const activeBtn = Array.from(document.querySelectorAll('.admin-tab-btn')).find(btn => btn.getAttribute('onclick').includes(`'${tabName}'`));
-        if (activeBtn) activeBtn.classList.add('active');
+    setTimeout(() => {
+        document.querySelectorAll('.admin-tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.admin-tab-content').forEach(content => content.classList.remove('active'));
 
-        if (tabName === 'overview') {
-            loadAdminData();
-        } else if (tabName === 'adminLoans') {
-            showLoanSubTab('pending');
-        } else if (tabName === 'users') {
-            showBranchSubTab('branches');
-        } else if (tabName === 'settings') {
-            loadSettingsPage();
+        const activeTab = document.getElementById(tabName + 'Tab');
+        if (activeTab) {
+            activeTab.classList.add('active');
+            const activeBtn = Array.from(document.querySelectorAll('.admin-tab-btn')).find(btn => btn.getAttribute('onclick').includes(`'${tabName}'`));
+            if (activeBtn) activeBtn.classList.add('active');
+
+            if (tabName === 'overview') {
+                loadAdminData();
+            } else if (tabName === 'adminLoans') {
+                showLoanSubTab('pending');
+            } else if (tabName === 'users') {
+                showBranchSubTab('branches');
+            } else if (tabName === 'settings') {
+                loadSettingsPage();
+            }
         }
-    }
+        toggleLoading(false);
+    }, 400);
 }
 
 // Authentication - Using only mock data (no backend)
 function setupLoginForm() {
     const loginForm = document.getElementById('loginForm');
-    if (!loginForm) {
-        console.error('Login form not found!');
-        return;
-    }
+    if (!loginForm) return;
 
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
-
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
+        const user = document.getElementById('username').value;
+        const pass = document.getElementById('password').value;
         const errorDiv = document.getElementById('loginError');
 
-        console.log('Login attempt:', username);
+        toggleLoading(true, 'Authenticating...');
 
-        // Check admin credentials
-        if (username === 'admin' && password === 'admin123') {
-            currentUser = { username: 'admin', role: 'ADMIN', fullName: 'System Admin' };
-            console.log('Admin login successful');
-            showScreen('adminDashboard');
-            loadSystemOverview();
-            errorDiv.textContent = '';
-            return;
-        }
+        setTimeout(() => {
+            const admin = branchUsers.find(u => u.username === user && u.password === pass && u.role === 'Admin');
+            const branch = branchUsers.find(u => u.username === user && u.password === pass && (u.role === 'Branch Manager' || u.role === 'Loan Officer'));
+            const client = mockClients.find(u => {
+                const clientUsername = u.username || u.nationalId;
+                const clientPassword = u.password || '1234';
+                return clientUsername.toLowerCase() === user.toLowerCase() && pass === clientPassword;
+            });
 
-        // Check branch users
-        const branchUser = branchUsers.find(u => u.username.toLowerCase() === username.toLowerCase() && u.password === password);
-        if (branchUser) {
-            if (branchUser.isActive === false) {
-                errorDiv.textContent = 'This branch account has been disabled. Please contact the administrator.';
-                return;
-            }
-            currentUser = { ...branchUser, role: 'BRANCH_USER' };
-            const branchNameEl = document.getElementById('branchUserName');
-            if (branchNameEl) branchNameEl.textContent = branchUser.fullName;
-
-            console.log('Branch user login successful:', branchUser.fullName);
-            showScreen('branchDashboard');
-
-            // Set first tab as active explicitly
-            const firstTab = document.querySelector('#branchDashboard .tab-btn');
-            if (firstTab) {
-                document.querySelectorAll('#branchDashboard .tab-btn').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('#branchDashboard .tab-content').forEach(c => c.classList.remove('active'));
-                firstTab.classList.add('active');
-                document.getElementById('overviewTab').classList.add('active');
-            }
-
-            if (typeof loadBranchOverview === 'function') loadBranchOverview();
-            errorDiv.textContent = '';
-            return;
-        }
-
-        // Check clients (Role Based Access Control)
-        const clientUser = mockClients.find(c => {
-            const clientLoginUsername = c.username || c.nationalId;
-            const clientLoginPassword = c.password || 'client123';
-            return clientLoginUsername && clientLoginUsername.toLowerCase() === username.toLowerCase() &&
-                password === clientLoginPassword;
-        });
-        if (clientUser) {
-            currentUser = { ...clientUser, role: 'CLIENT', username: clientUser.username || clientUser.nationalId };
-            console.log('Client login successful:', clientUser.fullName);
-
-            showScreen('clientDashboard');
-
-            // Set profile name
-            setTimeout(() => {
-                const profileNameEl = document.getElementById('clientProfileName');
-                if (profileNameEl) profileNameEl.textContent = clientUser.firstName;
-
-                // Render client data
-                if (typeof renderClientView === 'function') {
-                    renderClientView(clientUser.id);
+            if (admin) {
+                currentUser = admin;
+                showScreen('adminDashboard');
+                showAdminTab('overview');
+                const welcomeText = document.querySelector('#adminDashboard .welcome-text span');
+                if (welcomeText) welcomeText.textContent = admin.fullName;
+            } else if (branch) {
+                if (branch.isActive === false) {
+                    errorDiv.textContent = 'This account is disabled.';
+                    toggleLoading(false);
+                    return;
                 }
-
-                // Initialize Lucide icons
-                if (window.lucide) {
-                    window.lucide.createIcons();
-                }
-            }, 100);
-
-            errorDiv.textContent = '';
-            return;
-        }
-
-        console.log('Login failed');
-        errorDiv.textContent = 'Invalid credentials. Please try again.';
+                currentUser = branch;
+                showScreen('branchDashboard');
+                showTab('overview');
+                const welcomeText = document.querySelector('#branchDashboard .welcome-text span');
+                if (welcomeText) welcomeText.textContent = branch.fullName;
+            } else if (client) {
+                currentUser = client;
+                showScreen('clientDashboard');
+                renderClientView(client.id);
+                const welcomeText = document.querySelector('#clientDashboard .welcome-text span');
+                if (welcomeText) welcomeText.textContent = client.fullName;
+            } else if (user === 'admin' && pass === 'admin123') { // Fallback for simple admin
+                currentUser = { username: 'admin', role: 'Admin', fullName: 'System Admin' };
+                showScreen('adminDashboard');
+                showAdminTab('overview');
+            } else {
+                errorDiv.textContent = 'Invalid username or password';
+            }
+            toggleLoading(false);
+        }, 800);
     });
 }
 
@@ -3533,46 +3509,52 @@ document.addEventListener('DOMContentLoaded', () => {
             const purpose = document.getElementById('quickPurpose').value;
             const message = document.getElementById('quickApplyMessage');
 
-            // Create new mock loan
-            const newLoan = {
-                id: mockLoans.length + 1,
-                loanNumber: "QLN" + Math.floor(1000 + Math.random() * 9000),
-                clientName: currentUser.fullName,
-                clientId: currentUser.id,
-                requestedAmount: parseFloat(amount),
-                repaymentPeriodMonths: parseInt(term),
-                receivingMethod: method,
-                loanPurpose: purpose,
-                status: "PENDING",
-                branchName: (currentUser.district || 'Main') + " Branch",
-                disbursedAmount: 0,
-                collectedAmount: 0,
-                defaultAmount: 0
-            };
-
-            mockLoans.push(newLoan);
-            saveToStorage(STORAGE_KEYS.LOANS, mockLoans);
-
-            if (message) {
-                message.className = 'message success';
-                message.textContent = "Your loan application has been submitted successfully, and its being verified by the admin.";
-                message.style.display = 'block';
-            }
-
-            this.reset();
-
-            // Reset interest rate value after form reset
-            const quickInterestRate = document.getElementById('quickInterestRate');
-            if (quickInterestRate) {
-                quickInterestRate.value = (globalSettings.interestRate || 15) + '%';
-            }
-
-            // Refresh view
-            if (currentUser) renderClientView(currentUser.id);
+            toggleLoading(true, 'Submitting Request...');
 
             setTimeout(() => {
-                if (message) message.textContent = "";
-            }, 5000);
+                // Create new mock loan
+                const newLoan = {
+                    id: mockLoans.length + 1,
+                    loanNumber: "QLN" + Math.floor(1000 + Math.random() * 9000),
+                    clientName: currentUser.fullName,
+                    clientId: currentUser.id,
+                    requestedAmount: parseFloat(amount),
+                    repaymentPeriodMonths: parseInt(term),
+                    receivingMethod: method,
+                    loanPurpose: purpose,
+                    status: "PENDING",
+                    branchName: (currentUser.district || 'Main') + " Branch",
+                    disbursedAmount: 0,
+                    collectedAmount: 0,
+                    defaultAmount: 0
+                };
+
+                mockLoans.push(newLoan);
+                saveToStorage(STORAGE_KEYS.LOANS, mockLoans);
+
+                if (message) {
+                    message.className = 'message success';
+                    message.textContent = "Your loan application has been submitted successfully, and its being verified by the admin.";
+                    message.style.display = 'block';
+                }
+
+                quickApplyForm.reset();
+
+                // Reset interest rate value after form reset
+                const quickInterestRate = document.getElementById('quickInterestRate');
+                if (quickInterestRate) {
+                    quickInterestRate.value = (globalSettings.interestRate || 15) + '%';
+                }
+
+                // Refresh view
+                if (currentUser) renderClientView(currentUser.id);
+
+                toggleLoading(false);
+
+                setTimeout(() => {
+                    if (message) message.textContent = "";
+                }, 5000);
+            }, 1000);
         });
     }
 });

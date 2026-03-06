@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uprise Micro-Finance Portal</title>
+    <link rel="icon" type="image/png" href="uprise_logo.png">
     <link rel="stylesheet" href="styles.css">
     <script src="https://unpkg.com/@zxing/library@latest"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -381,7 +382,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Full Name</label>
-                                    <input type="text" id="userFullName" required placeholder="e.g., John Doe">
+                                    <input type="text" id="userFullName" required placeholder="e.g., Davie Mpandula">
                                 </div>
                                 <div class="form-group">
                                     <label>Email</label>
@@ -1261,6 +1262,13 @@
                 </div>
             </div>
         </div>
+
+        <!-- Global Loading Overlay -->
+        <div id="loadingOverlay" class="loading-overlay">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Processing...</p>
+        </div>
+
         <script src="app-enhanced.js"></script>
         <script>
             // Initialize Lucide icons on page load
