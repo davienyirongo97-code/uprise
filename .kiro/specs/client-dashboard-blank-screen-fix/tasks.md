@@ -36,7 +36,7 @@
   - Mark task complete when tests are written, run, and passing on unfixed code
   - _Requirements: 3.1, 3.2, 3.3, 3.4_
 
-- [~] 3. Fix for client dashboard blank screen
+- [ ] 3. Fix for client dashboard blank screen
 
   - [ ] 3.1 Remove corrupted HTML from registration form section
     - Locate the client dashboard navbar HTML incorrectly embedded in registration form (approximately lines 1007-1015)
@@ -130,7 +130,7 @@
     - Confirm all tests still pass after fix (no regressions)
     - _Requirements: 3.1, 3.2, 3.3, 3.4_
 
-- [~] 4. Checkpoint - Ensure all tests pass
+- [ ] 4. Checkpoint - Ensure all tests pass
   - Run all tests (exploration test + preservation tests)
   - Verify client dashboard displays correctly after login
   - Verify no regressions in other screens
