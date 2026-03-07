@@ -4468,6 +4468,7 @@ i[data-lucide] {
     position: relative;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1;
 }
 
 /* Add shine effect on hover */
@@ -4480,6 +4481,8 @@ i[data-lucide] {
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
     transition: left 0.5s;
+    z-index: 1;
+    pointer-events: none;
 }
 
 #adminDashboard .stat-card:hover::before {
@@ -4525,6 +4528,8 @@ i[data-lucide] {
     mask-composite: exclude;
     opacity: 0;
     transition: opacity 0.3s;
+    z-index: 1;
+    pointer-events: none;
 }
 
 #adminDashboard .stat-card:hover::after {
@@ -4586,29 +4591,7 @@ i[data-lucide] {
     }
 }
 
-/* Tooltip on hover */
-#adminDashboard .stat-card::before {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: -40px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-size: 12px;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s;
-    z-index: 1000;
-}
-
-#adminDashboard .stat-card:hover::before {
-    bottom: -35px;
-    opacity: 1;
-}
+/* Tooltip on hover - removed duplicate ::before, tooltips handled by JS */
 
 /* Breathing animation for important cards */
 @keyframes breathe {
