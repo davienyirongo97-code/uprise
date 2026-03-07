@@ -1670,6 +1670,9 @@ i[data-lucide] {
     font-size: 20px;
     cursor: pointer;
     transition: all 0.3s;
+    position: relative;
+    z-index: 10002;
+    pointer-events: auto;
 }
 
 .modal-close:hover {
@@ -2086,6 +2089,9 @@ i[data-lucide] {
     max-height: 90vh;
     overflow-y: auto;
     animation: scaleIn 0.3s ease;
+    position: relative;
+    z-index: 10001;
+    pointer-events: auto;
 }
 
 .client-modal-header {
@@ -2097,6 +2103,9 @@ i[data-lucide] {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border-radius: 15px 15px 0 0;
+    position: relative;
+    z-index: 10002;
+    pointer-events: auto;
 }
 
 .client-modal-header h2 {
@@ -2106,6 +2115,19 @@ i[data-lucide] {
 
 .client-modal-body {
     padding: 30px;
+    position: relative;
+    z-index: 10001;
+    pointer-events: auto;
+}
+
+/* Ensure all buttons and interactive elements in modals are clickable */
+.client-modal button,
+.client-modal a,
+.client-modal input,
+.client-modal select {
+    pointer-events: auto !important;
+    position: relative;
+    z-index: 10003;
 }
 
 .client-info-section {
