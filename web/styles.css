@@ -2079,6 +2079,7 @@ i[data-lucide] {
     justify-content: center;
     z-index: 10000;
     animation: fadeIn 0.3s ease;
+    pointer-events: auto;
 }
 
 .client-modal-content {
@@ -2128,6 +2129,24 @@ i[data-lucide] {
     pointer-events: auto !important;
     position: relative;
     z-index: 10003;
+}
+
+/* Make everything inside modal content clickable */
+.client-modal-content * {
+    pointer-events: auto !important;
+}
+
+/* Disable stat card interactions when modal is open */
+body:has(.client-modal) #adminDashboard .stat-card,
+body:has(.client-modal) #adminDashboard .stat-card::before,
+body:has(.client-modal) #adminDashboard .stat-card::after {
+    pointer-events: none !important;
+    z-index: 1 !important;
+}
+
+/* Ensure modal overlay blocks everything underneath */
+.client-modal {
+    pointer-events: auto !important;
 }
 
 .client-info-section {
