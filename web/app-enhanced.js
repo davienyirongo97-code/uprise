@@ -2387,6 +2387,12 @@ function showAllClientsModal() {
         }
     };
 
+    // Hide admin dashboard to prevent z-index conflicts
+    const adminDashboard = document.getElementById('adminDashboard');
+    if (adminDashboard) {
+        adminDashboard.style.visibility = 'hidden';
+    }
+
     document.body.appendChild(modal);
 }
 
@@ -3334,6 +3340,12 @@ function closeModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
         modal.remove();
+    }
+    
+    // Restore admin dashboard visibility
+    const adminDashboard = document.getElementById('adminDashboard');
+    if (adminDashboard) {
+        adminDashboard.style.visibility = 'visible';
     }
 }
 

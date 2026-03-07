@@ -8,6 +8,11 @@ document.addEventListener('DOMContentLoaded', function() {
         statCards.forEach((card, index) => {
             // Add ripple effect on click
             card.addEventListener('click', function(e) {
+                // Don't handle clicks if a modal is open
+                if (document.querySelector('.client-modal')) {
+                    return;
+                }
+                
                 createRipple(e, this);
                 handleStatCardClick(index);
             });
