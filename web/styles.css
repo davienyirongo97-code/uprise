@@ -4456,3 +4456,194 @@ i[data-lucide] {
         font-size: 13px;
     }
 }
+
+
+/* ========================================
+   BEAUTIFUL CLICKABLE STAT CARDS
+   ======================================== */
+
+/* Make stat cards clickable and attractive */
+#adminDashboard .stat-card {
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Add shine effect on hover */
+#adminDashboard .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+}
+
+#adminDashboard .stat-card:hover::before {
+    left: 100%;
+}
+
+/* Hover effects - lift and glow */
+#adminDashboard .stat-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Active/Click effect */
+#adminDashboard .stat-card:active {
+    transform: translateY(-4px) scale(0.98);
+}
+
+/* Icon animations on hover */
+#adminDashboard .stat-card:hover .stat-icon {
+    transform: scale(1.1) rotate(5deg);
+    transition: all 0.3s ease;
+}
+
+/* Number pulse on hover */
+#adminDashboard .stat-card:hover .stat-number {
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+
+/* Add gradient border on hover */
+#adminDashboard .stat-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 16px;
+    padding: 2px;
+    background: linear-gradient(135deg, transparent, transparent);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+#adminDashboard .stat-card:hover::after {
+    opacity: 1;
+    background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+}
+
+/* Specific card hover colors */
+#adminDashboard .stat-card:hover .stat-icon-blue {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+#adminDashboard .stat-card:hover .stat-icon-green {
+    background: linear-gradient(135deg, #11998e, #38ef7d);
+    color: white;
+    box-shadow: 0 4px 12px rgba(56, 239, 125, 0.4);
+}
+
+#adminDashboard .stat-card:hover .stat-icon-yellow {
+    background: linear-gradient(135deg, #f2994a, #f2c94c);
+    color: white;
+    box-shadow: 0 4px 12px rgba(242, 201, 76, 0.4);
+}
+
+#adminDashboard .stat-card:hover .stat-icon-orange {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+    color: white;
+    box-shadow: 0 4px 12px rgba(238, 90, 111, 0.4);
+}
+
+#adminDashboard .stat-card:hover .stat-icon-lightblue {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    color: white;
+    box-shadow: 0 4px 12px rgba(79, 172, 254, 0.4);
+}
+
+#adminDashboard .stat-card:hover .stat-icon-purple {
+    background: linear-gradient(135deg, #a8edea, #fed6e3);
+    color: #7b1fa2;
+    box-shadow: 0 4px 12px rgba(168, 237, 234, 0.4);
+}
+
+/* Add ripple effect on click */
+#adminDashboard .stat-card {
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Tooltip on hover */
+#adminDashboard .stat-card::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s;
+    z-index: 1000;
+}
+
+#adminDashboard .stat-card:hover::before {
+    bottom: -35px;
+    opacity: 1;
+}
+
+/* Breathing animation for important cards */
+@keyframes breathe {
+    0%, 100% {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+    50% {
+        box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2);
+    }
+}
+
+#adminDashboard .stat-card.important {
+    animation: breathe 3s ease-in-out infinite;
+}
+
+/* Add click indicator */
+#adminDashboard .stat-card {
+    user-select: none;
+}
+
+#adminDashboard .stat-card:hover {
+    cursor: pointer;
+}
+
+/* Add subtle background pattern on hover */
+#adminDashboard .stat-card:hover {
+    background: 
+        linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,1) 100%),
+        repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(102, 126, 234, 0.03) 10px, rgba(102, 126, 234, 0.03) 20px);
+}
+
+/* Mobile touch feedback */
+@media (max-width: 480px) {
+    #adminDashboard .stat-card:active {
+        transform: scale(0.95);
+        transition: transform 0.1s;
+    }
+}
