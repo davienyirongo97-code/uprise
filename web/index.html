@@ -285,7 +285,7 @@
                             </div>
                         </div>
                         <div class="stat-card" style="cursor: pointer;"
-                            onclick="if(typeof showLoanSubTab === 'function') showLoanSubTab('pending'); else showAdminTab('loans');">
+                            onclick="showAdminTab('adminLoans', 'pending');">
                             <div class="stat-icon stat-icon-lightblue"><i data-lucide="clock"></i></div>
                             <div class="stat-content">
                                 <p class="stat-label">Pending Review</p>
@@ -293,7 +293,7 @@
                             </div>
                         </div>
                         <div class="stat-card" style="cursor: pointer;"
-                            onclick="if(typeof showLoanSubTab === 'function') showLoanSubTab('approved'); else if(typeof showApprovedLoansModal === 'function') showApprovedLoansModal();">
+                            onclick="showAdminTab('adminLoans', 'approved');">
                             <div class="stat-icon stat-icon-purple"><i data-lucide="check-circle"></i></div>
                             <div class="stat-content">
                                 <p class="stat-label">Approved Total</p>

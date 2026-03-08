@@ -192,7 +192,7 @@ function showTab(tabName) {
     }, 400);
 }
 
-function showAdminTab(tabName) {
+function showAdminTab(tabName, subTabName) {
     toggleLoading(true, 'Accessing data...');
 
     setTimeout(() => {
@@ -208,7 +208,8 @@ function showAdminTab(tabName) {
             if (tabName === 'overview') {
                 loadAdminData();
             } else if (tabName === 'adminLoans') {
-                showLoanSubTab('pending');
+                // Use subTabName if provided, otherwise default to 'pending'
+                showLoanSubTab(subTabName || 'pending');
             } else if (tabName === 'users') {
                 showBranchSubTab('branches');
             } else if (tabName === 'settings') {

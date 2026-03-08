@@ -83,12 +83,7 @@ body {
 }
 
 /* Reset body background for dashboard - Light Blue Gradient Matched to Landing Page */
-body:has(#adminDashboard.active) {
-    background: #29B6F6;
-    display: block;
-    align-items: flex-start;
-}
-
+body:has(#adminDashboard.active),
 body:has(#branchDashboard.active),
 body:has(#clientDashboard.active) {
     background: linear-gradient(135deg, #f0f7ff 0%, #e1effe 50%, #dbeafe 100%);
