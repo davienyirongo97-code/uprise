@@ -330,9 +330,6 @@ function loadAdminData() {
     if (window.lucide) {
         window.lucide.createIcons();
     }
-    
-    // Add click handlers to stat cards
-    addStatCardClickHandlers();
 }
 
 function loadPendingLoans() {
@@ -3362,7 +3359,7 @@ function closeModal(modalId) {
     if (modal) {
         modal.remove();
     }
-    
+
     // Restore admin dashboard visibility
     const adminDashboard = document.getElementById('adminDashboard');
     if (adminDashboard) {
