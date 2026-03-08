@@ -8,16 +8,15 @@ document.addEventListener('DOMContentLoaded', function () {
         statCards.forEach((card, index) => {
             card.style.cursor = 'pointer';
 
-            // Add click handler using direct assignment to override anything else
-            card.onclick = function (e) {
+            // Add click handler using event listener to preserve inline onclick bindings
+            card.addEventListener('click', function (e) {
                 // Don't handle clicks if a modal is open
                 if (document.querySelector('.client-modal') || document.querySelector('.modal.active')) {
                     return;
                 }
 
                 createRipple(e, this);
-                handleStatCardClick(index);
-            };
+            });
 
             // Add tooltips
             const tooltips = [
@@ -56,76 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(() => ripple.remove(), 600);
     }
 
-    // Handle stat card clicks
-    function handleStatCardClick(index) {
-        const actions = [
-            showAllClients,
-            showActiveLoans,
-            showDisbursementDetails,
-            showDefaults,
-            showPendingReviews,
-            showApprovedLoans
-        ];
-
-        if (actions[index]) {
-            // Add success feedback
-            showNotification('Loading details...', 'info');
-            actions[index]();
-        }
-    }
-
-    // Action functions
-    function showAllClients() {
-        console.log('Showing all clients...');
-        if (typeof window.showAllClientsModal === 'function') {
-            window.showAllClientsModal();
-        } else if (typeof window.showClientBreakdownModal === 'function') {
-            window.showClientBreakdownModal();
-        }
-    }
-
-    function showActiveLoans() {
-        console.log('Showing active loans...');
-        if (typeof window.showActiveLoansModal === 'function') {
-            window.showActiveLoansModal();
-        } else if (typeof window.showApprovedLoansModal === 'function') {
-            window.showApprovedLoansModal();
-        }
-    }
-
-    function showDisbursementDetails() {
-        console.log('Showing disbursement details...');
-        if (typeof window.showDisbursedBreakdownModal === 'function') {
-            window.showDisbursedBreakdownModal();
-        } else if (typeof window.showDisbursedModal === 'function') {
-            window.showDisbursedModal();
-        }
-    }
-
-    function showDefaults() {
-        console.log('Showing defaults...');
-        if (typeof window.showDefaultsModal === 'function') {
-            window.showDefaultsModal();
-        }
-    }
-
-    function showPendingReviews() {
-        console.log('Showing pending reviews...');
-        if (typeof window.showLoanSubTab === 'function') {
-            window.showLoanSubTab('pending');
-        } else {
-            window.showAdminTab('loans');
-        }
-    }
-
-    function showApprovedLoans() {
-        console.log('Showing approved loans...');
-        if (typeof window.showLoanSubTab === 'function') {
-            window.showLoanSubTab('approved');
-        } else if (typeof window.showApprovedLoansModal === 'function') {
-            window.showApprovedLoansModal();
-        }
-    }
+    // Action functions removed (now handled by inline HTML onclick handlers)
 
     // Show notification
     function showNotification(message, type = 'success') {
@@ -205,11 +135,4 @@ document.addEventListener('DOMContentLoaded', function () {
     initStats();
     window.addEventListener('load', initStats);
 
-    // Persistent wrapper force checking
-    setInterval(() => {
-        const cards = document.querySelectorAll('#adminDashboard .stat-card');
-        if (cards.length > 0 && !cards[0].onclick) {
-            makeStatsClickable();
-        }
-    }, 500);
 });

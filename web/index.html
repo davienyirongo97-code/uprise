@@ -252,42 +252,48 @@
                     </div>
 
                     <div class="stats">
-                        <div class="stat-card">
+                        <div class="stat-card" style="cursor: pointer;"
+                            onclick="if(typeof showAllClientsModal === 'function') showAllClientsModal(); else if(typeof showClientBreakdownModal === 'function') showClientBreakdownModal();">
                             <div class="stat-icon stat-icon-blue"><i data-lucide="users"></i></div>
                             <div class="stat-content">
                                 <p class="stat-label">Total Clients</p>
                                 <h3 id="clientCount" class="stat-number">12</h3>
                             </div>
                         </div>
-                        <div class="stat-card">
+                        <div class="stat-card" style="cursor: pointer;"
+                            onclick="if(typeof showActiveLoansModal === 'function') showActiveLoansModal(); else if(typeof showApprovedLoansModal === 'function') showApprovedLoansModal();">
                             <div class="stat-icon stat-icon-green"><i data-lucide="activity"></i></div>
                             <div class="stat-content">
                                 <p class="stat-label">Active Loans</p>
                                 <h3 id="activeLoansCount" class="stat-number">8</h3>
                             </div>
                         </div>
-                        <div class="stat-card">
+                        <div class="stat-card" style="cursor: pointer;"
+                            onclick="if(typeof showDisbursedBreakdownModal === 'function') showDisbursedBreakdownModal(); else if(typeof showDisbursedModal === 'function') showDisbursedModal();">
                             <div class="stat-icon stat-icon-yellow"><i data-lucide="banknote"></i></div>
                             <div class="stat-content">
                                 <p class="stat-label">Total Disbursed</p>
                                 <h3 id="totalDisbursed" class="stat-number">MK 25.0M</h3>
                             </div>
                         </div>
-                        <div class="stat-card">
+                        <div class="stat-card" style="cursor: pointer;"
+                            onclick="if(typeof showDefaultsModal === 'function') showDefaultsModal();">
                             <div class="stat-icon stat-icon-orange"><i data-lucide="trending-down"></i></div>
                             <div class="stat-content">
                                 <p class="stat-label">Default Rate</p>
                                 <h3 id="defaultRate" class="stat-number">15%</h3>
                             </div>
                         </div>
-                        <div class="stat-card">
+                        <div class="stat-card" style="cursor: pointer;"
+                            onclick="if(typeof showLoanSubTab === 'function') showLoanSubTab('pending'); else showAdminTab('loans');">
                             <div class="stat-icon stat-icon-lightblue"><i data-lucide="clock"></i></div>
                             <div class="stat-content">
                                 <p class="stat-label">Pending Review</p>
                                 <h3 id="pendingCount" class="stat-number">4</h3>
                             </div>
                         </div>
-                        <div class="stat-card">
+                        <div class="stat-card" style="cursor: pointer;"
+                            onclick="if(typeof showLoanSubTab === 'function') showLoanSubTab('approved'); else if(typeof showApprovedLoansModal === 'function') showApprovedLoansModal();">
                             <div class="stat-icon stat-icon-purple"><i data-lucide="check-circle"></i></div>
                             <div class="stat-content">
                                 <p class="stat-label">Approved Total</p>

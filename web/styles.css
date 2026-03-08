@@ -83,7 +83,12 @@ body {
 }
 
 /* Reset body background for dashboard - Light Blue Gradient Matched to Landing Page */
-body:has(#adminDashboard.active),
+body:has(#adminDashboard.active) {
+    background: #29B6F6;
+    display: block;
+    align-items: flex-start;
+}
+
 body:has(#branchDashboard.active),
 body:has(#clientDashboard.active) {
     background: linear-gradient(135deg, #f0f7ff 0%, #e1effe 50%, #dbeafe 100%);
@@ -2137,12 +2142,6 @@ i[data-lucide] {
 }
 
 /* Disable stat card interactions when modal is open */
-body:has(.client-modal) #adminDashboard .stat-card,
-body:has(.client-modal) #adminDashboard .stat-card::before,
-body:has(.client-modal) #adminDashboard .stat-card::after {
-    pointer-events: none !important;
-    z-index: 1 !important;
-}
 
 /* Ensure modal overlay blocks everything underneath */
 .client-modal {
@@ -4123,22 +4122,22 @@ body:has(.client-modal) #adminDashboard .stat-card::after {
 
 /* Mobile Phones Only (up to 480px) */
 @media (max-width: 480px) {
-    
+
     /* Login Screen - Better mobile layout */
     .login-box {
         padding: 30px 20px;
         margin: 20px;
         width: calc(100% - 40px);
     }
-    
+
     .login-title {
         font-size: 22px;
     }
-    
+
     .logo-image {
         max-width: 80px;
     }
-    
+
     /* Navigation - Mobile friendly */
     .navbar {
         padding: 15px;
@@ -4146,15 +4145,15 @@ body:has(.client-modal) #adminDashboard .stat-card::after {
         gap: 15px;
         text-align: center;
     }
-    
+
     .navbar h1 {
         font-size: 20px;
     }
-    
+
     .welcome-text {
         font-size: 13px;
     }
-    
+
     /* Buttons - Larger for touch */
     .btn {
         padding: 14px 20px;
@@ -4162,140 +4161,146 @@ body:has(.client-modal) #adminDashboard .stat-card::after {
         width: 100%;
         margin: 5px 0;
     }
-    
+
     .btn-login {
         padding: 16px;
         font-size: 16px;
     }
-    
+
     /* Stats Cards - Stack vertically */
     .stats {
         grid-template-columns: 1fr !important;
         gap: 15px;
     }
-    
+
     .stat-card {
         padding: 20px 15px;
     }
-    
+
     .stat-number {
         font-size: 24px;
     }
-    
+
     .stat-label {
         font-size: 12px;
     }
-    
+
     /* Admin Dashboard - Mobile optimized */
     #adminDashboard .admin-tabs {
         flex-direction: column;
         padding: 5px;
     }
-    
+
     #adminDashboard .admin-tab-btn {
         width: 100%;
         padding: 12px;
         font-size: 14px;
         justify-content: center;
     }
-    
+
     #adminDashboard .admin-tab-btn i {
         font-size: 14px;
     }
-    
+
     /* Forms - Single column, larger inputs */
     .form-row {
         flex-direction: column;
         gap: 15px;
     }
-    
+
     .form-group {
         width: 100%;
     }
-    
-    input, select, textarea {
-        font-size: 16px; /* Prevents zoom on iOS */
+
+    input,
+    select,
+    textarea {
+        font-size: 16px;
+        /* Prevents zoom on iOS */
         padding: 14px;
     }
-    
+
     /* Multi-step form - Better mobile progress */
     .progress-steps {
         padding: 15px 10px;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
     }
-    
+
     .step {
         min-width: 80px;
     }
-    
+
     .step-number {
         width: 35px;
         height: 35px;
         font-size: 14px;
     }
-    
+
     .step-label {
         font-size: 11px;
     }
-    
+
     /* Tables - Horizontal scroll */
-    .list, .loans-list, .activity-list {
+    .list,
+    .loans-list,
+    .activity-list {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
     }
-    
-    .list-item, .loan-item {
+
+    .list-item,
+    .loan-item {
         min-width: 300px;
         padding: 15px;
     }
-    
+
     /* Client Dashboard - Mobile optimized */
     #clientDashboard .client-stats-grid {
         grid-template-columns: 1fr !important;
         gap: 15px;
     }
-    
+
     #clientDashboard .premium-card {
         padding: 20px 15px;
     }
-    
+
     /* Branch Dashboard - Mobile layout */
     #branchDashboard .tabs {
         flex-direction: column;
         gap: 5px;
     }
-    
+
     #branchDashboard .tab-btn {
         width: 100%;
         padding: 12px;
         font-size: 14px;
     }
-    
+
     /* Recent Activity - Better mobile spacing */
     .activity-item {
         flex-direction: column;
         text-align: center;
         padding: 15px;
     }
-    
+
     .activity-icon {
         margin: 0 auto 10px;
     }
-    
+
     /* Loan Cards - Stack content */
     .loan-card {
         padding: 15px;
     }
-    
+
     .loan-info h3 {
         font-size: 16px;
     }
-    
+
     .loan-info p {
         font-size: 13px;
     }
-    
+
     /* Modal - Full screen on mobile */
     .modal-content {
         width: 95%;
@@ -4305,102 +4310,104 @@ body:has(.client-modal) #adminDashboard .stat-card::after {
         max-height: 90vh;
         overflow-y: auto;
     }
-    
+
     /* Section headers - Smaller on mobile */
     h2 {
         font-size: 20px;
     }
-    
+
     h3 {
         font-size: 18px;
     }
-    
+
     /* Dashboard content - Better padding */
     .dashboard-content {
         padding: 10px;
     }
-    
+
     .section {
         padding: 15px;
         margin-bottom: 15px;
     }
-    
+
     /* Barcode scanner - Full width */
     .barcode-scanner-section {
         padding: 20px 15px;
     }
-    
+
     .btn-scanner-large {
         width: 100%;
         padding: 16px;
         font-size: 15px;
     }
-    
+
     /* Client details - Better mobile layout */
     .client-details-grid {
         grid-template-columns: 1fr !important;
     }
-    
+
     .detail-card {
         padding: 15px;
     }
-    
+
     /* Image preview - Fit mobile screen */
     .id-preview {
         max-width: 100%;
         height: auto;
     }
-    
+
     /* Loan dashboard cards - Stack */
     .loan-dashboard-cards {
         grid-template-columns: 1fr !important;
         gap: 15px;
     }
-    
+
     /* Branch stats - 2 columns on mobile */
     .branch-stats-grid {
         grid-template-columns: 1fr 1fr !important;
         gap: 10px;
     }
-    
+
     /* Error messages - Better visibility */
-    .error, .message {
+    .error,
+    .message {
         font-size: 14px;
         padding: 12px;
     }
-    
+
     /* Loading screen - Mobile optimized */
     .loading-logo {
         width: 80px;
         height: 80px;
         font-size: 48px;
     }
-    
+
     .loading-text {
         font-size: 22px;
     }
-    
+
     /* Spacing adjustments */
     .container {
         padding: 10px;
     }
-    
+
     /* Touch-friendly spacing */
     .form-group-login {
         margin-bottom: 20px;
     }
-    
+
     /* Better text readability */
     body {
         font-size: 15px;
         line-height: 1.6;
     }
-    
+
     /* Prevent horizontal scroll */
-    body, html {
+    body,
+    html {
         overflow-x: hidden;
     }
-    
+
     * {
         max-width: 100%;
     }
@@ -4408,29 +4415,29 @@ body:has(.client-modal) #adminDashboard .stat-card::after {
 
 /* Extra small phones (320px - 375px) */
 @media (max-width: 375px) {
-    
+
     .navbar h1 {
         font-size: 18px;
     }
-    
+
     .stat-number {
         font-size: 22px;
     }
-    
+
     .admin-tab-btn {
         font-size: 13px;
         padding: 10px;
     }
-    
+
     .btn {
         padding: 12px 16px;
         font-size: 14px;
     }
-    
+
     .step-label {
         font-size: 10px;
     }
-    
+
     .branch-stats-grid {
         grid-template-columns: 1fr !important;
     }
@@ -4438,15 +4445,15 @@ body:has(.client-modal) #adminDashboard .stat-card::after {
 
 /* Landscape mode on phones */
 @media (max-width: 768px) and (orientation: landscape) {
-    
+
     .stats {
         grid-template-columns: repeat(2, 1fr) !important;
     }
-    
+
     .admin-tabs {
         flex-direction: row !important;
     }
-    
+
     .navbar {
         flex-direction: row !important;
     }
@@ -4520,7 +4527,7 @@ body:has(.client-modal) #adminDashboard .stat-card::after {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
     transition: left 0.5s;
     z-index: 1;
     pointer-events: none;
@@ -4626,6 +4633,7 @@ body:has(.client-modal) #adminDashboard .stat-card::after {
         transform: scale(0);
         opacity: 1;
     }
+
     100% {
         transform: scale(4);
         opacity: 0;
@@ -4636,9 +4644,12 @@ body:has(.client-modal) #adminDashboard .stat-card::after {
 
 /* Breathing animation for important cards */
 @keyframes breathe {
-    0%, 100% {
+
+    0%,
+    100% {
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
+
     50% {
         box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2);
     }
@@ -4659,8 +4670,8 @@ body:has(.client-modal) #adminDashboard .stat-card::after {
 
 /* Add subtle background pattern on hover */
 #adminDashboard .stat-card:hover {
-    background: 
-        linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,1) 100%),
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 1) 100%),
         repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(102, 126, 234, 0.03) 10px, rgba(102, 126, 234, 0.03) 20px);
 }
 
@@ -4669,5 +4680,140 @@ body:has(.client-modal) #adminDashboard .stat-card::after {
     #adminDashboard .stat-card:active {
         transform: scale(0.95);
         transition: transform 0.1s;
+    }
+}
+
+/* ========================================
+   STAT CARD MODALS (dynamically created)
+   ======================================== */
+
+/* Full-screen overlay backdrop */
+.client-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: modalFadeIn 0.25s ease;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Modal container */
+.client-modal-content {
+    background: #fff;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 900px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-30px) scale(0.96);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Header */
+.client-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid #e9ecef;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 16px 16px 0 0;
+    flex-shrink: 0;
+}
+
+.client-modal-header h2 {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Close button */
+.modal-close {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: #fff;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+    flex-shrink: 0;
+}
+
+.modal-close:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: rotate(90deg);
+}
+
+/* Body */
+.client-modal-body {
+    padding: 24px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+/* Mobile modal adjustments */
+@media (max-width: 480px) {
+    .client-modal {
+        padding: 10px;
+        align-items: flex-end;
+    }
+
+    .client-modal-content {
+        max-height: 90vh;
+        border-radius: 16px 16px 0 0;
+        max-width: 100%;
+    }
+
+    .client-modal-header {
+        border-radius: 16px 16px 0 0;
+        padding: 16px 18px;
+    }
+
+    .client-modal-header h2 {
+        font-size: 16px;
+    }
+
+    .client-modal-body {
+        padding: 16px;
     }
 }
