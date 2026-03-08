@@ -330,6 +330,9 @@ function loadAdminData() {
     if (window.lucide) {
         window.lucide.createIcons();
     }
+    
+    // Add click handlers to stat cards
+    addStatCardClickHandlers();
 }
 
 function loadPendingLoans() {
