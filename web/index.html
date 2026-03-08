@@ -253,45 +253,45 @@
 
                     <div class="stats">
                         <div class="stat-card">
-                            <div class="stat-icon"><i data-lucide="users"></i></div>
+                            <div class="stat-icon stat-icon-blue"><i data-lucide="users"></i></div>
                             <div class="stat-content">
-                                <h3>Total Clients</h3>
-                                <p id="clientCount" class="stat-number">0</p>
+                                <p class="stat-label">Total Clients</p>
+                                <h3 id="clientCount" class="stat-number">12</h3>
                             </div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-icon"><i data-lucide="activity"></i></div>
+                            <div class="stat-icon stat-icon-green"><i data-lucide="activity"></i></div>
                             <div class="stat-content">
-                                <h3>Active Loans</h3>
-                                <p id="activeLoansCount" class="stat-number">0</p>
+                                <p class="stat-label">Active Loans</p>
+                                <h3 id="activeLoansCount" class="stat-number">8</h3>
                             </div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-icon"><i data-lucide="banknote"></i></div>
+                            <div class="stat-icon stat-icon-yellow"><i data-lucide="banknote"></i></div>
                             <div class="stat-content">
-                                <h3>Total Disbursed</h3>
-                                <p id="totalDisbursed" class="stat-number">0</p>
+                                <p class="stat-label">Total Disbursed</p>
+                                <h3 id="totalDisbursed" class="stat-number">MK 25.0M</h3>
                             </div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-icon"><i data-lucide="trending-down"></i></div>
+                            <div class="stat-icon stat-icon-orange"><i data-lucide="trending-down"></i></div>
                             <div class="stat-content">
-                                <h3>Default Rate</h3>
-                                <p id="defaultRate" class="stat-number">0%</p>
+                                <p class="stat-label">Default Rate</p>
+                                <h3 id="defaultRate" class="stat-number">15%</h3>
                             </div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-icon"><i data-lucide="clock"></i></div>
+                            <div class="stat-icon stat-icon-lightblue"><i data-lucide="clock"></i></div>
                             <div class="stat-content">
-                                <h3>Pending Review</h3>
-                                <p id="pendingCount" class="stat-number">0</p>
+                                <p class="stat-label">Pending Review</p>
+                                <h3 id="pendingCount" class="stat-number">4</h3>
                             </div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-icon"><i data-lucide="check-circle"></i></div>
+                            <div class="stat-icon stat-icon-purple"><i data-lucide="check-circle"></i></div>
                             <div class="stat-content">
-                                <h3>Approved Total</h3>
-                                <p id="approvedCount" class="stat-number">0</p>
+                                <p class="stat-label">Approved Total</p>
+                                <h3 id="approvedCount" class="stat-number">8</h3>
                             </div>
                         </div>
                     </div>
@@ -1212,7 +1212,8 @@
         </div>
 
         <script src="app-enhanced.js"></script>
-<script>
+        <script src="clickable-stats.js"></script>
+        <script>
             // Initialize Lucide icons on page load
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons();
