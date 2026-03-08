@@ -2401,57 +2401,75 @@ function showAllClientsModal() {
 
 function addStatCardClickHandlers() {
     // Total Clients card - show client breakdown by branch
-    const clientCountCard = document.getElementById('systemClientCount').closest('.stat-card');
+    const clientCountCard = document.getElementById('clientCount');
     if (clientCountCard) {
-        clientCountCard.style.cursor = 'pointer';
-        clientCountCard.onclick = function () {
-            showClientBreakdownModal();
-        };
+        const statCard = clientCountCard.closest('.stat-card');
+        if (statCard) {
+            statCard.style.cursor = 'pointer';
+            statCard.onclick = function () {
+                showClientBreakdownModal();
+            };
+        }
     }
 
     // Active Loans card - show all active loans
-    const activeLoansCard = document.getElementById('systemActiveLoans').closest('.stat-card');
+    const activeLoansCard = document.getElementById('activeLoansCount');
     if (activeLoansCard) {
-        activeLoansCard.style.cursor = 'pointer';
-        activeLoansCard.onclick = function () {
-            showActiveLoansModal();
-        };
+        const statCard = activeLoansCard.closest('.stat-card');
+        if (statCard) {
+            statCard.style.cursor = 'pointer';
+            statCard.onclick = function () {
+                showActiveLoansModal();
+            };
+        }
     }
 
     // Total Disbursed card - show disbursement breakdown
-    const disbursedCard = document.getElementById('systemDisbursed').closest('.stat-card');
+    const disbursedCard = document.getElementById('totalDisbursed');
     if (disbursedCard) {
-        disbursedCard.style.cursor = 'pointer';
-        disbursedCard.onclick = function () {
-            showDisbursedBreakdownModal();
-        };
+        const statCard = disbursedCard.closest('.stat-card');
+        if (statCard) {
+            statCard.style.cursor = 'pointer';
+            statCard.onclick = function () {
+                showDisbursedBreakdownModal();
+            };
+        }
     }
 
     // Default Rate card - show clients with defaults
-    const defaultsCard = document.getElementById('systemDefaults').closest('.stat-card');
+    const defaultsCard = document.getElementById('defaultRate');
     if (defaultsCard) {
-        defaultsCard.style.cursor = 'pointer';
-        defaultsCard.onclick = function () {
-            showDefaultsModal();
-        };
+        const statCard = defaultsCard.closest('.stat-card');
+        if (statCard) {
+            statCard.style.cursor = 'pointer';
+            statCard.onclick = function () {
+                showDefaultsModal();
+            };
+        }
     }
 
     // Pending Loans card - show pending applications
-    const pendingCard = document.getElementById('systemCollected').closest('.stat-card');
+    const pendingCard = document.getElementById('pendingCount');
     if (pendingCard) {
-        pendingCard.style.cursor = 'pointer';
-        pendingCard.onclick = function () {
-            showCollectedBreakdownModal();
-        };
+        const statCard = pendingCard.closest('.stat-card');
+        if (statCard) {
+            statCard.style.cursor = 'pointer';
+            statCard.onclick = function () {
+                showLoanSubTab('pending');
+            };
+        }
     }
 
-    // Total Branches card - show branch list
-    const branchesCard = document.getElementById('systemBranches').closest('.stat-card');
-    if (branchesCard) {
-        branchesCard.style.cursor = 'pointer';
-        branchesCard.onclick = function () {
-            showAdminTab('branches');
-        };
+    // Approved Total card - show approved loans
+    const approvedCard = document.getElementById('approvedCount');
+    if (approvedCard) {
+        const statCard = approvedCard.closest('.stat-card');
+        if (statCard) {
+            statCard.style.cursor = 'pointer';
+            statCard.onclick = function () {
+                showLoanSubTab('approved');
+            };
+        }
     }
 }
 
